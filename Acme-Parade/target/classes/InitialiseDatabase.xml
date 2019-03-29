@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ADMIN -->
+	
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Cristian" />
+		<property name="middleName" value="Lorca" />
+		<property name="surname" value="BRENES" />
+		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg" />
+		<property name="email" value="cristian@hotmail.com" />
+		<property name="phone" value="+34 620510520" />
+		<property name="address" value="SEVILLA" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	<!-- POSITION -->
+
+	<bean id="position1" class="domain.Posicion">
+		<property name="name" value="President" />
+		<property name="spanishName" value="Presidente" />
+	</bean>	
+
+	<bean id="position2" class="domain.Posicion">
+		<property name="name" value="Vice-President" />
+		<property name="spanishName" value="Vicepresidente" />
+	</bean>	
+
+	<bean id="position3" class="domain.Posicion">
+		<property name="name" value="Secretary" />
+		<property name="spanishName" value="Secretario" />
+	</bean>	
+
+	<bean id="position4" class="domain.Posicion">
+		<property name="name" value="Treasurer" />
+		<property name="spanishName" value="Tesorero" />
+	</bean>	
+
+	<bean id="position5" class="domain.Posicion">
+		<property name="name" value="Historian" />
+		<property name="spanishName" value="Historiador" />
+	</bean>	
+
+	<bean id="position6" class="domain.Posicion">
+		<property name="name" value="Fundraiser" />
+		<property name="spanishName" value="Promotor" />
+	</bean>	
+
+	<bean id="position7" class="domain.Posicion">
+		<property name="name" value="Officer" />
+		<property name="spanishName" value="Vocal" />
+	</bean>	
+	
+	<!-- CUSTOMIZABLE SYSTEM -->
+
+	<bean id="customizableSystem1" class="domain.CustomizableSystem">
+
+		<property name="nameSystem" value="Acme-Madrugá" />
+		<property name="banner" value="https://image.ibb.co/iuaDgV/Untitled.png" />
+		<property name="messageWelcomePage" value="Welcome to Acme Madrugá, the site to organise your processions." />
+		<property name="spanishMessageWelcomePage" value="¡Bienvenidos a Acme Madrugá!  Tu sitio para organizar procesiones." />
+		<property name="telephoneCode" value="+34" />
+
+
+	</bean>
+	
+</beans>

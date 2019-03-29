@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2018 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="picture/picturesBrotherhood" extends="master.page">	
+		<put-attribute name="title" value="Brotherhood Pictures" />
+		<put-attribute name="body" value="/views/picture/picturesBrotherhood.jsp" />
+	</definition>
+	<definition name="picture/picturesFloat" extends="master.page">	
+		<put-attribute name="title" value="Float Pictures" />
+		<put-attribute name="body" value="/views/picture/picturesFloat.jsp" />
+	</definition>
+	<definition name="picture/picturesPeriodRecord" extends="master.page">	
+		<put-attribute name="title" value="Period Record Pictures" />
+		<put-attribute name="body" value="/views/picture/picturesPeriodRecord.jsp" />
+	</definition>
+	<definition name="picture/editPictureBrotherhood" extends="master.page">	
+		<put-attribute name="title" value="Edit picture brotherhood" />
+		<put-attribute name="body" value="/views/picture/editPictureBrotherhood.jsp" />
+	</definition>	
+	<definition name="picture/editPictureFloat" extends="master.page">	
+		<put-attribute name="title" value="Edit picture float" />
+		<put-attribute name="body" value="/views/picture/editPictureFloat.jsp" />
+	</definition>
+	<definition name="picture/editPicturePeriodRecord" extends="master.page">	
+		<put-attribute name="title" value="Edit picture periodRecord" />
+		<put-attribute name="body" value="/views/picture/editPicturePeriodRecord.jsp" />
+	</definition>	
+	<definition name="picture/createPictureBrotherhood" extends="master.page">	
+		<put-attribute name="title" value="Create picture brotherhood" />
+		<put-attribute name="body" value="/views/picture/editPictureBrotherhood.jsp" />
+	</definition>	
+	<definition name="picture/createPictureFloat" extends="master.page">	
+		<put-attribute name="title" value="Create picture float" />
+		<put-attribute name="body" value="/views/picture/editPictureFloat.jsp" />
+	</definition>
+	
+	<definition name="picture/inceptionRecord" extends="master.page">	
+		<put-attribute name="title" value="Inception Record Pictures" />
+		<put-attribute name="body" value="/views/picture/picturesInceptionRecord.jsp" />
+	</definition>
+	<definition name="picture/editPictureInceptionRecord" extends="master.page">	
+		<put-attribute name="title" value="Edit picture inception record" />
+		<put-attribute name="body" value="/views/picture/editPictureInceptionRecord.jsp" />
+	</definition>
+	<definition name="picture/createPictureInceptionRecord" extends="master.page">	
+		<put-attribute name="title" value="Create picture inception record" />
+		<put-attribute name="body" value="/views/picture/editPictureInceptionRecord.jsp" />
+	</definition>
+</tiles-definitions>

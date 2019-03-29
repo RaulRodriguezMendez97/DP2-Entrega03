@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="brotherhood" />
+		<property name="password" value="44843b89fec33a1c48bbb3967b65abce" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHERHOOD" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="brotherhood1" />
+		<property name="password" value="479e3180a45b21ea8e88beb0c45aa8ed" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHERHOOD" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="member" />
+		<property name="password" value="aa08769cdcb26674c6706093503ff0a3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="member1" />
+		<property name="password" value="c7764cfed23c5ca3bb393308a0da2306" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Other domain beans come here -->
+	
+	
+	<!-- ADMINISTRATOR -->
+	
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Cristian" />
+		<property name="middleName" value="Lorca" />
+		<property name="surname" value="BRENES" />
+		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg" />
+		<property name="email" value="cristian@hotmail.com" />
+		<property name="phone" value="+34 620510520" />
+		<property name="address" value="SEVILLA" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	<bean id="administrator2" class="domain.Administrator">
+		<property name="name" value="Antonio" />
+		<property name="middleName" value="" />
+		<property name="surname" value="Segura" />
+		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg" />
+		<property name="email" value="antonio@hotmail.com" />
+		<property name="phone" value="+34 620510520" />
+		<property name="address" value="SEVILLA" />
+		<property name="userAccount" ref="userAccount2" />
+	</bean>
+	
+	<!-- Brotherhood -->
+	<bean id="brotherhood1" class="domain.Brotherhood">
+	
+		<property name="name" value="Jesus" />
+		<property name="middleName" value="" />
+		<property name="surname" value="Elias" />
+		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg" />
+		<property name="email" value="jesus@hotmail.com" />
+		<property name="phone" value="+34 620510520" />
+		<property name="address" value="SEVILLA" />
+		
+		<property name="title" value="Santa María Magdalena" />
+		<property name="establishmentDate" value="01/02/2019 23:59" />
+			<property name="pictures">
+			<list>
+				<ref bean="picture1" />
+				<ref bean="picture2" />
+			</list>
+		</property>
+		
+		<property name="userAccount" ref="userAccount3" />
+	</bean>
+	
+	<bean id="brotherhood2" class="domain.Brotherhood">
+		
+		<property name="name" value="Raul" />
+		<property name="middleName" value="" />
+		<property name="surname" value="Rodriguez" />
+		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg" />
+		<property name="email" value="raul@hotmail.com" />
+		<property name="phone" value="+34 620510520" />
+		<property name="address" value="SEVILLA" />
+		
+		<property name="title" value="San Gil" />
+		<property name="establishmentDate" value="01/02/2019 23:59" />
+			<property name="pictures">
+			<list>
+				<ref bean="picture3" />
+				<ref bean="picture4" />
+			</list>
+		</property>
+		
+		<property name="userAccount" ref="userAccount4" />
+	</bean>
+	
+	<!-- MEMBER -->
+	<bean id="member1" class="domain.Member">
+		<property name="name" value="Antonio" />
+		<property name="middleName" value="" />
+		<property name="surname" value="Seguras" />
+		<property name="photo" value="https://estaticos.muyinteresante.es/media/cache/760x570_thumb/uploads/images/article/5c6e8bb85cafe8069d0ddcc5/ia-duerme_0.jpg" />
+		<property name="email" value="antoniosegura@hotmail.com" />
+		<property name="phone" value="+34 629910520" />
+		<property name="address" value="ARAHAL" />	
+		<property name="userAccount" ref="userAccount5" />
+	</bean>
+	
+	<bean id="member2" class="domain.Member">
+		<property name="name" value="Antonio2" />
+		<property name="middleName" value="" />
+		<property name="surname" value="Segura2" />
+		<property name="photo" value="https://estaticos.muyinteresante.es/media/cache/760x570_thumb/uploads/images/article/5c6e8bb85cafe8069d0ddcc5/ia-duerme_0.jpg" />
+		<property name="email" value="antoniosegura2@hotmail.com" />
+		<property name="phone" value="+34 699910520" />
+		<property name="address" value="ARAHAL" />
+		<property name="userAccount" ref="userAccount6" />
+	</bean>
+	
+	<!-- POSITION -->
+
+	<bean id="position1" class="domain.Posicion">
+		<property name="name" value="President" />
+		<property name="spanishName" value="Presidente" />
+	</bean>	
+
+	<bean id="position2" class="domain.Posicion">
+		<property name="name" value="Vice-President" />
+		<property name="spanishName" value="Vicepresidente" />
+	</bean>	
+
+	<bean id="position3" class="domain.Posicion">
+		<property name="name" value="Secretary" />
+		<property name="spanishName" value="Secretario" />
+	</bean>	
+
+	<bean id="position4" class="domain.Posicion">
+		<property name="name" value="Treasurer" />
+		<property name="spanishName" value="Tesorero" />
+	</bean>	
+
+	<bean id="position5" class="domain.Posicion">
+		<property name="name" value="Historian" />
+		<property name="spanishName" value="Historiador" />
+	</bean>	
+
+	<bean id="position6" class="domain.Posicion">
+		<property name="name" value="Fundraiser" />
+		<property name="spanishName" value="Promotor" />
+	</bean>	
+
+	<bean id="position7" class="domain.Posicion">
+		<property name="name" value="Officer" />
+		<property name="spanishName" value="Vocal" />
+	</bean>	
+	
+	<!-- Bean picture -->
+	<bean id="picture1" class="domain.Picture">
+		<property name="url" value="http://www.spaincenter.org/tvi/images/stories/turismo/castilla-mancha/albacete-provincia/hellin/hellin-procesiones-pasos-imagenes-5.jpg"></property>
+	</bean>
+	<bean id="picture2" class="domain.Picture">
+		<property name="url" value="https://elpais.com/elpais/imagenes/2017/02/08/videos/1486542451_183414_1486542754_noticia_fotograma.jpg"></property>
+	</bean>	
+	<bean id="picture3" class="domain.Picture">
+		<property name="url" value="https://sevilla.abc.es/Media/201305/17/presentacion-rocio-hermandades--644x362.jpg"></property>
+	</bean>	
+	<bean id="picture4" class="domain.Picture">
+		<property name="url" value="https://www.revistaecclesia.com/wp-content/uploads/2017/03/hermandades-semana-santa-orihuela-alicante.jpg"></property>
+	</bean>
+	<bean id="picture5" class="domain.Picture">
+		<property name="url" value="https://www.lavanguardia.com/r/GODO/LV/p5/WebSite/2018/03/20/Recortada/img_jespinosa_20150329-125501_imagenes_lv_propias_jespinosa_3palma-k9gF-U441744397759U9B-992x558@LaVanguardia-Web.jpg"></property>
+	</bean>
+	<bean id="picture6" class="domain.Picture">
+		<property name="url" value="https://www.abc.es/media/espana/2016/10/17/domigno-ramos-kYrF--620x349@abc.jpg"></property>
+	</bean>
+	<bean id="picture7" class="domain.Picture">
+		<property name="url" value="https://www.abc.es/media/espana/2016/10/17/domigno-ramos-kYrF--620x349@abc.jpg"></property>
+	</bean>
+	<bean id="picture8" class="domain.Picture">
+		<property name="url" value="https://www.abc.es/media/espana/2016/10/17/domigno-ramos-kYrF--620x349@abc.jpg"></property>
+	</bean>	
+	<bean id="picture9" class="domain.Picture">
+		<property name="url" value="https://assets.trome.pe/files/ec_article_multimedia_gallery/uploads/2018/04/17/5ad609d27c1a7.jpeg"></property>
+	</bean>			
+
+	
+	<!-- NOTIFICATION -->
+	
+	<bean id="notification1" class="domain.Notification">
+		<property name="subject" value="Actualización del sistema" />
+		<property name="body" value="Update" />
+	</bean>
+	
+	<bean id="notification2" class="domain.Notification">
+		<property name="subject" value="Actualización del sistema" />
+		<property name="body" value="Update2" />
+	</bean>
+	
+	<!-- CustomizableSystem -->
+
+	<bean id="customizableSystem1" class="domain.CustomizableSystem">
+
+		<property name="nameSystem" value="Acme-Madrugá" />
+		<property name="banner" value="https://static.vecteezy.com/system/resources/previews/000/154/154/non_2x/vector-marching-band-parade-silhouette.jpg" />
+		<property name="messageWelcomePage" value="Welcome to Acme Madrugá, the site to organise your processions." />
+		<property name="spanishMessageWelcomePage" value="¡Bienvenidos a Acme Madrugá!  Tu sitio para organizar procesiones." />
+		<property name="telephoneCode" value="+34" />
+
+
+	</bean>
+	
+	<!-- Float -->
+	<bean id="float1" class="domain.Paso">
+		<property name="title" value="Gran Poder" />
+		<property name="description" value="Paso de la hermandad del Gran Poder" />
+		<property name="pictures">
+			<list>
+				<ref bean="picture5" />
+				<ref bean="picture6" />
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="procession"> <null/></property>
+	</bean>
+	
+	<bean id="float2" class="domain.Paso">
+		<property name="title" value="Las Siete caidas" />
+		<property name="description" value="Paso de la hermandad de las Sieta Caidas" />
+		<property name="pictures">
+			<list>
+				<ref bean="picture7" />
+				<ref bean="picture8" />
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="procession"> <null/></property>
+	</bean>
+	
+	<!-- Enrolment -->
+	<bean id="enrolment1" class="domain.Enrolment">
+		
+		<property name="moment" value="01/02/2019 23:51" />
+		<property name="endMoment" > <null/></property>
+		<property name="status" value="1" />
+		<property name="isOut" value="0" />
+		<property name="member" ref="member1" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="position" ref="position1" />
+		
+	</bean>	
+	
+	<bean id="enrolment2" class="domain.Enrolment">
+		
+		<property name="moment" value="01/02/2019 23:51" />
+		<property name="endMoment"> <null/></property>
+		<property name="status" value="0" />
+		<property name="isOut" value="0" />
+		<property name="member" ref="member1" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="position" ref="position2" />
+		
+	</bean>	
+	
+	<bean id="enrolment3" class="domain.Enrolment">
+		
+		<property name="moment" value="01/02/2019 23:51" />
+		<property name="endMoment" > <null/></property>
+		<property name="status" value="0" />
+		<property name="isOut" value="0" />
+		<property name="member" ref="member1" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="position" ref="position3" />
+		
+	</bean>	
+	
+		<bean id="enrolment4" class="domain.Enrolment">
+		
+		<property name="moment" value="01/02/2019 23:51" />
+		<property name="endMoment" value="01/02/2019 23:59" />
+		<property name="status" value="2" />
+		<property name="isOut" value="1" />
+		<property name="member" ref="member1" />
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="position" ref="position4" />
+		
+	</bean>	
+	
+	<!-- Procession -->
+	<bean id="procession1" class="domain.Parade">
+		<property name="ticker" value="121212-ASDQW" />
+		<property name="moment" value="12/04/2019 23:59" />
+		<property name="description" value="Procesion de Arahal" />
+		<property name="title" value="Procesion de la Esperanza" />
+		<property name="draftMode" value="1" />
+		<property name="brotherhood" ref="brotherhood1" />	
+		<property name="positionsRow">
+			<list>
+				<value>12</value>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="positionsColumn">
+			<list>
+				<value>12</value>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="maxRows" value ="2"/>
+		<property name="maxColumns" value ="500"/>
+	</bean>	
+	
+	<bean id="procession2" class="domain.Parade">
+		<property name="ticker" value="121212-ASDQA" />
+		<property name="moment" value="12/10/2019 23:59" />
+		<property name="description" value="Procesion de Arahal 2" />
+		<property name="title" value="Procesion de la Esperanza 2" />
+		<property name="draftMode" value="1" />
+		<property name="brotherhood" ref="brotherhood1" />	
+		<property name="positionsRow">
+			<list>
+				<value>1</value>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="positionsColumn">
+			<list>
+				<value>12</value>
+				<value>0</value>
+			</list>
+		</property>	
+		<property name="maxRows" value ="3"/>
+		<property name="maxColumns" value ="3000"/>
+	</bean>	
+	
+	<bean id="procession3" class="domain.Parade">
+		<property name="ticker" value="121212-ASDQB" />
+		<property name="moment" value="13/08/2019 23:59" />
+		<property name="description" value="Procesion de Arahal" />
+		<property name="title" value="Procesion de la Esperanza" />
+		<property name="draftMode" value="1" />
+		<property name="brotherhood" ref="brotherhood1" />	
+		<property name="positionsRow">
+			<list>
+				<value>1</value>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="positionsColumn">
+			<list>
+				<value>1</value>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="maxRows" value ="5"/>
+		<property name="maxColumns" value ="1000"/>
+	</bean>	
+	
+	<!-- Request -->
+	
+	<bean id="request1" class="domain.Request">
+		<property name="status" value="0" />
+		<property name="columna" value="1" />
+		<property name="row" value="2" />
+		<property name="description" value="Procesion de la Esperanza" />
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession3" />	
+	</bean>	
+	
+	<bean id="request2" class="domain.Request">
+		<property name="status" value="0" />
+		<property name="columna" value="12" />
+		<property name="row" value="23" />
+		<property name="description" value="Procesion" />
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession2" />	
+	</bean>	
+	
+	<bean id="request3" class="domain.Request">
+		<property name="status" value="1" />
+		<property name="columna" value="123" />
+		<property name="row" value="21" />
+		<property name="description" value="Esperanza" />
+		<property name="member" ref="member2" />
+		<property name="procession" ref="procession3" />	
+	</bean>	
+	
+	<bean id="request4" class="domain.Request">
+		<property name="status" value="2" />
+		<property name="columna" value="13" />
+		<property name="row" value="2" />
+		<property name="description" value="Procesion de la Esperanza" />
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession1" />	
+	</bean>	
+	
+	<bean id="request5" class="domain.Request">
+		<property name="status" value="2" />
+		<property name="columna" value="1" />
+		<property name="row" value="42" />
+		<property name="description" value="Procesion de la Esperanza" />
+		<property name="member" ref="member2" />
+		<property name="procession" ref="procession1" />	
+	</bean>	
+	
+	<!-- LegalRecord -->
+	<bean id="legalRecord1" class="domain.LegalRecord">
+		<property name="title" value="titulo1"></property>
+		<property name="description" value="LegalRecord1 del populate"></property>
+		<property name="legalName" value="legalRecord1"></property>
+		<property name="VATNumber" value="21"></property>
+		<property name="laws">
+			<list>
+				<value>Ley 1</value>
+				<value>Ley 2</value>
+			</list>
+		</property>
+	</bean>
+	
+		<bean id="legalRecord2" class="domain.LegalRecord">
+		<property name="title" value="titulo2"></property>
+		<property name="description" value="LegalRecord2 del populate"></property>
+		<property name="legalName" value="legalRecord2"></property>
+		<property name="VATNumber" value="21"></property>
+		<property name="laws">
+			<list>
+				<value>Ley 1</value>
+				<value>Ley 2</value>
+			</list>
+		</property>
+	</bean>
+	
+		<!-- InceptionRecord -->
+	<bean id="inceptionRecord1" class="domain.InceptionRecord">
+		<property name="title" value="titulo1"></property>
+		<property name="description" value="InceptionRecord1 del populate"></property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture1" />
+				<ref bean="picture2" />
+			</list>
+		</property>
+		
+	</bean>
+	
+		<bean id="inceptionRecord2" class="domain.InceptionRecord">
+		<property name="title" value="titulo2"></property>
+		<property name="description" value="InceptionRecord2 del populate"></property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture3" />
+				<ref bean="picture4" />
+			</list>
+		</property>
+		
+	</bean>
+	<!-- PeriodRecord--> 
+	<bean id="periodRecord1" class="domain.PeriodRecord">
+		<property name="title" value="titulo1"></property>
+		<property name="description" value="PeriodRecord1 del populate"></property>
+		<property name="starYear" value= "2019" ></property>
+		<property name="endYear" value="2020"></property>
+		<property name="pictures">
+			<list>
+				<ref bean="picture9" />
+			</list>
+		</property>
+	
+	</bean>
+	
+	<bean id="periodRecord2" class="domain.PeriodRecord">
+		<property name="title" value="titulo1"></property>
+		<property name="description" value="PeriodRecord2 del populate"></property>
+		<property name="starYear" value= "2020" ></property>
+		<property name="endYear" value="2022"></property>
+		<property name="pictures">
+			<list>
+			
+			</list>
+		</property>
+	
+	</bean>
+	
+		<!-- LinkRecord -->
+	<bean id="linkRecord1" class="domain.LinkRecord">
+		<property name="title" value="titulo1"></property>
+		<property name="description" value="LinkRecord1 del populate"></property>
+		<property name="brotherhood" ref="brotherhood2"></property>
+	
+	
+	</bean>
+	
+		<bean id="linkRecord2" class="domain.LinkRecord">
+		<property name="title" value="titulo2"></property>
+		<property name="description" value="LinkRecord2 del populate"></property>
+		<property name="brotherhood" ref="brotherhood1"></property>
+	
+	
+	</bean>
+	
+			<!-- MiscellaneousRecord -->
+	<bean id="miscellaneousRecord1" class="domain.MiscellaneousRecord">
+		<property name="title" value="titulo1"></property>
+		<property name="description" value="MiscellaneousRecord1 del populate"></property>
+	</bean>
+	
+		<bean id="miscellaneousRecord2" class="domain.MiscellaneousRecord">
+		<property name="title" value="titulo2"></property>
+		<property name="description" value="MiscellaneousRecord2 del populate"></property>
+	</bean>
+	
+	<!-- History -->
+	<bean id="history1" class="domain.History">
+		<property name="brotherhood" ref="brotherhood1"></property>
+		<property name="inceptionRecord" ref="inceptionRecord1"></property>
+		<property name="periodRecords">
+			<list>
+				<ref bean="periodRecord1" />
+				
+			</list>
+		</property>
+		<property name="legalRecords">
+			<list>
+				<ref bean="legalRecord1" />
+				
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				<ref bean="miscellaneousRecord1" />
+				
+			</list>
+		</property>
+		<property name="linkRecords">
+			<list>
+				<ref bean="linkRecord1" />
+				
+			</list>
+		</property>
+
+	</bean>
+	
+	<bean id="history2" class="domain.History">
+		<property name="brotherhood" ref="brotherhood2"></property>
+		<property name="inceptionRecord" ref="inceptionRecord2"></property>
+		<property name="periodRecords">
+			<list>
+				
+				<ref bean="periodRecord2" />
+			</list>
+		</property>
+		<property name="legalRecords">
+			<list>
+				
+				<ref bean="legalRecord2" />
+			</list>
+		</property>
+		<property name="miscellaneousRecords">
+			<list>
+				
+				<ref bean="miscellaneousRecord2" />
+			</list>
+		</property>
+		<property name="linkRecords">
+			<list>
+				
+				<ref bean="linkRecord2" />
+			</list>
+		</property>
+
+	</bean>
+	
+	
+	
+	
+	
+	
+</beans>
