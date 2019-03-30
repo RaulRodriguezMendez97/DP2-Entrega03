@@ -17,7 +17,7 @@ import security.LoginService;
 import services.ActorService;
 import services.MemberService;
 import domain.Actor;
-import domain.Member;
+import domain.Hacker;
 import domain.Request;
 
 @Controller
@@ -37,7 +37,7 @@ public class JSONController extends AbstractController {
 			final int id = LoginService.getPrincipal().getId();
 			final Actor a = this.actorService.getActorByUserAccount(id);
 			final ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-			final Member m = this.memberService.getMemberByUserAccount(id);
+			final Hacker m = this.memberService.getMemberByUserAccount(id);
 			String json;
 			if (this.memberService.getMemberByUserAccount(id) != null) {
 				final Collection<Request> collection = m.getRequests();

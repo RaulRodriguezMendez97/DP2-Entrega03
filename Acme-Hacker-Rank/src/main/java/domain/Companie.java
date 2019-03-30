@@ -6,33 +6,21 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Access(AccessType.PROPERTY)
-public class Posicion extends DomainEntity {
+public class Companie extends Actor {
 
 	private String	name;
-	private String	spanishName;
 
 
+	@Override
 	@NotNull
-	@NotBlank
 	public String getName() {
 		return this.name;
 	}
+
+	@Override
 	public void setName(final String name) {
 		this.name = name;
 	}
-
-	@NotNull
-	@NotBlank
-	public String getSpanishName() {
-		return this.spanishName;
-	}
-
-	public void setSpanishName(final String spanishName) {
-		this.spanishName = spanishName;
-	}
-
 }

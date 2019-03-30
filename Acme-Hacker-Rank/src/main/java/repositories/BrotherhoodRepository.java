@@ -8,25 +8,25 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.Brotherhood;
+import domain.Companie;
 
 @Repository
-public interface BrotherhoodRepository extends JpaRepository<Brotherhood, Integer> {
+public interface BrotherhoodRepository extends JpaRepository<Companie, Integer> {
 
 	@Query("select b from Brotherhood b where b.userAccount.id = ?1")
-	public Brotherhood brotherhoodUserAccount(Integer id);
+	public Companie brotherhoodUserAccount(Integer id);
 
 	@Query("select e.brotherhood from Enrolment e where e.member.id = ?1 and e.status = 1 and e.isOut = 0")
-	public Collection<Brotherhood> getBrotherhoodsByMember(Integer memberId);
+	public Collection<Companie> getBrotherhoodsByMember(Integer memberId);
 
 	@Query("select e.brotherhood from Enrolment e where e.member.id = ?1 and e.status=1")
-	public Collection<Brotherhood> getBrotherhoodsbelongsByMember(Integer memberId);
+	public Collection<Companie> getBrotherhoodsbelongsByMember(Integer memberId);
 
 	@Query("select e.brotherhood from Enrolment e where e.member.id = ?1 and e.status=2 and e.endMoment!=null")
-	public Collection<Brotherhood> getBrotherhoodsbelongedByMember(Integer memberId);
+	public Collection<Companie> getBrotherhoodsbelongedByMember(Integer memberId);
 
 	@Query("select b.brotherhood from History b where ?1 member of b.periodRecords.pictures")
-	public Brotherhood getBrotherhoodByPeriodRecordPicture(Integer id);
+	public Companie getBrotherhoodByPeriodRecordPicture(Integer id);
 
 	//DASHBOARD
 	@Query("select avg(1.0*(select count(e.member) from Enrolment e where e.status=1 and e.brotherhood.id = b.id)), min(1.0*(select count(e.member) from Enrolment e where e.status=1 and e.brotherhood.id = b.id)), max(1.0*(select count(e.member) from Enrolment e where e.status=1 and e.brotherhood.id = b.id)), sqrt(1.0*sum(1.0*(select count(e.member) from Enrolment e where e.status=1 and e.brotherhood.id = b.id) * (select count(e.member) from Enrolment e where e.status=1 and e.brotherhood.id = b.id)) / count(b) - avg(1.0*(select count(e.member) from Enrolment e where e.status=1 and e.brotherhood.id = b.id)) * avg(1.0*(select count(e.member) from Enrolment e where e.status=1 and e.brotherhood.id = b.id))) from Brotherhood b")

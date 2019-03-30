@@ -16,10 +16,27 @@ public class CustomizableSystem extends DomainEntity {
 	private String	nameSystem;
 	private String	banner;
 	private String	messageWelcomePage;
-	private String	spanishMessageWelcomePage;
-
+	//private String	spanishMessageWelcomePage;
 	private String	telephoneCode;
+	private int		timeCache;
+	private int		maxResults;
 
+
+	public int getTimeCache() {
+		return this.timeCache;
+	}
+
+	public void setTimeCache(final int timeCache) {
+		this.timeCache = timeCache;
+	}
+
+	public int getMaxResults() {
+		return this.maxResults;
+	}
+
+	public void setMaxResults(final int maxResults) {
+		this.maxResults = maxResults;
+	}
 
 	@NotNull
 	@NotBlank
@@ -52,15 +69,15 @@ public class CustomizableSystem extends DomainEntity {
 		this.messageWelcomePage = messageWelcomePage;
 	}
 
-	@NotBlank
-	@NotNull
-	public String getSpanishMessageWelcomePage() {
-		return this.spanishMessageWelcomePage;
-	}
-
-	public void setSpanishMessageWelcomePage(final String spanishMessageWelcomePage) {
-		this.spanishMessageWelcomePage = spanishMessageWelcomePage;
-	}
+	//	@NotBlank
+	//	@NotNull
+	//	public String getSpanishMessageWelcomePage() {
+	//		return this.spanishMessageWelcomePage;
+	//	}
+	//
+	//	public void setSpanishMessageWelcomePage(final String spanishMessageWelcomePage) {
+	//		this.spanishMessageWelcomePage = spanishMessageWelcomePage;
+	//	}
 
 	@NotBlank
 	@NotNull

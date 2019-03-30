@@ -1,10 +1,13 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -22,14 +25,15 @@ import security.UserAccount;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Actor extends DomainEntity {
 
-	private String		name;
-	private String		middleName;
-	private String		surname;
-	private String		photo;
-	private String		email;
-	private String		phone;
-	private String		address;
-	private UserAccount	userAccount;
+	private String				name;
+	private Collection<String>	surnames;
+	private String				vatNumber;
+	private String				photo;
+	private String				email;
+	private String				phone;
+	private String				address;
+	private UserAccount			userAccount;
+	private CredictCard			credictCard;
 
 
 	//Getters and Setters
@@ -44,22 +48,24 @@ public class Actor extends DomainEntity {
 		this.name = name;
 	}
 
-	public String getMiddleName() {
-		return this.middleName;
-	}
-
-	public void setMiddleName(final String middleName) {
-		this.middleName = middleName;
-	}
-
-	@NotBlank
 	@NotNull
-	public String getSurname() {
-		return this.surname;
+	public String getVatNumber() {
+		return this.vatNumber;
 	}
 
-	public void setSurname(final String surname) {
-		this.surname = surname;
+	public void setVatNumber(final String vatNumber) {
+		this.vatNumber = vatNumber;
+	}
+
+	@Valid
+	@ElementCollection
+	@NotNull
+	public Collection<String> getSurnames() {
+		return this.surnames;
+	}
+
+	public void setSurnames(final Collection<String> surnames) {
+		this.surnames = surnames;
 	}
 
 	@URL
@@ -73,7 +79,6 @@ public class Actor extends DomainEntity {
 
 	@Column(unique = true)
 	@NotNull
-	@NotBlank
 	public String getEmail() {
 		return this.email;
 	}
@@ -83,6 +88,7 @@ public class Actor extends DomainEntity {
 	}
 
 	//@Pattern(regexp = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}|^\\+[0-9]\\ $|^$|^\\+$")
+	//OPCIONAL
 	public String getPhone() {
 		return this.phone;
 	}
@@ -98,6 +104,17 @@ public class Actor extends DomainEntity {
 
 	public void setAddress(final String address) {
 		this.address = address;
+	}
+
+	@Valid
+	@NotNull
+	@OneToOne(optional = false)
+	public CredictCard getCredictCard() {
+		return this.credictCard;
+	}
+
+	public void setCredictCard(final CredictCard credictCard) {
+		this.credictCard = credictCard;
 	}
 
 	@Valid

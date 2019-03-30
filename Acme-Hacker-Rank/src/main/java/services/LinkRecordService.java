@@ -15,7 +15,7 @@ import repositories.LinkRecordRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.History;
 import domain.LinkRecord;
 
@@ -41,7 +41,7 @@ public class LinkRecordService {
 		final LinkRecord linkRecord = new LinkRecord();
 		linkRecord.setTitle("");
 		linkRecord.setDescription("");
-		linkRecord.setBrotherhood(new Brotherhood());
+		linkRecord.setBrotherhood(new Companie());
 		return linkRecord;
 	}
 
@@ -64,7 +64,7 @@ public class LinkRecordService {
 	public LinkRecord save(final LinkRecord linkRecord) {
 		final History h = this.historyService.getHistotyByLinkRecord(linkRecord.getId());
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		if (linkRecord.getId() != 0)
 			Assert.isTrue(h.getBrotherhood() == br);
 
@@ -79,7 +79,7 @@ public class LinkRecordService {
 	public void delete(final LinkRecord linkRecord, final int historyId) {
 		final History history = this.historyService.findOne(historyId);
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(history.getBrotherhood() == br);
 		Assert.isTrue(history.getLinkRecords().contains(linkRecord));

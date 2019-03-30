@@ -8,20 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import repositories.MemberRepository;
-import domain.Member;
+import domain.Hacker;
 
 @Component
 @Transactional
-public class StringToMemberConverter implements Converter<String, Member> {
+public class StringToMemberConverter implements Converter<String, Hacker> {
 
 	@Autowired
 	private MemberRepository	memberRepository;
 
 
 	@Override
-	public Member convert(final String source) {
+	public Hacker convert(final String source) {
 
-		Member member;
+		Hacker member;
 		int id;
 
 		try {

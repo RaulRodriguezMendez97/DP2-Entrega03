@@ -15,7 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.FloatRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.Paso;
 import domain.Picture;
 import domain.Parade;
@@ -38,7 +38,7 @@ public class FloatService {
 	public Paso create() {
 		final Paso paso = new Paso();
 		final UserAccount user = LoginService.getPrincipal();
-		final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		paso.setTitle("");
 		paso.setDescription("");
 		paso.setPictures(new HashSet<Picture>());
@@ -53,10 +53,10 @@ public class FloatService {
 	//Metodo findOne
 	public Paso findOne(final int floatId) {
 		final UserAccount user = LoginService.getPrincipal();
-		final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 
 		final Paso res = this.FRepo.findOne(floatId);
-		final Brotherhood brFloat = res.getBrotherhood();
+		final Companie brFloat = res.getBrotherhood();
 		Assert.isTrue(this.getFloatsByBrotherhood(br.getId()).contains(res));
 		Assert.isTrue(br.equals(brFloat));
 		return res;
@@ -64,7 +64,7 @@ public class FloatService {
 	//Metodo save
 	public Paso save(final Paso paso) {
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		Assert.isTrue(br.equals(paso.getBrotherhood()));
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(paso.getTitle() != null);
@@ -78,7 +78,7 @@ public class FloatService {
 	//Metodo delete
 	public void delete(final Paso paso) {
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(this.getFloatsByBrotherhood(br.getId()).contains(paso));
 		this.FRepo.delete(paso);

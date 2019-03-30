@@ -20,7 +20,7 @@ import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Member;
+import domain.Hacker;
 import domain.Request;
 import forms.MemberRegistrationForm;
 
@@ -41,8 +41,8 @@ public class MemberService {
 
 
 	//Crear nuevo member
-	public Member create() {
-		final Member res = new Member();
+	public Hacker create() {
+		final Hacker res = new Hacker();
 		res.setAddress("");
 		res.setEmail("");
 		res.setName("");
@@ -66,18 +66,18 @@ public class MemberService {
 		return res;
 	}
 	//Todos los member
-	public Collection<Member> findAll() {
+	public Collection<Hacker> findAll() {
 		return this.memberRepo.findAll();
 	}
 
 	//Un member por el id
-	public Member findOne(final int memberId) {
+	public Hacker findOne(final int memberId) {
 		return this.memberRepo.findOne(memberId);
 	}
 
 	//Guardar
-	public Member save(final Member r) {
-		Member res = null;
+	public Hacker save(final Hacker r) {
+		Hacker res = null;
 		Assert.isTrue(r != null && r.getName() != null && r.getSurname() != null && r.getName() != "" && r.getSurname() != "" && r.getUserAccount() != null && r.getEmail() != null && r.getEmail() != "", "MemberService.save -> Name or Surname invalid");
 
 		final String regexEmail1 = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";
@@ -94,7 +94,7 @@ public class MemberService {
 		if (r.getId() == 0)
 			Assert.isTrue(!emails.contains(r.getEmail()));
 		else {
-			final Member a = this.memberRepo.findOne(r.getId());
+			final Hacker a = this.memberRepo.findOne(r.getId());
 			Assert.isTrue(a.getEmail().equals(r.getEmail()));
 		}
 
@@ -120,20 +120,20 @@ public class MemberService {
 		return res;
 	}
 
-	public Member getMemberByUserAccount(final int userAccountId) {
+	public Hacker getMemberByUserAccount(final int userAccountId) {
 		return this.memberRepo.getMemberByUserAccount(userAccountId);
 	}
 
-	public Collection<Member> getMemberByBrotherhood(final Integer id) {
+	public Collection<Hacker> getMemberByBrotherhood(final Integer id) {
 		return this.memberRepo.getMembersOfBrotherhood(id);
 	}
 
 	//RECONSTRUCT
-	public Member reconstruct(final MemberRegistrationForm memberRegistrationForm, final BindingResult binding) {
-		Member res;
+	public Hacker reconstruct(final MemberRegistrationForm memberRegistrationForm, final BindingResult binding) {
+		Hacker res;
 
 		if (memberRegistrationForm.getId() == 0) {
-			res = new Member();
+			res = new Hacker();
 			res.setAddress(memberRegistrationForm.getAddress());
 			res.setEmail(memberRegistrationForm.getEmail());
 			res.setMiddleName(memberRegistrationForm.getMiddleName());
@@ -165,7 +165,7 @@ public class MemberService {
 		} else {
 			Assert.isTrue(memberRegistrationForm.getPassword2().equals(memberRegistrationForm.getUserAccount().getPassword()));
 			res = this.memberRepo.findOne(memberRegistrationForm.getId());
-			final Member p = new Member();
+			final Hacker p = new Hacker();
 			p.setId(res.getId());
 			p.setVersion(res.getVersion());
 			p.setAddress(memberRegistrationForm.getAddress());

@@ -5,14 +5,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Brotherhood;
+import domain.Companie;
 
 @Component
 @Transactional
-public class BrotherhoodToStringConverter implements Converter<Brotherhood, String> {
+public class BrotherhoodToStringConverter implements Converter<Companie, String> {
 
 	@Override
-	public String convert(final Brotherhood source) {
+	public String convert(final Companie source) {
 		String result;
 
 		if (source == null)

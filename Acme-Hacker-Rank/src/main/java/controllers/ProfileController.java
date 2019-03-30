@@ -29,8 +29,8 @@ import services.MemberService;
 import services.PictureService;
 import domain.Actor;
 import domain.Administrator;
-import domain.Brotherhood;
-import domain.Member;
+import domain.Companie;
+import domain.Hacker;
 import domain.Picture;
 import forms.MemberRegistrationForm;
 import forms.RegistrationForm;
@@ -71,7 +71,7 @@ public class ProfileController extends AbstractController {
 		result.addObject("actor", a);
 
 		if (user.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD")) {
-			final Brotherhood b = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Companie b = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			final Collection<Picture> pictures = b.getPictures();
 			result.addObject("pictures", pictures);
 		}
@@ -145,7 +145,7 @@ public class ProfileController extends AbstractController {
 	public ModelAndView editBrotherhood() {
 		ModelAndView result;
 		final RegistrationFormBrotherhood registrationForm = new RegistrationFormBrotherhood();
-		Brotherhood brotherhood;
+		Companie brotherhood;
 
 		try {
 
@@ -186,7 +186,7 @@ public class ProfileController extends AbstractController {
 		ModelAndView result;
 
 		try {
-			final Brotherhood brother = this.brotherhoodService.reconstruct(registrationForm, binding);
+			final Companie brother = this.brotherhoodService.reconstruct(registrationForm, binding);
 			if (!binding.hasErrors()) {
 				this.brotherhoodService.save(brother);
 
@@ -210,7 +210,7 @@ public class ProfileController extends AbstractController {
 	@RequestMapping(value = "/edit-member", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-		Member member;
+		Hacker member;
 		final MemberRegistrationForm formulario = new MemberRegistrationForm();
 		try {
 			member = this.memberService.findOne(this.memberService.getMemberByUserAccount(LoginService.getPrincipal().getId()).getId());
@@ -243,7 +243,7 @@ public class ProfileController extends AbstractController {
 	@RequestMapping(value = "/edit-member", method = RequestMethod.POST, params = "save")
 	public ModelAndView editMember(final MemberRegistrationForm memberRegistrationForm, final BindingResult binding) {
 		ModelAndView result;
-		Member member;
+		Hacker member;
 		try {
 			member = this.memberService.reconstruct(memberRegistrationForm, binding);
 			if (!binding.hasErrors()) {

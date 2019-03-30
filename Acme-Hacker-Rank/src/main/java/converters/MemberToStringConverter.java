@@ -5,14 +5,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Member;
+import domain.Hacker;
 
 @Component
 @Transactional
-public class MemberToStringConverter implements Converter<Member, String> {
+public class MemberToStringConverter implements Converter<Hacker, String> {
 
 	@Override
-	public String convert(final Member member) {
+	public String convert(final Hacker member) {
 		String result;
 
 		if (member == null)

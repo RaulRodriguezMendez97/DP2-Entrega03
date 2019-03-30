@@ -16,9 +16,9 @@ import repositories.EnrolmentRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.Enrolment;
-import domain.Member;
+import domain.Hacker;
 import domain.Posicion;
 
 @Service
@@ -44,9 +44,9 @@ public class EnrolmentService {
 		enrolment.setIsOut(0);
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
-		enrolment.setMember((Member) a);
+		enrolment.setMember((Hacker) a);
 		enrolment.setPosition(new Posicion());
-		enrolment.setBrotherhood(new Brotherhood());
+		enrolment.setBrotherhood(new Companie());
 		return enrolment;
 	}
 
@@ -74,7 +74,7 @@ public class EnrolmentService {
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
 		if (enrolment.getId() == 0) {
-			enrolment.setMember((Member) a);
+			enrolment.setMember((Hacker) a);
 			enrolment.setMoment(new Date());
 		} else {
 
@@ -117,7 +117,7 @@ public class EnrolmentService {
 			res.setIsOut(0);
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-			res.setMember((Member) a);
+			res.setMember((Hacker) a);
 			this.validator.validate(res, binding);
 
 			return res;

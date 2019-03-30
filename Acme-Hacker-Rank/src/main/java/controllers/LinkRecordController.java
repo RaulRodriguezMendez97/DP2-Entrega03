@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.HistoryService;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.History;
 import domain.LinkRecord;
 
@@ -35,7 +35,7 @@ public class LinkRecordController extends AbstractController {
 			history = this.historyService.findOneAnomimo(historyId);
 			Assert.notNull(history);
 			linkRecords = history.getLinkRecords();
-			final Brotherhood brotherhood = history.getBrotherhood();
+			final Companie brotherhood = history.getBrotherhood();
 			result = new ModelAndView("linkRecord/list");
 			result.addObject("linkRecords", linkRecords);
 			result.addObject("history", history);

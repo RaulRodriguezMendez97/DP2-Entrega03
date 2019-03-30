@@ -17,7 +17,7 @@ import org.springframework.validation.Validator;
 import repositories.ParadeRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.Parade;
 import domain.Request;
 
@@ -43,7 +43,7 @@ public class ParadeService {
 		procession.setPositionsRow(new ArrayList<Integer>());
 		procession.setPositionsColumn(new ArrayList<Integer>());
 		procession.setRequests(new HashSet<Request>());
-		final Brotherhood brotherhood = new Brotherhood();
+		final Companie brotherhood = new Companie();
 		procession.setBrotherhood(brotherhood);
 		procession.setMaxRows(2);
 		procession.setMaxColumns(3000);

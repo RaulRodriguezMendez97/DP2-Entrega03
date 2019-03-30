@@ -18,8 +18,8 @@ import org.springframework.validation.Validator;
 import repositories.RequestRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Brotherhood;
-import domain.Member;
+import domain.Companie;
+import domain.Hacker;
 import domain.Parade;
 import domain.Request;
 
@@ -48,7 +48,7 @@ public class RequestService {
 		final Parade procession = new Parade();
 		request.setProcession(procession);
 		final int userAccountId = LoginService.getPrincipal().getId();
-		final Member member = this.memberService.getMemberByUserAccount(userAccountId);
+		final Hacker member = this.memberService.getMemberByUserAccount(userAccountId);
 		request.setMember(member);
 		return request;
 	}
@@ -63,9 +63,9 @@ public class RequestService {
 		if (request.getId() == 0) {
 			Assert.isTrue(request.getStatus() == 1, "RequestService. No valid new request. Status must be 1.");
 			final int userAccountId = LoginService.getPrincipal().getId();
-			final Member member = this.memberService.getMemberByUserAccount(userAccountId);
-			final Collection<Brotherhood> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
-			final Set<Brotherhood> brotherhoodsWithOutDuplicates = new HashSet<Brotherhood>(brotherhoods);
+			final Hacker member = this.memberService.getMemberByUserAccount(userAccountId);
+			final Collection<Companie> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
+			final Set<Companie> brotherhoodsWithOutDuplicates = new HashSet<Companie>(brotherhoods);
 			Assert.isTrue(brotherhoodsWithOutDuplicates.contains(request.getProcession().getBrotherhood()), "RequestService. You only can use a procession of your brotherhood");
 			Assert.isTrue(request.getProcession() != null && request.getProcession().getDraftMode() == 0, "RequestService. You need to provied a procession in the request.");
 			Assert.isTrue(request.getMember() != null, "RequestService. You need to provied a member in the request.");
@@ -89,7 +89,7 @@ public class RequestService {
 
 		savedRequest = this.requestRepository.save(request);
 		if (request.getId() == 0) {
-			final Member miembroRequest = this.memberService.getMemberByUserAccount(LoginService.getPrincipal().getId());
+			final Hacker miembroRequest = this.memberService.getMemberByUserAccount(LoginService.getPrincipal().getId());
 			final Collection<Request> coleccion = miembroRequest.getRequests();
 			coleccion.add(savedRequest);
 			miembroRequest.setRequests(coleccion);
@@ -109,9 +109,9 @@ public class RequestService {
 	public void delete(final Request request) {
 		Assert.isTrue(request.getStatus() == 1);
 		final int userAccountId = LoginService.getPrincipal().getId();
-		final Member member = this.memberService.getMemberByUserAccount(userAccountId);
-		final Collection<Brotherhood> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
-		final Set<Brotherhood> brotherhoodsWithOutDuplicates = new HashSet<Brotherhood>(brotherhoods);
+		final Hacker member = this.memberService.getMemberByUserAccount(userAccountId);
+		final Collection<Companie> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
+		final Set<Companie> brotherhoodsWithOutDuplicates = new HashSet<Companie>(brotherhoods);
 		Assert.isTrue(brotherhoodsWithOutDuplicates.contains(request.getProcession().getBrotherhood()));
 		this.requestRepository.delete(request);
 	}

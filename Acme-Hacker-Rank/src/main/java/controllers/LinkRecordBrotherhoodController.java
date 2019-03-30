@@ -19,7 +19,7 @@ import services.BrotherhoodService;
 import services.HistoryService;
 import services.LinkRecordService;
 import domain.Actor;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.History;
 import domain.LinkRecord;
 
@@ -66,10 +66,10 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 		ModelAndView result;
 		try {
 			final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-			final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			final LinkRecord linkRecord;
 			final History history;
-			final Collection<Brotherhood> brotherhoods;
+			final Collection<Companie> brotherhoods;
 			brotherhoods = this.brotherhoodService.findAll();
 			brotherhoods.remove(br);
 			history = this.historyService.findOne(historyId);
@@ -93,10 +93,10 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 		ModelAndView result;
 		try {
 			final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-			final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			LinkRecord linkRecord;
 			History history;
-			final Collection<Brotherhood> brotherhoods;
+			final Collection<Companie> brotherhoods;
 			brotherhoods = this.brotherhoodService.findAll();
 			brotherhoods.remove(br);
 
@@ -134,9 +134,9 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 				result = new ModelAndView("redirect:list.do?historyId=" + historyId);
 			} else {
 				final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-				final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+				final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 				final History history = this.historyService.findOne(historyId);
-				final Collection<Brotherhood> brotherhoods;
+				final Collection<Companie> brotherhoods;
 				brotherhoods = this.brotherhoodService.findAll();
 				brotherhoods.remove(br);
 				Assert.notNull(history);
@@ -147,9 +147,9 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 			}
 		} catch (final Exception e) {
 			final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-			final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			final History history = this.historyService.findOne(historyId);
-			final Collection<Brotherhood> brotherhoods;
+			final Collection<Companie> brotherhoods;
 			brotherhoods = this.brotherhoodService.findAll();
 			brotherhoods.remove(br);
 			if (br.equals(history.getBrotherhood())) {
@@ -182,9 +182,9 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 				result = new ModelAndView("redirect:list.do?historyId=" + historyId);
 			} else {
 				final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-				final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+				final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 				final History history = this.historyService.findOne(historyId);
-				final Collection<Brotherhood> brotherhoods;
+				final Collection<Companie> brotherhoods;
 				brotherhoods = this.brotherhoodService.findAll();
 				brotherhoods.remove(br);
 				Assert.notNull(history);
@@ -195,9 +195,9 @@ public class LinkRecordBrotherhoodController extends AbstractController {
 			}
 		} catch (final Exception e) {
 			final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-			final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			final History history = this.historyService.findOne(historyId);
-			final Collection<Brotherhood> brotherhoods;
+			final Collection<Companie> brotherhoods;
 			brotherhoods = this.brotherhoodService.findAll();
 			brotherhoods.remove(br);
 			if (br.equals(history.getBrotherhood())) {

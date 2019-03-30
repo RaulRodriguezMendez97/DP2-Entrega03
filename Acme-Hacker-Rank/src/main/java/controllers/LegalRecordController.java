@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.HistoryService;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.History;
 import domain.LegalRecord;
 
@@ -29,7 +29,7 @@ public class LegalRecordController extends AbstractController {
 		try {
 			final Collection<LegalRecord> legalRecords;
 			final History history;
-			final Brotherhood brotherhood;
+			final Companie brotherhood;
 
 			history = this.historyService.findOneAnomimo(historyId);
 

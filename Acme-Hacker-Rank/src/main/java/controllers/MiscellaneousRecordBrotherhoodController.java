@@ -21,7 +21,7 @@ import services.BrotherhoodService;
 import services.HistoryService;
 import services.MiscellaneousRecordService;
 import domain.Actor;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.History;
 import domain.MiscellaneousRecord;
 
@@ -129,7 +129,7 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 			}
 		} catch (final Exception e) {
 			final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-			final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			final History history = this.historyService.findOne(historyId);
 			if (br.equals(history.getBrotherhood())) {
 				result = new ModelAndView("miscellaneousRecord/edit");
@@ -168,7 +168,7 @@ public class MiscellaneousRecordBrotherhoodController extends AbstractController
 		} catch (final Exception e) {
 			final History history = this.historyService.findOne(historyId);
 			final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-			final Brotherhood br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			if (br.equals(history.getBrotherhood())) {
 				result = new ModelAndView("miscellaneousRecord/edit");
 				result.addObject("miscellaneousRecord", miscellaneousRecord);

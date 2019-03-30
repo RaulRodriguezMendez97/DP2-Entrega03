@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.HistoryService;
 import services.InceptionRecordService;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.History;
 import domain.InceptionRecord;
 
@@ -29,7 +29,7 @@ public class InceptionRecordController extends AbstractController {
 		ModelAndView result;
 		try {
 			final History history = this.historyService.findOneAnomimo(historyId);
-			final Brotherhood brotherhood = history.getBrotherhood();
+			final Companie brotherhood = history.getBrotherhood();
 			final InceptionRecord inceptionRecord = this.inceptionRecordService.findOneThisBrotherhood(history.getInceptionRecord().getId(), brotherhood);
 			result = new ModelAndView("inceptionRecord/show");
 			result.addObject("inceptionRecord", inceptionRecord);

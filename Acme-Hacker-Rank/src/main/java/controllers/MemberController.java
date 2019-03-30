@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.UserAccount;
 import services.CustomizableSystemService;
 import services.MemberService;
-import domain.Member;
+import domain.Hacker;
 import forms.MemberRegistrationForm;
 
 @Controller
@@ -55,7 +55,7 @@ public class MemberController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final MemberRegistrationForm memberRegistrationForm, final BindingResult binding) {
 		ModelAndView result;
-		Member member;
+		Hacker member;
 		try {
 			member = this.memberService.reconstruct(memberRegistrationForm, binding);
 			if (!binding.hasErrors()) {
@@ -78,7 +78,7 @@ public class MemberController extends AbstractController {
 	@RequestMapping(value = "/list-All", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int idBrotherhood) {
 		final ModelAndView result;
-		final Collection<Member> members;
+		final Collection<Hacker> members;
 
 		members = this.memberService.getMemberByBrotherhood(idBrotherhood);
 

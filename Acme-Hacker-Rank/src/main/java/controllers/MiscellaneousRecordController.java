@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.HistoryService;
-import domain.Brotherhood;
+import domain.Companie;
 import domain.History;
 import domain.MiscellaneousRecord;
 
@@ -35,7 +35,7 @@ public class MiscellaneousRecordController extends AbstractController {
 			history = this.historyService.findOneAnomimo(historyId);
 			Assert.notNull(history);
 			miscellaneousRecords = history.getMiscellaneousRecords();
-			final Brotherhood brotherhood = history.getBrotherhood();
+			final Companie brotherhood = history.getBrotherhood();
 			result = new ModelAndView("miscellaneousRecord/list");
 			result.addObject("miscellaneousRecords", miscellaneousRecords);
 			result.addObject("history", history);

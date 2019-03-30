@@ -18,8 +18,8 @@ import security.LoginService;
 import services.BrotherhoodService;
 import services.MemberService;
 import services.RequestService;
-import domain.Brotherhood;
-import domain.Member;
+import domain.Companie;
+import domain.Hacker;
 import domain.Request;
 
 @Controller
@@ -52,9 +52,9 @@ public class RequestMemberController extends AbstractController {
 
 		request = this.requestService.create();
 		final Integer a = LoginService.getPrincipal().getId();
-		final Member member = this.memberService.getMemberByUserAccount(a);
-		final Collection<Brotherhood> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
-		final Set<Brotherhood> brotherhoodsWithOutDuplicates = new HashSet<Brotherhood>(brotherhoods);
+		final Hacker member = this.memberService.getMemberByUserAccount(a);
+		final Collection<Companie> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
+		final Set<Companie> brotherhoodsWithOutDuplicates = new HashSet<Companie>(brotherhoods);
 		result = new ModelAndView("request/edit");
 		result.addObject("request", request);
 		result.addObject("brotherhoods", brotherhoodsWithOutDuplicates);
@@ -65,9 +65,9 @@ public class RequestMemberController extends AbstractController {
 	public ModelAndView edit(Request newRequest, final BindingResult binding) {
 		ModelAndView result;
 		final int userAccountId = LoginService.getPrincipal().getId();
-		final Member member = this.memberService.getMemberByUserAccount(userAccountId);
-		final Collection<Brotherhood> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
-		final Set<Brotherhood> brotherhoodsWithOutDuplicates = new HashSet<Brotherhood>(brotherhoods);
+		final Hacker member = this.memberService.getMemberByUserAccount(userAccountId);
+		final Collection<Companie> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
+		final Set<Companie> brotherhoodsWithOutDuplicates = new HashSet<Companie>(brotherhoods);
 		try {
 			newRequest = this.requestService.reconstruct(newRequest, binding);
 			if (!binding.hasErrors()) {
@@ -112,7 +112,7 @@ public class RequestMemberController extends AbstractController {
 		try {
 			request = this.requestService.findOne(requestId);
 			Assert.notNull(request);
-			final Member m = this.memberService.getMemberByUserAccount(LoginService.getPrincipal().getId());
+			final Hacker m = this.memberService.getMemberByUserAccount(LoginService.getPrincipal().getId());
 			Assert.isTrue(m.getRequests().contains(request));
 			result = new ModelAndView("request/show");
 			result.addObject("request", request);
