@@ -44,7 +44,7 @@ public class CustomizableSystemAdministratorController extends AbstractControlle
 		try {
 			if (!binding.hasErrors()) {
 				this.customizableSystem.save(customizable);
-				result = new ModelAndView("redirect:https://localhost:8443/Acme-Madruga");
+				result = new ModelAndView("redirect:edit.do");
 			} else {
 				result = new ModelAndView("customizable/edit");
 				result.addObject("customizable", customizable);
