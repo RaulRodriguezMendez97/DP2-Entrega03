@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 import repositories.PictureRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Companie;
+import domain.Company;
 import domain.Picture;
 
 @Service
@@ -40,7 +40,7 @@ public class PictureService {
 	//Metodo findOne
 	public Picture findOne(final int PictureId) {
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Company br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		final Picture res = this.PRepo.findOne(PictureId);
 		Assert.isTrue(br.getPictures().contains(res) || this.getPicturesFloatByBrotherhood(br.getId()).contains(res) || this.brotherhoodService.getBrotherhoodByPeriodRecordPicture(PictureId).equals(br));
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));

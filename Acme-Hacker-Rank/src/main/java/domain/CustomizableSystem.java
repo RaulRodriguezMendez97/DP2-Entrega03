@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -16,12 +17,13 @@ public class CustomizableSystem extends DomainEntity {
 	private String	nameSystem;
 	private String	banner;
 	private String	messageWelcomePage;
-	//private String	spanishMessageWelcomePage;
+	private String	spanishMessageWelcomePage;
 	private String	telephoneCode;
 	private int		timeCache;
 	private int		maxResults;
 
 
+	@Range(min = 1, max = 24)
 	public int getTimeCache() {
 		return this.timeCache;
 	}
@@ -30,6 +32,7 @@ public class CustomizableSystem extends DomainEntity {
 		this.timeCache = timeCache;
 	}
 
+	@Range(min = 1, max = 100)
 	public int getMaxResults() {
 		return this.maxResults;
 	}
@@ -69,15 +72,15 @@ public class CustomizableSystem extends DomainEntity {
 		this.messageWelcomePage = messageWelcomePage;
 	}
 
-	//	@NotBlank
-	//	@NotNull
-	//	public String getSpanishMessageWelcomePage() {
-	//		return this.spanishMessageWelcomePage;
-	//	}
-	//
-	//	public void setSpanishMessageWelcomePage(final String spanishMessageWelcomePage) {
-	//		this.spanishMessageWelcomePage = spanishMessageWelcomePage;
-	//	}
+	@NotBlank
+	@NotNull
+	public String getSpanishMessageWelcomePage() {
+		return this.spanishMessageWelcomePage;
+	}
+
+	public void setSpanishMessageWelcomePage(final String spanishMessageWelcomePage) {
+		this.spanishMessageWelcomePage = spanishMessageWelcomePage;
+	}
 
 	@NotBlank
 	@NotNull

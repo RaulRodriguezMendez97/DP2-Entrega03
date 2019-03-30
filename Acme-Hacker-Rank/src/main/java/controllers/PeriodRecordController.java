@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.HistoryService;
 import services.PeriodRecordService;
-import domain.Companie;
+import domain.Company;
 import domain.History;
 import domain.PeriodRecord;
 
@@ -34,7 +34,7 @@ public class PeriodRecordController extends AbstractController {
 
 			final History h = this.historyService.findOneAnomimo(historyId);
 			Assert.notNull(h);
-			final Companie brotherhood = h.getBrotherhood();
+			final Company brotherhood = h.getBrotherhood();
 			final Collection<PeriodRecord> periodRecords = h.getPeriodRecords();
 
 			result = new ModelAndView("periodRecords/list");

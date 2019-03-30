@@ -14,7 +14,7 @@ import org.springframework.validation.Validator;
 
 import repositories.InceptionRecordRepository;
 import security.LoginService;
-import domain.Companie;
+import domain.Company;
 import domain.History;
 import domain.InceptionRecord;
 import domain.Picture;
@@ -50,7 +50,7 @@ public class InceptionRecordService {
 		return inceptionRecord;
 	}
 
-	public InceptionRecord findOneThisBrotherhood(final int inceptionRecordId, final Companie brotherhood) {
+	public InceptionRecord findOneThisBrotherhood(final int inceptionRecordId, final Company brotherhood) {
 		final InceptionRecord inceptionRecord = this.findOne(inceptionRecordId);
 		Assert.isTrue(this.getAllInceptionRecordsBrotherhood(brotherhood).contains(inceptionRecord));
 		return inceptionRecord;
@@ -102,7 +102,7 @@ public class InceptionRecordService {
 		final int userAccountId = LoginService.getPrincipal().getId();
 		return this.inceptionRecordRepository.allMyInceptionRecords(userAccountId);
 	}
-	public Collection<InceptionRecord> getAllInceptionRecordsBrotherhood(final Companie brotherhood) {
+	public Collection<InceptionRecord> getAllInceptionRecordsBrotherhood(final Company brotherhood) {
 
 		return this.inceptionRecordRepository.allMyInceptionRecords(brotherhood.getUserAccount().getId());
 	}

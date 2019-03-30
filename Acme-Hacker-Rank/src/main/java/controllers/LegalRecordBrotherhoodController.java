@@ -20,7 +20,7 @@ import services.ActorService;
 import services.HistoryService;
 import services.LegalRecordService;
 import domain.Actor;
-import domain.Companie;
+import domain.Company;
 import domain.History;
 import domain.LegalRecord;
 
@@ -44,7 +44,7 @@ public class LegalRecordBrotherhoodController extends AbstractController {
 		try {
 			final Collection<LegalRecord> legalRecords;
 			final History history;
-			final Companie brotherhood;
+			final Company brotherhood;
 			history = this.historyService.findOne(historyId);
 			legalRecords = history.getLegalRecords();
 			brotherhood = history.getBrotherhood();

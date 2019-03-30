@@ -24,7 +24,7 @@ import services.InceptionRecordService;
 import services.PeriodRecordService;
 import services.PictureService;
 import domain.Actor;
-import domain.Companie;
+import domain.Company;
 import domain.History;
 import domain.InceptionRecord;
 import domain.Paso;
@@ -57,7 +57,7 @@ public class PictureBrotherhoodController extends AbstractController {
 		final ModelAndView result;
 		final Collection<Picture> pictures;
 		final UserAccount user = LoginService.getPrincipal();
-		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Company br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 
 		pictures = br.getPictures();
 
@@ -120,7 +120,7 @@ public class PictureBrotherhoodController extends AbstractController {
 	public ModelAndView savePictureBrotherhood(@Valid final Picture picture, final BindingResult binding) {
 		ModelAndView result;
 		final UserAccount user = LoginService.getPrincipal();
-		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Company br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		if (!binding.hasErrors()) {
 			final Picture picSave = this.pictureService.save(picture);
 			if (br.getPictures().contains(picture)) {
@@ -141,7 +141,7 @@ public class PictureBrotherhoodController extends AbstractController {
 	public ModelAndView deletePictureBrotherhood(final Picture picture, final BindingResult binding) {
 		ModelAndView result;
 		final UserAccount user = LoginService.getPrincipal();
-		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Company br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 
 		if (!binding.hasErrors()) {
 			br.getPictures().remove(picture);

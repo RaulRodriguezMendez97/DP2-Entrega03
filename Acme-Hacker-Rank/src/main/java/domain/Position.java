@@ -32,17 +32,17 @@ public class Position extends DomainEntity {
 	private int			salaty;
 	private String		ticker;
 	private int			draftMode;
-	private Companie	companie;
+	private Company	companie;
 
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Companie getCompanie() {
+	public Company getCompanie() {
 		return this.companie;
 	}
 
-	public void setCompanie(final Companie companie) {
+	public void setCompanie(final Company companie) {
 		this.companie = companie;
 	}
 

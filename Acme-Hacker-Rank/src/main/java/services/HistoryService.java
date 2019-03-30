@@ -14,7 +14,7 @@ import org.springframework.util.Assert;
 import repositories.HistoryRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Companie;
+import domain.Company;
 import domain.History;
 import domain.InceptionRecord;
 import domain.LegalRecord;
@@ -36,7 +36,7 @@ public class HistoryService {
 	public History create() {
 		final History history = new History();
 		final UserAccount user = LoginService.getPrincipal();
-		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Company br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		history.setInceptionRecord(new InceptionRecord());
 		history.setLinkRecords(new HashSet<LinkRecord>());
 		history.setLegalRecords(new HashSet<LegalRecord>());
@@ -76,7 +76,7 @@ public class HistoryService {
 	public History findOne(final int historyId) {
 		final History h = this.historyRepository.findOne(historyId);
 		final UserAccount userAccount = LoginService.getPrincipal();
-		final Companie b = this.brotherhoodService.brotherhoodUserAccount(userAccount.getId());
+		final Company b = this.brotherhoodService.brotherhoodUserAccount(userAccount.getId());
 		Assert.isTrue(h.getBrotherhood().getId() == b.getId());
 		Assert.isTrue(userAccount.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 

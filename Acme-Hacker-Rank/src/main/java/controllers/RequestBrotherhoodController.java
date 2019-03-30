@@ -17,7 +17,7 @@ import security.LoginService;
 import services.BrotherhoodService;
 import services.ParadeService;
 import services.RequestService;
-import domain.Companie;
+import domain.Company;
 import domain.Parade;
 import domain.Request;
 
@@ -159,7 +159,7 @@ public class RequestBrotherhoodController extends AbstractController {
 		try {
 			request = this.requestService.findOne(requestId);
 			Assert.notNull(request);
-			final Companie b = this.brotherhoodService.brotherhoodUserAccount(LoginService.getPrincipal().getId());
+			final Company b = this.brotherhoodService.brotherhoodUserAccount(LoginService.getPrincipal().getId());
 			final Collection<Parade> processions = this.processionService.getAllProcessionsByBrotherhood(b.getId());
 			Assert.isTrue(processions.contains(request.getProcession()));
 			result = new ModelAndView("request/show");

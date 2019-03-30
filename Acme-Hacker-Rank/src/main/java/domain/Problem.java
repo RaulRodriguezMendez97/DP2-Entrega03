@@ -8,7 +8,6 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -19,24 +18,13 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class Problem extends DomainEntity {
 
-	private String					title;
-	private String					statement;
-	private String					hint;
-	private Collection<String>		attachment;
-	private int						draftMode;
-	private Position				position;
-	private Collection<Application>	applications;
+	private String				title;
+	private String				statement;
+	private String				hint;
+	private Collection<String>	attachment;
+	private int					draftMode;
+	private Position			position;
 
-
-	@Valid
-	@OneToMany
-	public Collection<Application> getApplications() {
-		return this.applications;
-	}
-
-	public void setApplications(final Collection<Application> applications) {
-		this.applications = applications;
-	}
 
 	@Valid
 	@NotNull

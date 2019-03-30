@@ -15,7 +15,7 @@ import security.UserAccount;
 import services.ActorService;
 import services.BrotherhoodService;
 import domain.Actor;
-import domain.Companie;
+import domain.Company;
 
 @Controller
 @RequestMapping("/brotherhood/member")
@@ -31,7 +31,7 @@ public class BrotherhoodMemberController {
 	@RequestMapping(value = "/list-member-belongs", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Companie> brotherhoods;
+		final Collection<Company> brotherhoods;
 
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
@@ -52,7 +52,7 @@ public class BrotherhoodMemberController {
 	@RequestMapping(value = "/list-member-belonged", method = RequestMethod.GET)
 	public ModelAndView listbelonged() {
 		final ModelAndView result;
-		final Collection<Companie> brotherhoods;
+		final Collection<Company> brotherhoods;
 
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());

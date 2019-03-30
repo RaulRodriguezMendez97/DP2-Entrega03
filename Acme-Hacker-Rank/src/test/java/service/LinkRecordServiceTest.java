@@ -14,7 +14,7 @@ import services.BrotherhoodService;
 import services.HistoryService;
 import services.LinkRecordService;
 import utilities.AbstractTest;
-import domain.Companie;
+import domain.Company;
 import domain.History;
 import domain.LinkRecord;
 
@@ -258,7 +258,7 @@ public class LinkRecordServiceTest extends AbstractTest {
 			super.authenticate("brotherhood");
 
 			final LinkRecord linkRecord = this.linkRecordService.create();
-			final Companie brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+			final Company brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 			linkRecord.setTitle(title);
 			linkRecord.setDescription(description);
 			linkRecord.setBrotherhood(brotherhood);

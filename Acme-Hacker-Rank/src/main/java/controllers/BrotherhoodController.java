@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
 import services.CustomizableSystemService;
-import domain.Companie;
+import domain.Company;
 import forms.RegistrationFormBrotherhood;
 
 @Controller
@@ -78,7 +78,7 @@ public class BrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("registrationForm") final RegistrationFormBrotherhood registrationForm, final BindingResult binding) {
 		ModelAndView result;
-		Companie brotherhood = null;
+		Company brotherhood = null;
 
 		try {
 
@@ -104,7 +104,7 @@ public class BrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Companie> brotherhoods;
+		final Collection<Company> brotherhoods;
 
 		brotherhoods = this.brotherhoodService.findAll();
 		Assert.notNull(brotherhoods);

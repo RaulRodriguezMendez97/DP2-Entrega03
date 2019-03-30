@@ -13,7 +13,7 @@ import repositories.MiscellaneousRecordRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
-import domain.Companie;
+import domain.Company;
 import domain.History;
 import domain.MiscellaneousRecord;
 
@@ -59,7 +59,7 @@ public class MiscellaneousRecordService {
 	public MiscellaneousRecord save(final MiscellaneousRecord miscellaneousRecord) {
 		final History h = this.historyService.getHistotyByMiscellaneousRecord(miscellaneousRecord.getId());
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Company br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		if (miscellaneousRecord.getId() != 0)
 			Assert.isTrue(h.getBrotherhood() == br);
 
@@ -73,7 +73,7 @@ public class MiscellaneousRecordService {
 	public void delete(final MiscellaneousRecord miscellaneousRecord, final int historyId) {
 		final History history = this.historyService.findOne(historyId);
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Companie br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+		final Company br = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"));
 		Assert.isTrue(history.getBrotherhood() == br);
 		Assert.isTrue(history.getMiscellaneousRecords().contains(miscellaneousRecord));

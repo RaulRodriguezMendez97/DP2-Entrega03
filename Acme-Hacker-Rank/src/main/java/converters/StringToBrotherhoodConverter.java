@@ -8,20 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import repositories.BrotherhoodRepository;
-import domain.Companie;
+import domain.Company;
 
 @Component
 @Transactional
-public class StringToBrotherhoodConverter implements Converter<String, Companie> {
+public class StringToBrotherhoodConverter implements Converter<String, Company> {
 
 	@Autowired
 	private BrotherhoodRepository	brotherhoodRepository;
 
 
 	@Override
-	public Companie convert(final String source) {
+	public Company convert(final String source) {
 
-		Companie brotherhood;
+		Company brotherhood;
 		int id;
 
 		try {

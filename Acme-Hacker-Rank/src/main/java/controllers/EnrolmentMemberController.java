@@ -20,7 +20,7 @@ import services.BrotherhoodService;
 import services.EnrolmentService;
 import services.PositionService;
 import domain.Actor;
-import domain.Companie;
+import domain.Company;
 import domain.Enrolment;
 import domain.Posicion;
 
@@ -63,7 +63,7 @@ public class EnrolmentMemberController {
 	public ModelAndView create() {
 		final ModelAndView result;
 		Collection<Posicion> positions;
-		Collection<Companie> brotherhoods;
+		Collection<Company> brotherhoods;
 		final Enrolment enrolment;
 		final String language;
 
@@ -120,7 +120,7 @@ public class EnrolmentMemberController {
 
 				final Collection<Posicion> positions = this.positionService.findAll();
 
-				final Collection<Companie> brotherhoods = this.brotherhoodService.findAll();
+				final Collection<Company> brotherhoods = this.brotherhoodService.findAll();
 				result = new ModelAndView("enrolment/edit");
 				result.addObject("enrolment", enrolment);
 				result.addObject("positions", positions);
@@ -132,7 +132,7 @@ public class EnrolmentMemberController {
 			final String language = LocaleContextHolder.getLocale().getLanguage();
 
 			final Collection<Posicion> positions = this.positionService.findAll();
-			final Collection<Companie> brotherhoods = this.brotherhoodService.findAll();
+			final Collection<Company> brotherhoods = this.brotherhoodService.findAll();
 			result = new ModelAndView("enrolment/edit");
 			result.addObject("enrolment", enrolment);
 			result.addObject("positions", positions);

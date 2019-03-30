@@ -18,7 +18,7 @@ import security.LoginService;
 import services.BrotherhoodService;
 import services.MemberService;
 import services.RequestService;
-import domain.Companie;
+import domain.Company;
 import domain.Hacker;
 import domain.Request;
 
@@ -53,8 +53,8 @@ public class RequestMemberController extends AbstractController {
 		request = this.requestService.create();
 		final Integer a = LoginService.getPrincipal().getId();
 		final Hacker member = this.memberService.getMemberByUserAccount(a);
-		final Collection<Companie> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
-		final Set<Companie> brotherhoodsWithOutDuplicates = new HashSet<Companie>(brotherhoods);
+		final Collection<Company> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
+		final Set<Company> brotherhoodsWithOutDuplicates = new HashSet<Company>(brotherhoods);
 		result = new ModelAndView("request/edit");
 		result.addObject("request", request);
 		result.addObject("brotherhoods", brotherhoodsWithOutDuplicates);
@@ -66,8 +66,8 @@ public class RequestMemberController extends AbstractController {
 		ModelAndView result;
 		final int userAccountId = LoginService.getPrincipal().getId();
 		final Hacker member = this.memberService.getMemberByUserAccount(userAccountId);
-		final Collection<Companie> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
-		final Set<Companie> brotherhoodsWithOutDuplicates = new HashSet<Companie>(brotherhoods);
+		final Collection<Company> brotherhoods = this.brotherhoodService.getBrotherhoodsByMember(member.getId());
+		final Set<Company> brotherhoodsWithOutDuplicates = new HashSet<Company>(brotherhoods);
 		try {
 			newRequest = this.requestService.reconstruct(newRequest, binding);
 			if (!binding.hasErrors()) {

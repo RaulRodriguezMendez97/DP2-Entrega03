@@ -29,7 +29,7 @@ import services.MemberService;
 import services.PictureService;
 import domain.Actor;
 import domain.Administrator;
-import domain.Companie;
+import domain.Company;
 import domain.Hacker;
 import domain.Picture;
 import forms.MemberRegistrationForm;
@@ -71,7 +71,7 @@ public class ProfileController extends AbstractController {
 		result.addObject("actor", a);
 
 		if (user.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD")) {
-			final Companie b = this.brotherhoodService.brotherhoodUserAccount(user.getId());
+			final Company b = this.brotherhoodService.brotherhoodUserAccount(user.getId());
 			final Collection<Picture> pictures = b.getPictures();
 			result.addObject("pictures", pictures);
 		}
@@ -145,7 +145,7 @@ public class ProfileController extends AbstractController {
 	public ModelAndView editBrotherhood() {
 		ModelAndView result;
 		final RegistrationFormBrotherhood registrationForm = new RegistrationFormBrotherhood();
-		Companie brotherhood;
+		Company brotherhood;
 
 		try {
 
@@ -186,7 +186,7 @@ public class ProfileController extends AbstractController {
 		ModelAndView result;
 
 		try {
-			final Companie brother = this.brotherhoodService.reconstruct(registrationForm, binding);
+			final Company brother = this.brotherhoodService.reconstruct(registrationForm, binding);
 			if (!binding.hasErrors()) {
 				this.brotherhoodService.save(brother);
 

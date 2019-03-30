@@ -16,7 +16,7 @@ import repositories.EnrolmentRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
-import domain.Companie;
+import domain.Company;
 import domain.Enrolment;
 import domain.Hacker;
 import domain.Posicion;
@@ -46,7 +46,7 @@ public class EnrolmentService {
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 		enrolment.setMember((Hacker) a);
 		enrolment.setPosition(new Posicion());
-		enrolment.setBrotherhood(new Companie());
+		enrolment.setBrotherhood(new Company());
 		return enrolment;
 	}
 

@@ -21,7 +21,7 @@ import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Companie;
+import domain.Company;
 import domain.Picture;
 import forms.RegistrationFormBrotherhood;
 
@@ -46,8 +46,8 @@ public class BrotherhoodService {
 
 	//Metodos CRUD
 
-	public Companie create() {
-		final Companie res = new Companie();
+	public Company create() {
+		final Company res = new Company();
 
 		res.setTitle("");
 		res.setEstablishmentDate(new Date());
@@ -75,21 +75,21 @@ public class BrotherhoodService {
 	}
 
 	//listing
-	public Collection<Companie> findAll() {
+	public Collection<Company> findAll() {
 		return this.brotherhoodRepo.findAll();
 	}
 
-	public Companie findOne(final int brotherhoodId) {
+	public Company findOne(final int brotherhoodId) {
 		return this.brotherhoodRepo.findOne(brotherhoodId);
 	}
 
 	//updating
-	public Companie save(final Companie r) {
+	public Company save(final Company r) {
 
 		//final UserAccount userLoged = LoginService.getPrincipal();
 		//Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("BROTHERHOOD"), "Comprobar que hay brotherhood conectado");
 
-		Companie res = null;
+		Company res = null;
 		Assert.isTrue(r.getTitle() != null && r.getTitle() != "" && r.getEstablishmentDate() != null, "BrotherService.save -> Tilte or EstablishmentDate invalid");
 		Assert.isTrue(r != null && r.getName() != null && r.getSurname() != null && r.getName() != "" && r.getSurname() != "" && r.getUserAccount() != null && r.getEmail() != null && r.getEmail() != "", "BrotherService.save -> Name or Surname invalid");
 
@@ -107,7 +107,7 @@ public class BrotherhoodService {
 		if (r.getId() == 0)
 			Assert.isTrue(!emails.contains(r.getEmail()), "Brotherhood.Email -> The email you entered is already being used");
 		else {
-			final Companie a = this.brotherhoodRepo.findOne(r.getId());
+			final Company a = this.brotherhoodRepo.findOne(r.getId());
 			Assert.isTrue(a.getEmail().equals(r.getEmail()));
 		}
 
@@ -127,21 +127,21 @@ public class BrotherhoodService {
 		res = this.brotherhoodRepo.save(r);
 		return res;
 	}
-	public Companie brotherhoodUserAccount(final Integer id) {
+	public Company brotherhoodUserAccount(final Integer id) {
 		return this.brotherhoodRepo.brotherhoodUserAccount(id);
 	}
 
-	public Collection<Companie> getBrotherhoodsByMember(final Integer memberId) {
+	public Collection<Company> getBrotherhoodsByMember(final Integer memberId) {
 		return this.brotherhoodRepo.getBrotherhoodsByMember(memberId);
 	}
 
-	public Collection<Companie> getBrotherhoodsBelongsByMember(final Integer memberId) {
+	public Collection<Company> getBrotherhoodsBelongsByMember(final Integer memberId) {
 		final UserAccount userLoged = LoginService.getPrincipal();
 		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 		return this.brotherhoodRepo.getBrotherhoodsbelongsByMember(memberId);
 	}
 
-	public Collection<Companie> getBrotherhoodsBelongedByMember(final Integer memberId) {
+	public Collection<Company> getBrotherhoodsBelongedByMember(final Integer memberId) {
 		final UserAccount userLoged = LoginService.getPrincipal();
 		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("MEMBER"));
 		return this.brotherhoodRepo.getBrotherhoodsbelongedByMember(memberId);
@@ -164,8 +164,8 @@ public class BrotherhoodService {
 		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
 		return this.brotherhoodRepo.getSmallestBrotherhoods();
 	}
-	public Companie reconstruct(final RegistrationFormBrotherhood registrationForm, final BindingResult binding) {
-		Companie res = new Companie();
+	public Company reconstruct(final RegistrationFormBrotherhood registrationForm, final BindingResult binding) {
+		Company res = new Company();
 
 		if (registrationForm.getId() == 0) {
 			res.setId(registrationForm.getUserAccount().getId());
@@ -208,7 +208,7 @@ public class BrotherhoodService {
 		} else {
 			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
 			res = this.brotherhoodRepo.findOne(registrationForm.getId());
-			final Companie p = new Companie();
+			final Company p = new Company();
 			p.setId(res.getId());
 			p.setVersion(res.getVersion());
 			p.setAddress(registrationForm.getAddress());
@@ -250,8 +250,8 @@ public class BrotherhoodService {
 		return res;
 
 	}
-	public Companie reconstruct(final Companie brotherhood, final BindingResult binding) {
-		Companie res;
+	public Company reconstruct(final Company brotherhood, final BindingResult binding) {
+		Company res;
 
 		if (brotherhood.getId() == 0) {
 			res = brotherhood;
@@ -269,7 +269,7 @@ public class BrotherhoodService {
 			return res;
 		} else {
 			res = this.brotherhoodRepo.findOne(brotherhood.getId());
-			final Companie p = new Companie();
+			final Company p = new Company();
 			p.setId(res.getId());
 			p.setVersion(res.getVersion());
 			p.setAddress(brotherhood.getAddress());
@@ -290,7 +290,7 @@ public class BrotherhoodService {
 
 	}
 
-	public Companie getBrotherhoodByPeriodRecordPicture(final Integer id) {
+	public Company getBrotherhoodByPeriodRecordPicture(final Integer id) {
 		return this.brotherhoodRepo.getBrotherhoodByPeriodRecordPicture(id);
 	}
 

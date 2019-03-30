@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Companie extends Actor {
+public class Company extends Actor {
 
 	private String	name;
 
