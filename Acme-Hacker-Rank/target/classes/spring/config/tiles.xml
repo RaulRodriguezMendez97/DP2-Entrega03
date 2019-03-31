@@ -26,6 +26,8 @@
 		<value>/views/notification/tiles.xml</value>
 
 		<value>/views/customizable/tiles.xml</value>
+		<value>/views/position/tiles.xml</value>
+	
 		
 		
 		

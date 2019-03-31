@@ -12,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -32,21 +33,22 @@ public class Position extends DomainEntity {
 	private int		salary;
 	private String	ticker;
 	private int		draftMode;
-	private Company	companie;
+	private Company	company;
 
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Company getCompanie() {
-		return this.companie;
+	public Company getCompany() {
+		return this.company;
 	}
 
-	public void setCompanie(final Company companie) {
-		this.companie = companie;
+	public void setCompany(final Company company) {
+		this.company = company;
 	}
 
 	@NotNull
+	@NotBlank
 	public String getTitle() {
 		return this.title;
 	}
@@ -56,6 +58,7 @@ public class Position extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}
@@ -76,6 +79,7 @@ public class Position extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getRequiredProfile() {
 		return this.requiredProfile;
 	}
@@ -85,6 +89,7 @@ public class Position extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getSkillsRequired() {
 		return this.skillsRequired;
 	}
@@ -94,6 +99,7 @@ public class Position extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getTechnologiesRequired() {
 		return this.technologiesRequired;
 	}
@@ -102,6 +108,7 @@ public class Position extends DomainEntity {
 		this.technologiesRequired = technologiesRequired;
 	}
 
+	@Min(0)
 	public int getSalary() {
 		return this.salary;
 	}

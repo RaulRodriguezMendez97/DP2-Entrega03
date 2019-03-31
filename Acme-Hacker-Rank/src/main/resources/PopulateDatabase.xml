@@ -166,25 +166,66 @@
 	
 	</bean>
 	
-	<!-- POSITION -->
-	
-	<bean id="position1" class="domain.Position1">
-		<property name="name" value="Antonio"/>
+	<bean id="company2" class="domain.Company">
+		<property name="name" value="Jesús"/>
 		<property name="surnames">
 			<list>
 			</list>
 		</property>
 		<property name="vatNumber" value="745"/>
-		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
-		<property name="email" value="company@hotmail.com"/>
+		<property name="photo"><null/></property>
+		<property name="email" value="companyOfJesus@hotmail.com"/>
 		<property name="phone" value="654654654"/>
 		<property name="address" value="Sevilla"/>
-		<property name="userAccount" ref="userAccount3"/>
-		<property name="credictCard" ref="credictCard2"/>
-		<property name="nameCompany" value="Universidad de Sevilla"/>
+		<property name="userAccount" ref="userAccount4"/>
+		<property name="credictCard" ref="credictCard3"/>
+		<property name="nameCompany" value="Universidad de Huelva"/>
 	
 	</bean>
 	
+	<!-- POSITION -->
+	
+	<bean id="position1" class="domain.Position">
+		<property name="title" value="Position1"/>
+		<property name="description" value="Description of position1"/>
+		<property name="deadLine" value="01/01/2020"/>
+		<property name="requiredProfile" value="Happy"/>
+		<property name="skillsRequired" value="MySQL"/>
+		<property name="technologiesRequired" value="i7"/>
+		<property name="salary" value="1500"/>
+		<property name="ticker" value="poio-7654"/>
+		<property name="draftMode" value="1"/>
+		<property name="company" ref="company1"/>
+	
+	</bean>
+	
+	<bean id="position2" class="domain.Position">
+		<property name="title" value="Position2"/>
+		<property name="description" value="Description of position2"/>
+		<property name="deadLine" value="01/04/2020"/>
+		<property name="requiredProfile" value="Happy"/>
+		<property name="skillsRequired" value="MySQL and JPA"/>
+		<property name="technologiesRequired" value="i7"/>
+		<property name="salary" value="1200"/>
+		<property name="ticker" value="pdfo-7654"/>
+		<property name="draftMode" value="0"/>
+		<property name="company" ref="company1"/>
+	
+	</bean>
+	
+	<bean id="position3" class="domain.Position">
+		<property name="title" value="Position3"/>
+		<property name="description" value="Description of position3"/>
+		<property name="deadLine" value="01/01/2020"/>
+		<property name="requiredProfile" value="Happy"/>
+		<property name="skillsRequired" value="MySQL and Java"/>
+		<property name="technologiesRequired" value="i7"/>
+		<property name="salary" value="1600"/>
+		<property name="ticker" value="phgo-7654"/>
+		<property name="draftMode" value="1"/>
+		<property name="company" ref="company2"/>
+	
+	</bean>	
 	
 	
 	

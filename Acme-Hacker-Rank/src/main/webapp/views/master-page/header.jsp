@@ -35,6 +35,8 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('COMPANY')">
+		<li><a href="position/company/list.do"><spring:message code="master.page.position" /></a></li>
+		
 		</security:authorize>
 		
 		

@@ -6,6 +6,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Company extends Actor {
@@ -14,6 +16,7 @@ public class Company extends Actor {
 
 
 	@NotNull
+	@Length(min = 4)
 	public String getNameCompany() {
 		return this.nameCompany;
 	}

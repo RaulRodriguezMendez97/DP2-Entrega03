@@ -7,6 +7,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.PositionRepository;
 import security.LoginService;
@@ -25,11 +28,14 @@ public class PositionService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private Validator			validator;
+
 
 	public Position create() {
 		final Position res = new Position();
 
-		res.setCompanie(new Company());
+		res.setCompany(new Company());
 		res.setTitle("");
 		res.setDescription("");
 		res.setDeadLine(new Date());
@@ -59,12 +65,65 @@ public class PositionService {
 	public Position save(final Position p) {
 		final Position saved = this.positionRepository.save(p);
 
-		if (p.getId() == 0) {
-			final UserAccount user = LoginService.getPrincipal();
-			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-			p.setCompanie((Company) a);
-		}
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+		Assert.isTrue(p.getCompany().equals(a));
+		Assert.isTrue(p.getTitle() != null && p.getTitle() != "");
+		Assert.isTrue(p.getDescription() != null && p.getDescription() != "");
+		//deadline
+		Assert.isTrue(p.getRequiredProfile() != null && p.getRequiredProfile() != "");
+		Assert.isTrue(p.getSkillsRequired() != null && p.getSkillsRequired() != "");
+		Assert.isTrue(p.getTechnologiesRequired() != null && p.getTechnologiesRequired() != "");
+		Assert.isTrue(p.getSalary() >= 0);
+		Assert.isTrue(p.getTicker() != null && p.getTicker() != "");
+		Assert.isTrue(p.getDraftMode() == 0 || p.getDraftMode() == 1);
 
 		return saved;
+	}
+
+	//RECONSTRUCT
+	public Position reconstruct(final Position position, final BindingResult binding) {
+		final Position res;
+
+		if (position.getId() == 0) {
+			res = position;
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+			position.setCompany((Company) a);
+			position.setTicker(PositionService.generarTicker((Company) a));
+			position.setDraftMode(1);
+			this.validator.validate(res, binding);
+
+			return res;
+		} else {
+			res = this.positionRepository.findOne(position.getId());
+			final Position copy = res;
+			copy.setCompany(position.getCompany());
+			copy.setTicker(position.getTicker());
+
+			this.validator.validate(copy, binding);
+			return copy;
+
+		}
+
+	}
+
+	//TICKER
+	public static String generarTicker(final Company company) {
+		final int tam = 4;
+
+		final String d = company.getNameCompany().substring(0, 3);
+
+		String ticker = "-";
+		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+		for (int i = 0; i < tam; i++) {
+			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());
+			ticker = ticker + a.charAt(random);
+		}
+
+		return d + ticker;
+
 	}
 }
