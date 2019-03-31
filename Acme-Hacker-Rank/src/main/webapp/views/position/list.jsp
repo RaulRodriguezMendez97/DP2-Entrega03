@@ -40,3 +40,25 @@ requestURI="position/company/list.do" >
 			onclick="javascript: relativeRedir('position/company/create.do');" />
 
 </security:authorize>
+
+
+<security:authorize access="isAnonymous()">
+
+<display:table pagesize="5" name="positions" id="row"
+requestURI="position/list.do" >
+
+<display:column>
+	<a href="position/show.do?positionId=${row.id}"><spring:message code="position.moreDetails" /></a>
+</display:column>
+
+<display:column property="ticker" titleKey="position.ticker" />
+<display:column property="title" titleKey="position.title" />
+<display:column property="deadLine" titleKey="position.deadline" />
+<display:column property="salary" titleKey="position.salary" />
+
+</display:table>
+
+	<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
+			onclick="javascript: relativeRedir('company/list.do');" />
+
+</security:authorize>

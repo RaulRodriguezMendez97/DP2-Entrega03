@@ -33,3 +33,21 @@
 			onclick="javascript: relativeRedir('position/company/list.do');" />
 
 </security:authorize>
+
+<security:authorize access="isAnonymous()">
+
+<b><spring:message code="position.ticker" /> : </b> <jstl:out value="${position.ticker}"></jstl:out><br/>
+<b><spring:message code="position.title" /> : </b> <jstl:out value="${position.title}"></jstl:out> <br/>
+<b><spring:message code="position.description" /> : </b> <jstl:out value="${position.description}"></jstl:out><br/>
+<b><spring:message code="position.deadline" /> : </b> <jstl:out value="${position.deadLine}"></jstl:out><br/>
+<b><spring:message code="position.requiredProfile" /> : </b> <jstl:out value="${position.requiredProfile}"></jstl:out><br/>
+<b><spring:message code="position.skillsRequired" /> : </b> <jstl:out value="${position.skillsRequired}"></jstl:out><br/>
+<b><spring:message code="position.technologiesRequired" /> : </b> <jstl:out value="${position.technologiesRequired}"></jstl:out><br/>
+<b><spring:message code="position.salary" /> : </b> <jstl:out value="${position.salary}"></jstl:out>
+
+<br/>
+<br/>
+<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
+			onclick="javascript: relativeRedir('position/list.do?companyId=${position.company.id}');" />
+
+</security:authorize>
