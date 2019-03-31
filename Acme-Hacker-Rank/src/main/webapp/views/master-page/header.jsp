@@ -31,10 +31,7 @@
 					<li><a href="administrator/create.do"><spring:message code="master.page.administrator.Create" /></a></li>				
 				</ul>
 			</li>
-			
-			<li><a href="position/administrator/list.do"><spring:message	code="master.page.positions" /></a>
-			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.Tour" /></a></li>
-			
+						
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BROTHERHOOD')">

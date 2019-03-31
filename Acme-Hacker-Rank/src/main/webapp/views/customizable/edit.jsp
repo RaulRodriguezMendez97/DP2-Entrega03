@@ -32,6 +32,9 @@
 <acme:textarea code="customizable.messageEn" path="messageWelcomePage"/>
 <acme:textarea code="customizable.messageEs" path="spanishMessageWelcomePage"/>
 <acme:textbox code="customizable.code" path="telephoneCode"/>
+<acme:textbox code="customizable.timeCache" path="timeCache"/>
+<acme:textbox code="customizable.maxResults" path="maxResults"/>
+
 
 <br/>
 <acme:submit name="save" code="customizable.save"/>
