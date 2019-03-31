@@ -84,11 +84,13 @@
 
 	<bean id="customizableSystem1" class="domain.CustomizableSystem">
 
-		<property name="nameSystem" value="Acme-Madrugá" />
-		<property name="banner" value="https://image.ibb.co/iuaDgV/Untitled.png" />
-		<property name="messageWelcomePage" value="Welcome to Acme Madrugá, the site to organise your processions." />
-		<property name="spanishMessageWelcomePage" value="¡Bienvenidos a Acme Madrugá!  Tu sitio para organizar procesiones." />
+		<property name="nameSystem" value="Acme Hacker Rank" />
+		<property name="banner" value="https://i.imgur.com/7b8lu4b.png" />
+		<property name="messageWelcomePage" value="“Welcome to Acme hacker Rank! We’re IT hacker’s favourite job marketplace!" />
+		<property name="spanishMessageWelcomePage" value="¡Bienvenidos a Acme Hacker Rank!  ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
 		<property name="telephoneCode" value="+34" />
+		<property name="timeCache" value="1" />
+		<property name="maxResults" value="10" />
 
 
 	</bean>

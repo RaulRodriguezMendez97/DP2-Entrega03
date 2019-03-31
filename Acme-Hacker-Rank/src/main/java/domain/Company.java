@@ -10,17 +10,16 @@ import javax.validation.constraints.NotNull;
 @Access(AccessType.PROPERTY)
 public class Company extends Actor {
 
-	private String	name;
+	private String	nameCompany;
 
 
-	@Override
 	@NotNull
-	public String getName() {
-		return this.name;
+	public String getNameCompany() {
+		return this.nameCompany;
 	}
 
-	@Override
-	public void setName(final String name) {
-		this.name = name;
+	public void setNameCompany(final String nameCompany) {
+		this.nameCompany = nameCompany;
 	}
+
 }
