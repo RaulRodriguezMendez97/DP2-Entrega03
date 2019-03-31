@@ -276,6 +276,24 @@
 		<property name="attachment" value="attachment4"/>
 	</bean>	
 	
+	<!-- PositionData -->
+	<bean id="positionData1" class="domain.PositionData">
+		<property name="title" value="title1"/>
+		<property name="description" value="description1"/>
+		<property name="startDate" value="01/02/2019 23:59"/>
+		<property name="endDate" value="01/03/2019 23:59"/>
+	</bean>	
+	
+	<!-- EducationData -->
+	<bean id="educationData1" class="domain.EducationData">
+		<property name="degree" value="degree1"/>
+		<property name="institution" value="institution1"/>
+		<property name="mark" value="2"/>
+		<property name="startDate" value="01/02/2019 23:59"/>
+		<property name="endDate" value="01/03/2019 23:59"/>
+	</bean>	
+	
+	<!-- Curricula -->
 	
 		
 	
