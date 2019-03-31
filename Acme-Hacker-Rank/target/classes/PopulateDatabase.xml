@@ -225,7 +225,59 @@
 		<property name="draftMode" value="1"/>
 		<property name="company" ref="company2"/>
 	
+	</bean>
+	
+	
+	<!-- ProfileData -->
+	<bean id="profileData1" class="domain.ProfileData">
+		<property name="fullName" value="profileData1"/>
+		<property name="statement" value="statement1"/>
+		<property name="phoneNumber" value="+34 123456789"/>
+		<property name="githubProfile" value="http://githubProfile1.com"/>
+		<property name="linkedlnProfile" value="http://linkedlnProfile1"/>
 	</bean>	
+	<bean id="profileData2" class="domain.ProfileData">
+		<property name="fullName" value="profileData2"/>
+		<property name="statement" value="statement2"/>
+		<property name="phoneNumber" value="+34 123456799"/>
+		<property name="githubProfile" value="http://githubProfile2.com"/>
+		<property name="linkedlnProfile" value="http://linkedlnProfile2"/>
+	</bean>	
+	<bean id="profileData3" class="domain.ProfileData">
+		<property name="fullName" value="profileData3"/>
+		<property name="statement" value="statement3"/>
+		<property name="phoneNumber" value="+34 123456999"/>
+		<property name="githubProfile" value="http://githubProfile3.com"/>
+		<property name="linkedlnProfile" value="http://linkedlnProfile3"/>
+	</bean>	
+	<bean id="profileData4" class="domain.ProfileData">
+		<property name="fullName" value="profileData4"/>
+		<property name="statement" value="statement4"/>
+		<property name="phoneNumber" value="+34 123459999"/>
+		<property name="githubProfile" value="http://githubProfile4.com"/>
+		<property name="linkedlnProfile" value="http://linkedlnProfile4"/>
+	</bean>	
+	
+	<!-- MiscellaneousData -->
+	<bean id="miscellaneousData1" class="domain.MiscellaneousData">
+		<property name="text" value="text1"/>
+		<property name="attachment" value="attachment1"/>
+	</bean>
+	<bean id="miscellaneousData2" class="domain.MiscellaneousData">
+		<property name="text" value="text2"/>
+		<property name="attachment" value="attachment2"/>
+	</bean>	
+	<bean id="miscellaneousData3" class="domain.MiscellaneousData">
+		<property name="text" value="text3"/>
+		<property name="attachment" value="attachment3"/>
+	</bean>	
+	<bean id="miscellaneousData4" class="domain.MiscellaneousData">
+		<property name="text" value="text4"/>
+		<property name="attachment" value="attachment4"/>
+	</bean>	
+	
+	
+		
 	
 	
 	

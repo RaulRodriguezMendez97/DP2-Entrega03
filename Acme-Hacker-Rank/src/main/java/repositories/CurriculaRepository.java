@@ -7,12 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.Position;
+import domain.Curricula;
 
 @Repository
-public interface PositionRepository extends JpaRepository<Position, Integer> {
+public interface CurriculaRepository extends JpaRepository<Curricula, Integer> {
 
-	@Query("select p from Position p where p.company.id=?1")
-	public Collection<Position> getPositionsByCompany(Integer id);
-
+	@Query("select c from Curricula c where c.hacker.id=?1")
+	public Collection<Curricula> getCurriculasByHacker(Integer hackerId);
 }
