@@ -34,23 +34,12 @@
 						
 		</security:authorize>
 		
-		<security:authorize access="hasRole('BROTHERHOOD')">
-			<li><a href="float/brotherhood/list.do"><spring:message code="master.page.brotherhood.float" /></a></li>
-			<li><a href="enrolment/brotherhood/list.do"><spring:message code="master.page.brotherhood.enrolment" /></a></li>
-			<li><a href="member/brotherhood/list.do"><spring:message code="master.page.brotherhood.member" /></a></li>
-			<li><a href="parade/brotherhood/list.do"><spring:message code="master.page.processions" /></a></li>			
-			<li><a href="picture/brotherhood/picturesBrotherhood.do"><spring:message code="master.page.brotherhood.picture" /></a></li>
-			<li><a href="history/brotherhood/list.do"><spring:message code="master.page.brotherhood.history" /></a></li>
-			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.Tour" /></a></li>
+		<security:authorize access="hasRole('COMPANY')">
 		</security:authorize>
 		
 		
-		<security:authorize access="hasRole('MEMBER')">
-			<li><a href="enrolment/member/list.do"><spring:message code="master.page.enrolment" /></a></li>
-			<li><a href="brotherhood/member/list-member-belongs.do"><spring:message code="master.page.Brotherhood.list.Member" /></a></li>
+		<security:authorize access="hasRole('HACKER')">
 		
-			<li><a class="fNiv" href="request/member/list.do"><spring:message code="master.page.member.request" /></a></li>
-			<li><a href="brotherhood/list.do"><spring:message code="master.page.brotherhood.Tour" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -23,15 +23,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Position extends DomainEntity {
 
-	private String		title;
-	private String		description;
-	private Date		deadLine;
-	private String		requiredProfile;
-	private String		skillsRequired;
-	private String		technologiesRequired;
-	private int			salaty;
-	private String		ticker;
-	private int			draftMode;
+	private String	title;
+	private String	description;
+	private Date	deadLine;
+	private String	requiredProfile;
+	private String	skillsRequired;
+	private String	technologiesRequired;
+	private int		salary;
+	private String	ticker;
+	private int		draftMode;
 	private Company	companie;
 
 
@@ -64,9 +64,9 @@ public class Position extends DomainEntity {
 		this.description = description;
 	}
 
-	@Past
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Future
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getDeadLine() {
 		return this.deadLine;
 	}
@@ -102,12 +102,12 @@ public class Position extends DomainEntity {
 		this.technologiesRequired = technologiesRequired;
 	}
 
-	public int getSalaty() {
-		return this.salaty;
+	public int getSalary() {
+		return this.salary;
 	}
 
-	public void setSalaty(final int salaty) {
-		this.salaty = salaty;
+	public void setSalary(final int salary) {
+		this.salary = salary;
 	}
 
 	@Pattern(regexp = "^[A-z]{4}\\-[0-9]{4}$")

@@ -19,29 +19,25 @@ public class CustomizableSystem extends DomainEntity {
 	private String	messageWelcomePage;
 	private String	spanishMessageWelcomePage;
 	private String	telephoneCode;
-	private Integer	timeCache;
-	private Integer	maxResults;
+	private int		timeCache;
+	private int		maxResults;
 
 
-	@NotBlank
-	@NotNull
 	@Range(min = 1, max = 24)
-	public Integer getTimeCache() {
+	public int getTimeCache() {
 		return this.timeCache;
 	}
 
-	public void setTimeCache(final Integer timeCache) {
+	public void setTimeCache(final int timeCache) {
 		this.timeCache = timeCache;
 	}
 
-	@NotBlank
-	@NotNull
 	@Range(min = 1, max = 100)
-	public Integer getMaxResults() {
+	public int getMaxResults() {
 		return this.maxResults;
 	}
 
-	public void setMaxResults(final Integer maxResults) {
+	public void setMaxResults(final int maxResults) {
 		this.maxResults = maxResults;
 	}
 

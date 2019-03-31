@@ -43,17 +43,9 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/administrator/dashboard.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/administrator/graph.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/create.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMIN')" /> 
 		
-		<security:intercept-url pattern="/float/brotherhood/**" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/linkRecord/brotherhood/**" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/legalRecord/brotherhood/**" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/periodRecord/brotherhood/**" access="hasRole('BROTHERHOOD')" />
-			<security:intercept-url pattern="/miscellaneousRecord/brotherhood/**" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/picture/brotherhood/**" access="hasRole('BROTHERHOOD')" />    
-
 		<security:intercept-url pattern="/profile/personal-datas.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/edit-administrator.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/profile/edit-brotherhood.do" access="hasRole('BROTHERHOOD')" />
@@ -64,46 +56,16 @@
 		<security:intercept-url pattern="/notification/actor/show.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/notification/administrator/create.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/notification/administrator/edit.do" access="hasRole('ADMIN')" />
-			
-		<security:intercept-url pattern="/enrolment/member/list.do" access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/enrolment/member/create.do" access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/enrolment/member/edit.do" access="hasRole('MEMBER')" />
-		 
-		<security:intercept-url pattern="/enrolment/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/enrolment/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
-		
-		<security:intercept-url pattern="/parade/brotherhood/**" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/request/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/request/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/request/brotherhood/show.do" access="hasRole('BROTHERHOOD')" />
-		
-		<security:intercept-url pattern="/inception-record/brotherhood/show.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/inception-record/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/inception-record/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/inception-record/brotherhood/delete.do" access="hasRole('BROTHERHOOD')" />
-		
-		<security:intercept-url pattern="/request/member/**" access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/parade/member/list.do" access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/brotherhood/member/**" access="hasRole('MEMBER')" />
-		 
+			 
 		 
 		<security:intercept-url pattern="/member/create.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/member/edit.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/brotherhood/create.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/brotherhood/edit.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/legalRecord/list.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/periodRecord/list.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/miscellaneousRecord/list.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/inception-record/show.do" access="isAnonymous()" />
 	
-		<security:intercept-url pattern="/member/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/enrolment/brotherhood/listAccepted.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/enrolment/brotherhood/delete.do" access="hasRole('BROTHERHOOD')" />
 	
 		<security:intercept-url pattern="/customizableSystem/administrator/edit.do" access="hasRole('ADMIN')" />
-	
-		<security:intercept-url pattern="/history/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
-	
+		
 	
 		<security:intercept-url pattern="/termsAndConditions/show.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

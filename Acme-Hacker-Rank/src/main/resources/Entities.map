@@ -1,15 +1,16 @@
 #./src/main/resources/Entities.map
-#Sun Mar 31 16:44:35 CEST 2019
-customizableSystem1=22
-credictCard3=25
-credictCard2=24
-credictCard1=23
-notification2=21
-notification1=20
-userAccount6=19
-administrator1=26
-userAccount5=18
-userAccount4=17
-userAccount3=16
-userAccount2=15
-userAccount1=14
+#Sun Mar 31 17:16:04 CEST 2019
+customizableSystem1=23
+company1=28
+credictCard3=26
+credictCard2=25
+credictCard1=24
+notification2=22
+notification1=21
+userAccount6=20
+administrator1=27
+userAccount5=19
+userAccount4=18
+userAccount3=17
+userAccount2=16
+userAccount1=15
