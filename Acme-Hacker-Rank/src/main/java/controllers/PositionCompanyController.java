@@ -47,6 +47,27 @@ public class PositionCompanyController extends AbstractController {
 
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final Integer positionId) {
+		ModelAndView result;
+		try {
+			final Position position;
+
+			position = this.positionService.findOne(positionId);
+
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+			Assert.isTrue(position.getCompany().equals(a));
+			Assert.notNull(position);
+
+			result = new ModelAndView("position/show");
+			result.addObject("position", position);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
+		return result;
+
+	}
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		final ModelAndView result;

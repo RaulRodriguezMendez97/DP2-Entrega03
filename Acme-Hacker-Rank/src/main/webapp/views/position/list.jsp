@@ -21,10 +21,16 @@
 <display:table pagesize="5" name="positions" id="row"
 requestURI="position/company/list.do" >
 
+<display:column>
+	<a href="position/company/show.do?positionId=${row.id}"><spring:message code="position.moreDetails" /></a>
+</display:column>
 
-
-
+<display:column property="ticker" titleKey="position.ticker" />
 <display:column property="title" titleKey="position.title" />
+<display:column property="deadLine" titleKey="position.deadline" />
+<display:column property="salary" titleKey="position.salary" />
+
+
 <display:column>
 	<a href="position/company/edit.do?positionId=${row.id}"><spring:message code="position.edit" /></a>
 </display:column>

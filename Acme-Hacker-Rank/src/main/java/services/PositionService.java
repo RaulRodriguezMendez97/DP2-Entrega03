@@ -68,6 +68,11 @@ public class PositionService {
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
+		if (p.getId() == 0) {
+			p.setCompany((Company) a);
+			p.setTicker(PositionService.generarTicker((Company) a));
+		}
+
 		Assert.isTrue(p.getCompany().equals(a));
 		Assert.isTrue(p.getTitle() != null && p.getTitle() != "");
 		Assert.isTrue(p.getDescription() != null && p.getDescription() != "");
@@ -88,10 +93,9 @@ public class PositionService {
 
 		if (position.getId() == 0) {
 			res = position;
-			final UserAccount user = LoginService.getPrincipal();
-			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-			position.setCompany((Company) a);
-			position.setTicker(PositionService.generarTicker((Company) a));
+
+			position.setCompany(new Company());
+			position.setTicker("");
 			position.setDraftMode(1);
 			this.validator.validate(res, binding);
 
