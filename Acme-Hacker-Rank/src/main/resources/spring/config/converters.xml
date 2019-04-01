@@ -29,6 +29,8 @@
 		<bean class="converters.StringToUserAccountConverter" />
 		<bean class="converters.AuthorityToStringConverter" />
 		<bean class="converters.StringToAuthorityConverter" />
+		<bean class="converters.FinderToStringConverter" />
+		<bean class="converters.StringToFinderConverter" />
 		
 		
 	</util:list>
