@@ -27,7 +27,7 @@ public class PositionController extends AbstractController {
 		final ModelAndView result;
 		final Collection<Position> positions;
 
-		positions = this.positionService.getPositionsByCompany(companyId);
+		positions = this.positionService.getPositionsByCompanyOutDraftMode(companyId);
 		Assert.notNull(positions);
 
 		result = new ModelAndView("position/list");
@@ -38,16 +38,34 @@ public class PositionController extends AbstractController {
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int positionId) {
-		final ModelAndView result;
-		final Position position;
+		ModelAndView result;
+		try {
+			final Position position;
 
-		position = this.positionService.findOne(positionId);
-		Assert.notNull(position);
+			position = this.positionService.findOne(positionId);
+			Assert.notNull(position);
+			Assert.isTrue(position.getDraftMode() == 0);
 
-		result = new ModelAndView("position/show");
-		result.addObject("position", position);
+			result = new ModelAndView("position/show");
+			result.addObject("position", position);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../");
+		}
 		return result;
 
 	}
 
+	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public ModelAndView list() {
+		final ModelAndView result;
+		final Collection<Position> positions;
+
+		positions = this.positionService.getPositionsOutDraftMode();
+		Assert.notNull(positions);
+
+		result = new ModelAndView("position/list");
+		result.addObject("positions", positions);
+		return result;
+
+	}
 }

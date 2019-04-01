@@ -62,6 +62,14 @@ public class PositionService {
 		return this.positionRepository.getPositionsByCompany(id);
 	}
 
+	public Collection<Position> getPositionsOutDraftMode() {
+		return this.positionRepository.getPositionsOutDraftMode();
+	}
+
+	public Collection<Position> getPositionsByCompanyOutDraftMode(final Integer id) {
+		return this.positionRepository.getPositionsByCompanyOutDraftMode(id);
+	}
+
 	public Position save(final Position p) {
 		final Position saved = this.positionRepository.save(p);
 

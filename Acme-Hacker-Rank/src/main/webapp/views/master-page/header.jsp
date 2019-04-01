@@ -53,6 +53,8 @@
 					<li><a href="brotherhood/create.do"><spring:message code="master.page.brotherhood.register" /></a></li>
 				</ul>
 			<li><a href="company/list.do"><spring:message code="master.page.company" /></a></li>
+			<li><a href="position/listAll.do"><spring:message code="master.page.position" /></a></li>
+			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
