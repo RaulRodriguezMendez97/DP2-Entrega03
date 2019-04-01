@@ -41,7 +41,7 @@
 		
 		
 		<security:authorize access="hasRole('HACKER')">
-		
+			<li><a href="finder/hacker/show.do"><spring:message code="master.page.hacker" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
