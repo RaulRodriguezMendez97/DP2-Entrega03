@@ -129,6 +129,18 @@
 	<bean id="credictCard3" class="domain.CredictCard">
 	</bean>
 	
+	<bean id="credictCard4" class="domain.CredictCard">
+	</bean>
+	
+	<bean id="credictCard5" class="domain.CredictCard">
+	</bean>
+	
+	<bean id="credictCard6" class="domain.CredictCard">
+	</bean>
+	
+	<bean id="credictCard7" class="domain.CredictCard">
+	</bean>
+	
 	<!-- ADMINISTRATOR -->
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -153,6 +165,7 @@
 		<property name="name" value="Antonio"/>
 		<property name="surnames">
 			<list>
+			
 			</list>
 		</property>
 		<property name="vatNumber" value="745"/>
@@ -180,6 +193,75 @@
 		<property name="userAccount" ref="userAccount4"/>
 		<property name="credictCard" ref="credictCard3"/>
 		<property name="nameCompany" value="Universidad de Huelva"/>
+	
+	</bean>
+	
+		<!-- Hacker -->
+	
+	<bean id="hacker1" class="domain.Hacker">
+		<property name="name" value="Cristian"/>
+		<property name="surnames">
+			<list>
+			</list>
+		</property>
+		<property name="vatNumber" value="800"/>
+		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="email" value="Cristian@hotmail.com"/>
+		<property name="phone" value="666777888"/>
+		<property name="address" value="Sevilla"/>
+		<property name="userAccount" ref="userAccount5"/>
+		<property name="credictCard" ref="credictCard4"/>
+		<property name="finder" ref="finder1"/>
+	
+	</bean>
+	
+		<bean id="hacker2" class="domain.Hacker">
+		<property name="name" value="Raul"/>
+		<property name="surnames">
+			<list>
+			<value>Rodriguez</value>
+				<value>Mendez</value>
+			</list>
+		</property>
+		<property name="vatNumber" value="900"/>
+		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="email" value="Raul@hotmail.com"/>
+		<property name="phone" value="653234123"/>
+		<property name="address" value="Sevilla"/>
+		<property name="userAccount" ref="userAccount6"/>
+		<property name="credictCard" ref="credictCard5"/>
+		<property name="finder" ref="finder2"/>
+	
+	
+	</bean>
+	
+	<!-- Hacker -->
+	
+		<bean id="finder1" class="domain.Finder">
+		<property name="KeyWord" value="Prueba1"/>
+		<property name="deadLine" value="12/10/2019 23:59"/>
+		<property name="minSalary" value="10"/>
+		<property name="maxDeadLine" value="12/11/2019 23:59"/>
+		<property name="positions">
+			<list>
+				<ref bean="position1" />
+				<ref bean="position2" />
+			</list>
+		</property>
+	
+	</bean>
+	
+		<bean id="finder2" class="domain.Finder">
+		<property name="KeyWord" value="Prueba2"/>
+		<property name="deadLine" value="12/10/2019 23:59"/>
+		<property name="minSalary" value="10"/>
+		<property name="maxDeadLine" value="12/11/2019 23:59"/>
+		<property name="positions">
+			<list>
+				<ref bean="position3" />
+
+			</list>
+		</property>
 	
 	</bean>
 	
