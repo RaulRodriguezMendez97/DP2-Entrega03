@@ -29,6 +29,7 @@
 		<value>/views/position/tiles.xml</value>
 		<value>/views/company/tiles.xml</value>
 		<value>/views/finder/tiles.xml</value>
+		<value>/views/administrator/tiles.xml</value>
 		
 	
 		

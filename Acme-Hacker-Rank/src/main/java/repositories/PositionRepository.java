@@ -3,6 +3,7 @@ package repositories;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,8 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 
 	@Query(value = "select date_add(CURRENT_DATE, interval 1 day)", nativeQuery = true)
 	public Date getTomorrow();
+
+	//DASHBOARD
+	@Query("select avg(1.0*(select count(p.company) from Position p where p.company.id = b.id)), min(1.0*(select count(p.company) from Position p where p.company.id = b.id)), max(1.0*(select count(p.company) from Position p where p.company.id = b.id)), sqrt(1.0*sum(1.0*(select count (p.company) from Position p where p.company.id = b.id) * (select count(p.company) from Position p where p.company.id = b.id)) / count(b) - avg(1.0*(select count(p.company) from Position p where p.company.id = b.id)) * avg(1.0*(select count(p.company) from Position p where p.company.id = b.id))) from Company b")
+	public List<Object[]> getAvgMinMaxDesvPositionByCompany();
 }
