@@ -10,9 +10,14 @@
 
 package forms;
 
+import java.util.HashSet;
+
 import javax.validation.constraints.Size;
 
+import security.Authority;
+import security.UserAccount;
 import domain.Actor;
+import domain.CredictCard;
 
 public class RegistrationForm extends Actor {
 
@@ -48,5 +53,36 @@ public class RegistrationForm extends Actor {
 	}
 
 	// Business methods -------------------------------------------------------
+
+	public RegistrationForm createToAdmin() {
+
+		final RegistrationForm registrationForm = new RegistrationForm();
+
+		registrationForm.setPatternPhone(false);
+		registrationForm.setAddress("");
+		registrationForm.setEmail("");
+		registrationForm.setName("");
+		registrationForm.setVatNumber("");
+		registrationForm.setPhoto("");
+		registrationForm.setSurnames(new HashSet<String>());
+		registrationForm.setAddress("");
+		registrationForm.setCredictCard(new CredictCard());
+		registrationForm.setPassword("");
+
+		//PREGUNTAR
+		final UserAccount user = new UserAccount();
+		user.setAuthorities(new HashSet<Authority>());
+		final Authority ad = new Authority();
+		ad.setAuthority(Authority.ADMIN);
+		user.getAuthorities().add(ad);
+
+		//NUEVO
+		user.setUsername("");
+		user.setPassword("");
+
+		registrationForm.setUserAccount(user);
+
+		return registrationForm;
+	}
 
 }

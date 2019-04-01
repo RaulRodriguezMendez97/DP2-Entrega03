@@ -20,13 +20,17 @@ public class Finder extends DomainEntity {
 
 	private String					keyWord;
 	private Date					deadLine;
-	private Integer					minSalary;
+	private Double					minSalary;
 	private Date					maxDeadLine;
 	private Collection<Position>	positions;
 
 
 	public String getKeyWord() {
 		return this.keyWord;
+	}
+
+	public void setKeyWord(final String keyWord) {
+		this.keyWord = keyWord;
 	}
 
 	@Valid
@@ -39,10 +43,6 @@ public class Finder extends DomainEntity {
 		this.positions = positions;
 	}
 
-	public void setKeyWord(final String keyWord) {
-		this.keyWord = keyWord;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getDeadLine() {
@@ -53,11 +53,11 @@ public class Finder extends DomainEntity {
 		this.deadLine = deadLine;
 	}
 
-	public Integer getMinSalary() {
+	public Double getMinSalary() {
 		return this.minSalary;
 	}
 
-	public void setMinSalary(final Integer minSalary) {
+	public void setMinSalary(final Double minSalary) {
 		this.minSalary = minSalary;
 	}
 
