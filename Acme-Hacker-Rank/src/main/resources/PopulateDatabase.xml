@@ -309,6 +309,132 @@
 	
 	</bean>
 	
+	<!-- PROBLEM -->
+	
+	<bean id="problem1" class="domain.Problem">
+		<property name="title" value="Problem1"/>
+		<property name="statement" value="Statement"/>
+		<property name="hint" value="Hint1"/>
+		<property name="attachment">
+			<list>
+				<value>attachment1</value>
+			</list>
+		</property>
+		<property name="draftMode" value="0"/>
+		<property name="position" ref="position1"/>
+	
+	</bean>
+	
+	<bean id="problem2" class="domain.Problem">
+		<property name="title" value="Problem2"/>
+		<property name="statement" value="Statement2"/>
+		<property name="hint" value="Hint2"/>
+		<property name="attachment">
+			<list>
+			</list>
+		</property>
+		<property name="draftMode" value="1"/>
+		<property name="position" ref="position1"/>
+	
+	</bean>
+	
+	<bean id="problem3" class="domain.Problem">
+		<property name="title" value="Problem3"/>
+		<property name="statement" value="Statement3"/>
+		<property name="hint" value="Hint3"/>
+		<property name="attachment">
+			<list>
+				<value>attachment3</value>
+			</list>
+		</property>
+		<property name="draftMode" value="0"/>
+		<property name="position" ref="position1"/>
+	
+	</bean>
+	
+	<bean id="problem4" class="domain.Problem">
+		<property name="title" value="Problem4"/>
+		<property name="statement" value="Statement4"/>
+		<property name="hint" value="Hint4"/>
+		<property name="attachment">
+			<list>
+				<value>attachment1</value>
+			</list>
+		</property>
+		<property name="draftMode" value="0"/>
+		<property name="position" ref="position2"/>
+	
+	</bean>
+	
+	<bean id="problem5" class="domain.Problem">
+		<property name="title" value="Problem5"/>
+		<property name="statement" value="Statement5"/>
+		<property name="hint" value="Hint5"/>
+		<property name="attachment">
+			<list>
+				<value>attachment1</value>
+			</list>
+		</property>
+		<property name="draftMode" value="0"/>
+		<property name="position" ref="position2"/>
+	
+	</bean>
+	
+	<!-- APPLICATION -->
+	<bean id="application1" class="domain.Application">
+		<property name="moment" value="01/03/2019 23:59"/>
+		<property name="explication" value="explication1"/>
+		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
+		<property name="submitMoment" value="01/03/2019 23:59"/>
+		<property name="status" value="1"/>
+		<property name="problem" ref="problem5"/>
+		<property name="hacker" ref="hacker1"/>
+		<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="application2" class="domain.Application">
+		<property name="moment" value="01/03/2019 23:59"/>
+		<property name="explication" value="explication2"/>
+		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
+		<property name="submitMoment" value="01/03/2019 23:59"/>
+		<property name="status" value="1"/>
+		<property name="problem" ref="problem1"/>
+		<property name="hacker" ref="hacker1"/>
+		<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="application3" class="domain.Application">
+		<property name="moment" value="01/03/2019 23:59"/>
+		<property name="explication" value="explication3"/>
+		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
+		<property name="submitMoment" value="01/03/2019 23:59"/>
+		<property name="status" value="1"/>
+		<property name="problem" ref="problem1"/>
+		<property name="hacker" ref="hacker1"/>
+		<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="application4" class="domain.Application">
+		<property name="moment" value="01/03/2019 23:59"/>
+		<property name="explication" value="explication2"/>
+		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
+		<property name="submitMoment" value="01/03/2019 23:59"/>
+		<property name="status" value="1"/>
+		<property name="problem" ref="problem1"/>
+		<property name="hacker" ref="hacker2"/>
+		<property name="curricula" ref="curricula1"/>
+	</bean>
+	
+	<bean id="application5" class="domain.Application">
+		<property name="moment" value="01/03/2019 23:59"/>
+		<property name="explication" value="explication2"/>
+		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
+		<property name="submitMoment" value="01/03/2019 23:59"/>
+		<property name="status" value="1"/>
+		<property name="problem" ref="problem1"/>
+		<property name="hacker" ref="hacker2"/>
+		<property name="curricula" ref="curricula1"/>
+	</bean>
 	
 	<!-- ProfileData -->
 	<bean id="profileData1" class="domain.ProfileData">
