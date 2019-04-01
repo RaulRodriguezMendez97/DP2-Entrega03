@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Company;
+import domain.Hacker;
 
 @Repository
-public interface CompanyRepository extends JpaRepository<Company, Integer> {
+public interface HackerRepository extends JpaRepository<Company, Integer> {
 
-	@Query("select c from Company c where c.userAccount.id = ?1")
-	public Company companyUserAccount(Integer id);
+	@Query("select h from Hacker h where h.userAccount.id = ?1")
+	public Hacker hackerUserAccount(Integer id);
 }

@@ -4,9 +4,9 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -15,7 +15,7 @@ public class Company extends Actor {
 	private String	nameCompany;
 
 
-	@NotNull
+	@NotBlank
 	@Length(min = 4)
 	public String getNameCompany() {
 		return this.nameCompany;
