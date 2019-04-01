@@ -28,6 +28,7 @@
 		<value>/views/customizable/tiles.xml</value>
 		<value>/views/position/tiles.xml</value>
 		<value>/views/company/tiles.xml</value>
+		<value>/views/finder/tiles.xml</value>
 		
 	
 		

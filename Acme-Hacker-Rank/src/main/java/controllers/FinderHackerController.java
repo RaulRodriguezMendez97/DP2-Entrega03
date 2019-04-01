@@ -19,6 +19,17 @@ public class FinderHackerController extends AbstractController {
 	private FinderService	finderService;
 
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show() {
+		final ModelAndView result;
+		final Finder finder = this.finderService.findOne();
+
+		result = new ModelAndView("finder/show");
+		result.addObject("positions", finder.getPositions());
+		return result;
+
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		final ModelAndView result;
@@ -39,7 +50,7 @@ public class FinderHackerController extends AbstractController {
 
 		if (!binding.hasErrors()) {
 			this.finderService.save(finder);
-			result = new ModelAndView("edit.do");
+			result = new ModelAndView("show.do");
 		} else {
 			result = new ModelAndView("finder/edit");
 			result.addObject("finder", finder);
