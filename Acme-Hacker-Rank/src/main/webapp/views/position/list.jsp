@@ -32,7 +32,9 @@ requestURI="position/company/list.do" >
 
 
 <display:column>
+<jstl:if test="${row.draftMode eq 1 }">
 	<a href="position/company/edit.do?positionId=${row.id}"><spring:message code="position.edit" /></a>
+</jstl:if>
 </display:column>
 </display:table>
 

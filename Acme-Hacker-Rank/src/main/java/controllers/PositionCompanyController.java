@@ -83,30 +83,59 @@ public class PositionCompanyController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final Integer positionId) {
-		final ModelAndView result;
-		final Position position;
+		ModelAndView result;
 
-		position = this.positionService.findOne(positionId);
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		try {
+			final Position position;
 
-		result = new ModelAndView("position/edit");
-		result.addObject("position", position);
+			position = this.positionService.findOne(positionId);
+
+			Assert.isTrue(position.getCompany().equals(a));
+			Assert.isTrue(position.getDraftMode() == 1);
+
+			result = new ModelAndView("position/edit");
+			result.addObject("position", position);
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
 		return result;
 
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Position p, final BindingResult binding) {
-		final ModelAndView result;
+		ModelAndView result;
 		final Position position;
 
 		position = this.positionService.reconstruct(p, binding);
+		try {
 
-		if (!binding.hasErrors()) {
-			this.positionService.save(position);
-			result = new ModelAndView("list.do");
-		} else {
-			result = new ModelAndView("position/edit");
-			result.addObject("position", position);
+			if (!binding.hasErrors()) {
+				this.positionService.save(position);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("position/edit");
+				result.addObject("position", position);
+			}
+		} catch (final Exception e) {
+
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+			if (position.getCompany().equals(a)) {
+				if (position.getDraftMode() == 1) {
+
+					result = new ModelAndView("position/edit");
+					result.addObject("position", position);
+					result.addObject("exception", e);
+				} else
+					result = new ModelAndView("redirect:list.do");
+
+			} else
+				result = new ModelAndView("redirect:../../");
 		}
 
 		return result;

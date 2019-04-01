@@ -38,11 +38,12 @@ public class PositionService {
 		res.setCompany(new Company());
 		res.setTitle("");
 		res.setDescription("");
-		res.setDeadLine(new Date());
+		final Date tomorrow = this.positionRepository.getTomorrow();
+		res.setDeadLine(tomorrow);
 		res.setRequiredProfile("");
 		res.setSkillsRequired("");
 		res.setTechnologiesRequired("");
-		res.setSalary(0);
+		res.setSalary(0.0);
 		res.setTicker("");
 		res.setDraftMode(1);
 
@@ -76,19 +77,17 @@ public class PositionService {
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
-		if (p.getId() == 0) {
-			p.setCompany((Company) a);
-			p.setTicker(PositionService.generarTicker((Company) a));
-		}
+		final Position old = this.positionRepository.findOne(p.getId());
+		Assert.isTrue(old.getDraftMode() == 1);
 
 		Assert.isTrue(p.getCompany().equals(a));
 		Assert.isTrue(p.getTitle() != null && p.getTitle() != "");
 		Assert.isTrue(p.getDescription() != null && p.getDescription() != "");
-		//deadline
+		Assert.isTrue(new Date().before(p.getDeadLine()));
 		Assert.isTrue(p.getRequiredProfile() != null && p.getRequiredProfile() != "");
 		Assert.isTrue(p.getSkillsRequired() != null && p.getSkillsRequired() != "");
 		Assert.isTrue(p.getTechnologiesRequired() != null && p.getTechnologiesRequired() != "");
-		Assert.isTrue(p.getSalary() >= 0);
+		Assert.isTrue(p.getSalary() >= 0.0);
 		Assert.isTrue(p.getTicker() != null && p.getTicker() != "");
 		Assert.isTrue(p.getDraftMode() == 0 || p.getDraftMode() == 1);
 
@@ -102,18 +101,30 @@ public class PositionService {
 		if (position.getId() == 0) {
 			res = position;
 
-			position.setCompany(new Company());
-			position.setTicker("");
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+			position.setCompany((Company) a);
+			position.setTicker(PositionService.generarTicker((Company) a));
 			position.setDraftMode(1);
 			this.validator.validate(res, binding);
 
 			return res;
 		} else {
 			res = this.positionRepository.findOne(position.getId());
-			final Position copy = res;
-			copy.setCompany(position.getCompany());
-			copy.setTicker(position.getTicker());
-
+			final Position copy = new Position();
+			copy.setCompany(res.getCompany());
+			copy.setTicker(res.getTicker());
+			copy.setDeadLine(position.getDeadLine());
+			copy.setDescription(position.getDescription());
+			copy.setDraftMode(position.getDraftMode());
+			copy.setRequiredProfile(position.getRequiredProfile());
+			copy.setSalary(position.getSalary());
+			copy.setSkillsRequired(position.getSkillsRequired());
+			copy.setTechnologiesRequired(position.getTechnologiesRequired());
+			copy.setTitle(position.getTitle());
+			copy.setId(position.getId());
+			copy.setVersion(position.getVersion());
 			this.validator.validate(copy, binding);
 			return copy;
 
@@ -125,10 +136,10 @@ public class PositionService {
 	public static String generarTicker(final Company company) {
 		final int tam = 4;
 
-		final String d = company.getNameCompany().substring(0, 3);
+		final String d = company.getNameCompany().substring(0, 4);
 
 		String ticker = "-";
-		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		final String a = "0123456789";
 
 		for (int i = 0; i < tam; i++) {
 			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());

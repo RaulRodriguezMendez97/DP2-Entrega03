@@ -23,7 +23,7 @@
 <form:form action="position/company/edit.do" modelAttribute="position">
 
 <jstl:if test="${not empty exception}">
-		<p style="color:red"> <spring:message code="notification.error" /> </p>
+		<p style="color:red"> <spring:message code="position.error" /> </p>
 </jstl:if>
 
 <form:hidden path="id"/>
@@ -49,7 +49,7 @@
 
 <br/>
 <input type="submit" name="save" 
-	value="<spring:message code="notification.save" />" />
+	value="<spring:message code="position.save" />" />
 	
 <input type="button" name="cancel" value="<spring:message code="position.cancel" />"
 			onclick="javascript: relativeRedir('position/company/list.do');" />

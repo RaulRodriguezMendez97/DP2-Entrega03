@@ -30,7 +30,7 @@ public class Position extends DomainEntity {
 	private String	requiredProfile;
 	private String	skillsRequired;
 	private String	technologiesRequired;
-	private int		salary;
+	private Double	salary;
 	private String	ticker;
 	private int		draftMode;
 	private Company	company;
@@ -109,11 +109,11 @@ public class Position extends DomainEntity {
 	}
 
 	@Min(0)
-	public int getSalary() {
+	public Double getSalary() {
 		return this.salary;
 	}
 
-	public void setSalary(final int salary) {
+	public void setSalary(final Double salary) {
 		this.salary = salary;
 	}
 

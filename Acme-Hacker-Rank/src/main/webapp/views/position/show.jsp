@@ -25,7 +25,14 @@
 <b><spring:message code="position.requiredProfile" /> : </b> <jstl:out value="${position.requiredProfile}"></jstl:out><br/>
 <b><spring:message code="position.skillsRequired" /> : </b> <jstl:out value="${position.skillsRequired}"></jstl:out><br/>
 <b><spring:message code="position.technologiesRequired" /> : </b> <jstl:out value="${position.technologiesRequired}"></jstl:out><br/>
-<b><spring:message code="position.salary" /> : </b> <jstl:out value="${position.salary}"></jstl:out>
+<b><spring:message code="position.salary" /> : </b> <jstl:out value="${position.salary}"></jstl:out><br/>
+<b><spring:message code="position.draftMode" /> : </b> 
+<jstl:if test="${position.draftMode eq 1 }">
+Yes
+</jstl:if>
+<jstl:if test="${position.draftMode eq 0 }">
+No
+</jstl:if>
 
 <br/>
 <br/>
