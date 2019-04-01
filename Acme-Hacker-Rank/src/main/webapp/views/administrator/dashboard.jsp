@@ -17,6 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <security:authorize access="hasRole('ADMIN')">
@@ -35,6 +36,17 @@
 <b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinAppByHackers}"></jstl:out><br/>
 <b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxAppByHackers}"></jstl:out><br/>
 <b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getDesvAppByHackers}"></fmt:formatNumber>
+</fieldset>
+
+<fieldset>
+<b><spring:message code="administrator.company.positions" /></b>:
+<br/>
+<jstl:if test="${fn:length(getCompaniesWithMorePositions) ne 0}">
+<jstl:forEach var="item" items="${getCompaniesWithMorePositions}">
+<jstl:out value="${item}"></jstl:out>
+<br/>
+</jstl:forEach>
+</jstl:if>
 </fieldset>
 
 </security:authorize>

@@ -206,4 +206,9 @@ public class CompanyService {
 		return res;
 
 	}
+
+	//Dashboard
+	public List<String> getCompaniesWithMorePositions() {
+		return this.companyRepository.getCompaniesWithMorePositions();
+	}
 }
