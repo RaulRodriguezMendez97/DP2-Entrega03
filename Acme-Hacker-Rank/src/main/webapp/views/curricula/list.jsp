@@ -46,7 +46,7 @@ requestURI="curricula/hacker/list.do?idHacker=${row.hacker.id}" >
 
 
 <display:column titleKey="curricula.miscellaneousData"> 
-<a href="miscellaneousData/hacker/list.do?curriculaId=${row.id}"><spring:message code="curricula.miscellaneousData.list" /></a>
+<a href="miscellaneousData/hacker/show.do?curriculaId=${row.id}"><spring:message code="curricula.miscellaneousData.list" /></a>
 </display:column>
 
 </display:table>

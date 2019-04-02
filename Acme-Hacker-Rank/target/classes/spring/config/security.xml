@@ -66,6 +66,8 @@
 		<security:intercept-url pattern="/finder/hacker/show.do" access="hasRole('HACKER')" />
 		<security:intercept-url pattern="/curricula/hacker/list.do" access="hasRole('HACKER')" />
 		<security:intercept-url pattern="/personalData/hacker/show.do" access="hasRole('HACKER')" />
+		<security:intercept-url pattern="/miscellaneousData/hacker/show.do" access="hasRole('HACKER')" />
+		
 		
 		<security:intercept-url pattern="/position/show.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/position/list.do" access="isAnonymous()" />
