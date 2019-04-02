@@ -240,8 +240,8 @@
 		<bean id="finder1" class="domain.Finder">
 		<property name="KeyWord" value="Prueba1"/>
 		<property name="deadLine" value="12/10/2019 23:59"/>
-		<property name="minSalary" value="10"/>
-		<property name="maxDeadLine" value="12/11/2019 23:59"/>
+		<property name="minSalary" value="10.0"/>
+		<property name="maxSalary" value="100.0"/>
 		<property name="positions">
 			<list>
 				<ref bean="position1" />
@@ -254,8 +254,8 @@
 		<bean id="finder2" class="domain.Finder">
 		<property name="KeyWord" value="Prueba2"/>
 		<property name="deadLine" value="12/10/2019 23:59"/>
-		<property name="minSalary" value="10"/>
-		<property name="maxDeadLine" value="12/11/2019 23:59"/>
+		<property name="minSalary" value="10.0"/>
+		<property name="maxSalary" value="100.0"/>
 		<property name="positions">
 			<list>
 				<ref bean="position3" />
@@ -264,6 +264,7 @@
 		</property>
 	
 	</bean>
+	
 	
 	<!-- POSITION -->
 	
