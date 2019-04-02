@@ -34,7 +34,7 @@ requestURI="finder/hacker/show.do" >
 </display:column>
 </display:table>
 
-	<input type="button" name="create" value="<spring:message code="position.create" />"
-			onclick="javascript: relativeRedir('position/company/create.do');" />
+	<input type="button" name="create" value="<spring:message code="finder.back" />"
+			onclick="javascript: relativeRedir('finder/hacker/edit.do');" />
 
 </security:authorize>

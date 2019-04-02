@@ -32,7 +32,7 @@ public class FinderService {
 	public Finder create() {
 		final Finder res = new Finder();
 		res.setDeadLine(new Date());
-		res.setMaxDeadLine(new Date());
+		res.setMaxSalary(0.);
 		res.setKeyWord("");
 		res.setMinSalary(0.);
 		res.setPositions(new HashSet<Position>());
@@ -51,12 +51,12 @@ public class FinderService {
 	public Finder save(final Finder f) {
 		Finder saved;
 		if (f.getId() == 0) {
-			Assert.isTrue(f.getKeyWord() == "" && f.getDeadLine() != null && f.getMaxDeadLine() != null && f.getMinSalary() >= 0. && f.getPositions().isEmpty());
+			Assert.isTrue(f.getKeyWord() == "" && f.getDeadLine() != null && f.getMaxSalary() >= 0. && f.getMinSalary() >= 0. && f.getPositions().isEmpty());
 			saved = this.finderRepository.save(f);
 		} else {
 			final Finder savedFinder = this.findOne();
 			savedFinder.setDeadLine(f.getDeadLine());
-			savedFinder.setMaxDeadLine(f.getMaxDeadLine());
+			savedFinder.setMaxSalary(f.getMaxSalary());
 			savedFinder.setKeyWord(f.getKeyWord());
 			savedFinder.setMinSalary(f.getMinSalary());
 			savedFinder.setPositions(f.getPositions());
@@ -73,8 +73,8 @@ public class FinderService {
 		final Finder copy = res;
 		copy.setKeyWord(finder.getKeyWord());
 		copy.setDeadLine(finder.getDeadLine());
-		copy.setMaxDeadLine(finder.getMaxDeadLine());
-		copy.setPositions(this.finderRepository.filterPositions(copy.getKeyWord(), copy.getMinSalary(), Double.MAX_VALUE, copy.getDeadLine(), copy.getMaxDeadLine()));
+		copy.setMaxSalary(finder.getMaxSalary());
+		copy.setPositions(this.finderRepository.filterPositions(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), finder.getDeadLine()));
 		copy.setMinSalary(finder.getMinSalary());
 		this.validator.validate(copy, binding);
 		return copy;

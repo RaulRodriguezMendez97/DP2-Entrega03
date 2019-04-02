@@ -12,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -21,7 +22,7 @@ public class Finder extends DomainEntity {
 	private String					keyWord;
 	private Date					deadLine;
 	private Double					minSalary;
-	private Date					maxDeadLine;
+	private Double					maxSalary;
 	private Collection<Position>	positions;
 
 
@@ -53,6 +54,7 @@ public class Finder extends DomainEntity {
 		this.deadLine = deadLine;
 	}
 
+	@Range(min = (long) 0.0, max = (long) Double.MAX_VALUE)
 	public Double getMinSalary() {
 		return this.minSalary;
 	}
@@ -61,14 +63,13 @@ public class Finder extends DomainEntity {
 		this.minSalary = minSalary;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getMaxDeadLine() {
-		return this.maxDeadLine;
+	@Range(min = (long) 0.0, max = (long) Double.MAX_VALUE)
+	public Double getMaxSalary() {
+		return this.maxSalary;
 	}
 
-	public void setMaxDeadLine(final Date maxDeadLine) {
-		this.maxDeadLine = maxDeadLine;
+	public void setMaxSalary(final Double maxSalary) {
+		this.maxSalary = maxSalary;
 	}
 
 }

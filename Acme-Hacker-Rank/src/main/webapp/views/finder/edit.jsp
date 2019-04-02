@@ -30,9 +30,9 @@
 <form:hidden path="version"/>
 
 <acme:textbox code="finder.keyWord" path="keyWord"/>
-<acme:textarea code="finder.deadLine" path="deadLine"/>
-<acme:textarea code="finder.maxDeadLine" path="maxDeadLine"/>
+<acme:textbox code="finder.deadLine" path="deadLine"/>
 <acme:textbox code="finder.minSalary" path="minSalary"/>
+<acme:textbox code="finder.maxSalary" path="maxSalary"/>
 
 
 <input type="submit" name="save" 

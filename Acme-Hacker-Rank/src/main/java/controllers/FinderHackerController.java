@@ -50,7 +50,7 @@ public class FinderHackerController extends AbstractController {
 
 		if (!binding.hasErrors()) {
 			this.finderService.save(finder);
-			result = new ModelAndView("show.do");
+			result = new ModelAndView("finder/show");
 		} else {
 			result = new ModelAndView("finder/edit");
 			result.addObject("finder", finder);
