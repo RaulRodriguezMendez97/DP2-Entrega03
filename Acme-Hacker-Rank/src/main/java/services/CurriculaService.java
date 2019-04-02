@@ -38,6 +38,7 @@ public class CurriculaService {
 		res.setMiscellaneousData(new MiscellaneousData());
 		res.setPositionData(new PositionData());
 		res.setPersonalData(new PersonalData());
+		res.setIsCopy(0);
 		return res;
 	}
 
@@ -70,7 +71,7 @@ public class CurriculaService {
 	}
 
 	public Curricula getCurriculaByProfileData(final Integer profileDataId) {
-		return this.curriculaRepository.getCurriculaByProfileData(profileDataId);
+		return this.curriculaRepository.getCurriculaByPersonalData(profileDataId);
 	}
 	public Curricula getCurriculaByPositionData(final Integer positionDataId) {
 		return this.curriculaRepository.getCurriculaByPositionData(positionDataId);
@@ -80,6 +81,9 @@ public class CurriculaService {
 	}
 	public Curricula getCurriculaByMiscellaneousData(final Integer miscellaneousDataId) {
 		return this.curriculaRepository.getCurriculaByMiscellaneousData(miscellaneousDataId);
+	}
+	public Collection<Curricula> getCurriculasByHacker(final Integer hackerId) {
+		return this.curriculaRepository.getCurriculasByHacker(hackerId);
 	}
 
 }

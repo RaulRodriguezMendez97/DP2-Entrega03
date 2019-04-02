@@ -23,11 +23,11 @@
 requestURI="curricula/hacker/list.do?idHacker=${row.hacker.id}" >
 
 
-<display:column titleKey="curricula.hacker.list">
+<display:column titleKey="curricula.hacker">
 <jstl:out value="${row.hacker.name}"></jstl:out>
 </display:column>
 <display:column titleKey="curricula.isCopy">
-<jstl:out value="${row.hacker.name}"></jstl:out>
+<jstl:out value="${row.isCopy}"></jstl:out>
 </display:column>
 
 <display:column titleKey="curricula.personalData">
