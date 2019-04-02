@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -111,6 +112,10 @@ public class PositionCompanyController extends AbstractController {
 		final Position position;
 
 		position = this.positionService.reconstruct(p, binding);
+
+		if (!(new Date().before(position.getDeadLine())))
+			binding.rejectValue("deadLine", "FutureBinding");
+
 		try {
 
 			if (!binding.hasErrors()) {
