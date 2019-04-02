@@ -56,7 +56,7 @@ public class MiscellaneousDataService {
 			Assert.isTrue(curricula.getHacker() == a);
 
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
-		Assert.isTrue(miscellaneousData != null && miscellaneousData.getText() != null);
+		Assert.isTrue(miscellaneousData != null && miscellaneousData.getText() != null && miscellaneousData.getText() != "");
 		return this.miscellaneousDataRepository.save(miscellaneousData);
 	}
 

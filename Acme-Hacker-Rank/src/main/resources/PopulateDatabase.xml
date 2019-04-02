@@ -436,29 +436,29 @@
 		<property name="curricula" ref="curricula1"/>
 	</bean>
 	
-	<!-- ProfileData -->
-	<bean id="profileData1" class="domain.ProfileData">
+	<!-- PersonalData -->
+	<bean id="personalData1" class="domain.PersonalData">
 		<property name="fullName" value="profileData1"/>
 		<property name="statement" value="statement1"/>
 		<property name="phoneNumber" value="+34 123456789"/>
 		<property name="githubProfile" value="http://githubProfile1.com"/>
 		<property name="linkedlnProfile" value="http://linkedlnProfile1"/>
 	</bean>	
-	<bean id="profileData2" class="domain.ProfileData">
+	<bean id="personalData2" class="domain.PersonalData">
 		<property name="fullName" value="profileData2"/>
 		<property name="statement" value="statement2"/>
 		<property name="phoneNumber" value="+34 123456799"/>
 		<property name="githubProfile" value="http://githubProfile2.com"/>
 		<property name="linkedlnProfile" value="http://linkedlnProfile2"/>
 	</bean>	
-	<bean id="profileData3" class="domain.ProfileData">
+	<bean id="personalData3" class="domain.PersonalData">
 		<property name="fullName" value="profileData3"/>
 		<property name="statement" value="statement3"/>
 		<property name="phoneNumber" value="+34 123456999"/>
 		<property name="githubProfile" value="http://githubProfile3.com"/>
 		<property name="linkedlnProfile" value="http://linkedlnProfile3"/>
 	</bean>	
-	<bean id="profileData4" class="domain.ProfileData">
+	<bean id="personalData4" class="domain.PersonalData">
 		<property name="fullName" value="profileData4"/>
 		<property name="statement" value="statement4"/>
 		<property name="phoneNumber" value="+34 123459999"/>
@@ -504,7 +504,7 @@
 	<!-- Curricula -->
 	<bean id="curricula1" class="domain.Curricula">
 		<property name="hacker" ref="hacker1"/>
-		<property name="profileData" ref="profileData1"/>
+		<property name="personalData" ref="personalData1"/>
 		<property name="positionData" ref="positionData1"/>
 		<property name="educationData" ref="educationData1"/>
 		<property name="miscellaneousData" ref="miscellaneousData1"/>

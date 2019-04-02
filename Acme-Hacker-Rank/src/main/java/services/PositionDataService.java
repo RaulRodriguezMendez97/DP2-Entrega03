@@ -59,8 +59,8 @@ public class PositionDataService {
 			Assert.isTrue(curricula.getHacker() == a);
 
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
-		Assert.isTrue(positionData != null && positionData.getTitle() != null && positionData.getDescription() != null && positionData.getStartDate().before(new Date()) && positionData.getEndDate().before(new Date())
-			&& positionData.getEndDate().after(positionData.getStartDate()));
+		Assert.isTrue(positionData != null && positionData.getTitle() != null && positionData.getTitle() != "" && positionData.getDescription() != null && positionData.getDescription() != "" && positionData.getStartDate().before(new Date())
+			&& positionData.getEndDate().before(new Date()) && positionData.getEndDate().after(positionData.getStartDate()));
 		return this.positionDataRepository.save(positionData);
 	}
 

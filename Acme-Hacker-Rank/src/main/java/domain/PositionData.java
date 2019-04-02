@@ -11,6 +11,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -24,6 +25,7 @@ public class PositionData extends DomainEntity {
 
 
 	@NotNull
+	@NotBlank
 	public String getTitle() {
 		return this.title;
 	}
@@ -33,6 +35,7 @@ public class PositionData extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class Curricula extends DomainEntity {
 
 	private Hacker				hacker;
-	private ProfileData			profileData;
+	private PersonalData		personalData;
 	private PositionData		positionData;
 	private EducationData		educationData;
 	private MiscellaneousData	miscellaneousData;
@@ -35,12 +35,12 @@ public class Curricula extends DomainEntity {
 	@NotNull
 	@Valid
 	@OneToOne(cascade = CascadeType.REMOVE)
-	public ProfileData getProfileData() {
-		return this.profileData;
+	public PersonalData getPersonalData() {
+		return this.personalData;
 	}
 
-	public void setProfileData(final ProfileData profileData) {
-		this.profileData = profileData;
+	public void setPersonalData(final PersonalData personalData) {
+		this.personalData = personalData;
 	}
 
 	@NotNull
