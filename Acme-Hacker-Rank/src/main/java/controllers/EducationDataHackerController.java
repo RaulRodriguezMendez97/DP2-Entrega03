@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CurriculaService;
-import services.MiscellaneousDataService;
+import services.EducationDataService;
 import domain.Curricula;
-import domain.MiscellaneousData;
+import domain.EducationData;
 
 @Controller
-@RequestMapping("/miscellaneousData/hacker")
-public class MiscellaneousDataHackerController extends AbstractController {
+@RequestMapping("/educationData/hacker")
+public class EducationDataHackerController extends AbstractController {
 
 	@Autowired
-	private CurriculaService			curriculaService;
+	private CurriculaService		curriculaService;
 	@Autowired
-	private MiscellaneousDataService	miscellaneousDataService;
+	private EducationDataService	educationDataService;
 
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -29,9 +29,9 @@ public class MiscellaneousDataHackerController extends AbstractController {
 		try {
 			final Curricula curricula = this.curriculaService.findOne(curriculaId);
 			//final PersonalData personalData = this.personalData.findOne(curricula.getPersonalData().getId());
-			final MiscellaneousData miscellaneousData = curricula.getMiscellaneousData();
-			result = new ModelAndView("miscellaneousData/show");
-			result.addObject("miscellaneousData", miscellaneousData);
+			final EducationData educationData = curricula.getEducationData();
+			result = new ModelAndView("educationData/show");
+			result.addObject("educationData", educationData);
 			//result.addObject("curriculaId", curriculaId);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../curricula/hacker/list.do");
