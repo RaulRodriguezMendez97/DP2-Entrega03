@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Curricula extends DomainEntity {
@@ -19,7 +21,17 @@ public class Curricula extends DomainEntity {
 	private PositionData		positionData;
 	private EducationData		educationData;
 	private MiscellaneousData	miscellaneousData;
+	private int					isCopy;
 
+
+	@Range(min = 0, max = 1)
+	public int getIsCopy() {
+		return this.isCopy;
+	}
+
+	public void setIsCopy(final int isCopy) {
+		this.isCopy = isCopy;
+	}
 
 	@NotNull
 	@Valid

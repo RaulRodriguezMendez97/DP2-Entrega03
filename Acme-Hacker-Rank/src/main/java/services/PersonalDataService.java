@@ -64,8 +64,7 @@ public class PersonalDataService {
 			Assert.isTrue(curricula.getHacker() == a);
 
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
-		Assert.isTrue(profileData != null && profileData.getFullName() != null && profileData.getFullName() != "" && profileData.getStatement() != null && profileData.getStatement() != "" && profileData.getGithubProfile() != null
-			&& profileData.getGithubProfile() != "" && profileData.getLinkedlnProfile() != null && profileData.getLinkedlnProfile() != "");
+		Assert.isTrue(profileData != null);
 		if (a.getPhone() != "" || a.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";
 			final Pattern patternTelefono = Pattern.compile(regexTelefono);

@@ -60,8 +60,7 @@ public class EducationDataService {
 			Assert.isTrue(curricula.getHacker() == a);
 
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
-		Assert.isTrue(educationData != null && educationData.getDegree() != null && educationData.getDegree() != "" && educationData.getInstitution() != null && educationData.getInstitution() != "" && educationData.getStartDate().before(new Date())
-			&& educationData.getEndDate().before(new Date()) && educationData.getEndDate().after(educationData.getStartDate()));
+		Assert.isTrue(educationData != null && educationData.getEndDate().after(educationData.getStartDate()));
 		return this.educationDataRepository.save(educationData);
 	}
 

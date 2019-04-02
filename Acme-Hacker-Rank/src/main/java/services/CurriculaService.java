@@ -58,8 +58,6 @@ public class CurriculaService {
 		final UserAccount user = LoginService.getPrincipal();
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
 		Assert.isTrue(curricula != null);
-		Assert.isTrue(curricula.getHacker() != null);
-		Assert.isTrue(curricula.getEducationData() != null && curricula.getMiscellaneousData() != null && curricula.getPositionData() != null && curricula.getPersonalData() != null);
 		Assert.isTrue(curricula.getHacker().equals(this.hackerService.hackerUserAccount(user.getId())));
 		return this.curriculaRepository.save(curricula);
 	}

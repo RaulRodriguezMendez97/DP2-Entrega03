@@ -491,6 +491,24 @@
 		<property name="startDate" value="01/02/2019 23:59"/>
 		<property name="endDate" value="01/03/2019 23:59"/>
 	</bean>	
+	<bean id="positionData2" class="domain.PositionData">
+		<property name="title" value="title2"/>
+		<property name="description" value="description2"/>
+		<property name="startDate" value="01/09/2019 23:59"/>
+		<property name="endDate" value="01/20/2019 23:59"/>
+	</bean>
+	<bean id="positionData3" class="domain.PositionData">
+		<property name="title" value="title3"/>
+		<property name="description" value="description3"/>
+		<property name="startDate" value="03/02/2019 23:59"/>
+		<property name="endDate" value="03/03/2019 23:59"/>
+	</bean>
+	<bean id="positionData4" class="domain.PositionData">
+		<property name="title" value="title4"/>
+		<property name="description" value="description4"/>
+		<property name="startDate" value="02/12/2019 23:59"/>
+		<property name="endDate" value="03/12/2019 23:59"/>
+	</bean>
 	
 	<!-- EducationData -->
 	<bean id="educationData1" class="domain.EducationData">
@@ -504,9 +522,23 @@
 		<property name="degree" value="degree2"/>
 		<property name="institution" value="institution2"/>
 		<property name="mark" value="2"/>
-		<property name="startDate" value="03/02/2019 23:59"/>
-		<property name="endDate" value="02/03/2019 23:59"/>
+		<property name="startDate" value="02/02/2019 23:59"/>
+		<property name="endDate" value="03/03/2019 23:59"/>
 	</bean>	
+	<bean id="educationData3" class="domain.EducationData">
+		<property name="degree" value="degree3"/>
+		<property name="institution" value="institution3"/>
+		<property name="mark" value="4"/>
+		<property name="startDate" value="03/05/2019 23:59"/>
+		<property name="endDate" value="03/09/2019 23:59"/>
+	</bean>
+	<bean id="educationData4" class="domain.EducationData">
+		<property name="degree" value="degree4"/>
+		<property name="institution" value="institution4"/>
+		<property name="mark" value="6"/>
+		<property name="startDate" value="03/09/2019 23:59"/>
+		<property name="endDate" value="03/20/2019 23:59"/>
+	</bean>		
 	
 	<!-- Curricula -->
 	<bean id="curricula1" class="domain.Curricula">
@@ -515,6 +547,7 @@
 		<property name="positionData" ref="positionData1"/>
 		<property name="educationData" ref="educationData1"/>
 		<property name="miscellaneousData" ref="miscellaneousData1"/>
+		<property name="isCopy" value="0"/>
 	</bean>
 		
 	
