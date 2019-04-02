@@ -29,4 +29,13 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 	//DASHBOARD
 	@Query("select avg(1.0*(select count(p.company) from Position p where p.company.id = b.id)), min(1.0*(select count(p.company) from Position p where p.company.id = b.id)), max(1.0*(select count(p.company) from Position p where p.company.id = b.id)), sqrt(1.0*sum(1.0*(select count (p.company) from Position p where p.company.id = b.id) * (select count(p.company) from Position p where p.company.id = b.id)) / count(b) - avg(1.0*(select count(p.company) from Position p where p.company.id = b.id)) * avg(1.0*(select count(p.company) from Position p where p.company.id = b.id))) from Company b")
 	public List<Object[]> getAvgMinMaxDesvPositionByCompany();
+
+	@Query("select avg(p.salary), min(p.salary), max(p.salary), sqrt(sum(p.salary * p.salary)/count(p)-avg(p.salary)*avg(p.salary)) from Position p")
+	public List<Object[]> getAvgMaxMinDesvSalaryOfPositions();
+
+	@Query("select p.title from Position p where p.salary=(select max(p.salary) from Position p)")
+	public String getPositionWithBestSalary();
+
+	@Query("select p.title from Position p where p.salary=(select min(p.salary) from Position p)")
+	public String getPositionWithWorstSalary();
 }

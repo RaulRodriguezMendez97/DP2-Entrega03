@@ -206,4 +206,9 @@ public class HackerService {
 		return res;
 
 	}
+
+	//dashboard
+	public List<String> getHackersWithMoreApplications() {
+		return this.hackerRepository.getHackersWithMoreApplications();
+	}
 }

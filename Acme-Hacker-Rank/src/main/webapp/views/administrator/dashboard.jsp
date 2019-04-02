@@ -23,7 +23,7 @@
 <security:authorize access="hasRole('ADMIN')">
 
 <fieldset>
-<legend><spring:message code="administrator.member.position.company" /></legend>
+<legend><spring:message code="administrator.position.company" /></legend>
 <b><spring:message code="administrator.avg" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getAvgPositionByCompany}"></fmt:formatNumber><br/>
 <b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinPositionByCompany}"></jstl:out><br/>
 <b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxPositionByCompany}"></jstl:out><br/>
@@ -31,7 +31,7 @@
 </fieldset>
 
 <fieldset>
-<legend><spring:message code="administrator.member.application.hacker" /></legend>
+<legend><spring:message code="administrator.application.hacker" /></legend>
 <b><spring:message code="administrator.avg" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getAvgAppByHackers}"></fmt:formatNumber> <br/>
 <b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinAppByHackers}"></jstl:out><br/>
 <b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxAppByHackers}"></jstl:out><br/>
@@ -47,6 +47,32 @@
 <br/>
 </jstl:forEach>
 </jstl:if>
+</fieldset>
+
+<fieldset>
+<b><spring:message code="administrator.hacker.applications" /></b>:
+<br/>
+<jstl:if test="${fn:length(getHackersWithMoreApplications) ne 0}">
+<jstl:forEach var="item" items="${getHackersWithMoreApplications}">
+<jstl:out value="${item}"></jstl:out>
+<br/>
+</jstl:forEach>
+</jstl:if>
+</fieldset>
+
+<fieldset>
+<legend><spring:message code="administrator.position.salary" /></legend>
+<b><spring:message code="administrator.avg" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getAvgSalaryOfPositions}"></fmt:formatNumber> <br/>
+<b><spring:message code="administrator.min" /></b>: <jstl:out value="${getMinSalaryOfPositions}"></jstl:out><br/>
+<b><spring:message code="administrator.max" /></b>: <jstl:out value="${getMaxSalaryOfPositions}"></jstl:out><br/>
+<b><spring:message code="administrator.desv" /></b>: <fmt:formatNumber type="number" maxIntegerDigits = "3" value ="${getDesvSalaryOfPositions}"></fmt:formatNumber>
+</fieldset>
+
+<fieldset>
+<legend><spring:message code="administrator.salary" /></legend>
+<b><spring:message code="administrator.best" /></b>: <jstl:out value="${getPositionWithBestSalary}"></jstl:out><br/>
+<b><spring:message code="administrator.worst" /></b>: <jstl:out value="${getPositionWithWorstSalary}"></jstl:out><br/>
+
 </fieldset>
 
 </security:authorize>

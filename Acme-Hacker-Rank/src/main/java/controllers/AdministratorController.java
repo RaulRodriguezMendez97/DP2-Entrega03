@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.CompanyService;
+import services.HackerService;
 import services.PositionService;
 
 @Controller
@@ -33,6 +34,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private CompanyService		companyService;
+
+	@Autowired
+	private HackerService		hackerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -59,6 +63,17 @@ public class AdministratorController extends AbstractController {
 
 		final List<String> getCompaniesWithMorePositions = this.companyService.getCompaniesWithMorePositions();
 
+		final List<String> getHackersWithMoreApplications = this.hackerService.getHackersWithMoreApplications();
+
+		final List<Object[]> getAvgMaxMinDesvSalaryOfPositions = this.positionService.getAvgMaxMinDesvSalaryOfPositions();
+		final Double getAvgSalaryOfPositions = (Double) getAvgMaxMinDesvSalaryOfPositions.get(0)[0];
+		final Double getMinSalaryOfPositions = (Double) getAvgMaxMinDesvSalaryOfPositions.get(0)[1];
+		final Double getMaxSalaryOfPositions = (Double) getAvgMaxMinDesvSalaryOfPositions.get(0)[2];
+		final Double getDesvSalaryOfPositions = (Double) getAvgMaxMinDesvSalaryOfPositions.get(0)[3];
+
+		final String getPositionWithBestSalary = this.positionService.getPositionWithBestSalary();
+		final String getPositionWithWorstSalary = this.positionService.getPositionWithWorstSalary();
+
 		result = new ModelAndView("administrator/dashboard");
 
 		result.addObject("getAvgPositionByCompany", getAvgPositionByCompany);
@@ -73,23 +88,19 @@ public class AdministratorController extends AbstractController {
 
 		result.addObject("getCompaniesWithMorePositions", getCompaniesWithMorePositions);
 
+		result.addObject("getHackersWithMoreApplications", getHackersWithMoreApplications);
+
+		result.addObject("getAvgSalaryOfPositions", getAvgSalaryOfPositions);
+		result.addObject("getMinSalaryOfPositions", getMinSalaryOfPositions);
+		result.addObject("getMaxSalaryOfPositions", getMaxSalaryOfPositions);
+		result.addObject("getDesvSalaryOfPositions", getDesvSalaryOfPositions);
+
+		result.addObject("getPositionWithBestSalary", getPositionWithBestSalary);
+		result.addObject("getPositionWithWorstSalary", getPositionWithWorstSalary);
+
 		return result;
 	}
 
-	//	------------------------------------------------------
-	//	+ The hackers who have made more applications
-	//
-	//	select h.name from Hacker h where (select max(1.0*(
-	//		select count(a.hacker) from Application a where
-	//		a.hacker.id=x.id)) from Hacker x)=(1.0*(
-	//		select count(b.hacker) from Application b where
-	//		b.hacker.id=h.id))
-	//
-	//	-------------------------------------------------------
-	//	+ The average, the minimum, the maximum, and the standard deviation of the salaries offered
-	//
-	//	select avg(p.salary), min(p.salary), max(p.salary), sqrt(sum(p.salary * p.salary)/count(p)-avg(p.salary)*avg(p.salary)) from Position p
-	//
 	//	-------------------------------------------------------
 	//	+ The best and the worst position in terms of salary 
 	//

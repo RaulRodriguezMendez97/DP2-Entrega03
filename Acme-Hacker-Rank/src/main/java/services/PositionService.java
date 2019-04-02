@@ -154,4 +154,16 @@ public class PositionService {
 	public List<Object[]> getAvgMinMaxDesvPositionByCompany() {
 		return this.positionRepository.getAvgMinMaxDesvPositionByCompany();
 	}
+
+	public List<Object[]> getAvgMaxMinDesvSalaryOfPositions() {
+		return this.positionRepository.getAvgMaxMinDesvSalaryOfPositions();
+	}
+
+	public String getPositionWithBestSalary() {
+		return this.positionRepository.getPositionWithBestSalary();
+	}
+
+	public String getPositionWithWorstSalary() {
+		return this.positionRepository.getPositionWithWorstSalary();
+	}
 }
