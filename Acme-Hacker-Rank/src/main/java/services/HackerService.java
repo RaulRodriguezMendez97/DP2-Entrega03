@@ -32,6 +32,9 @@ public class HackerService {
 	private HackerRepository			hackerRepository;
 
 	@Autowired
+	private FinderService				finderService;
+
+	@Autowired
 	private CustomizableSystemService	customizableService;
 
 	@Autowired
@@ -115,6 +118,10 @@ public class HackerService {
 			final String hash = encoder.encodePassword(r.getUserAccount().getPassword(), null);
 			final UserAccount user = r.getUserAccount();
 			user.setPassword(hash);
+
+			final Finder finder = this.finderService.create();
+			final Finder savedFinder = this.finderService.save(finder);
+			r.setFinder(savedFinder);
 		}
 
 		res = this.hackerRepository.save(r);
