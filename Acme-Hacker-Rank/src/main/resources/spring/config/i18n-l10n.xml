@@ -32,6 +32,7 @@
 		
 		<value>/views/company/messages</value>
 		<value>/views/curricula/messages</value>
+		<value>/views/personalData/messages</value>
 		
 		<value>/views/customizable/messages</value>
 		<value>/views/termsAndConditions/messages</value>

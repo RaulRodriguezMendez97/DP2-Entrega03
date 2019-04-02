@@ -31,7 +31,7 @@ requestURI="curricula/hacker/list.do?idHacker=${row.hacker.id}" >
 </display:column>
 
 <display:column titleKey="curricula.personalData">
-<a href="personalData/hacker/list.do?curiculaId=${row.id}"><spring:message code="curricula.personalData.list" /></a>
+<a href="personalData/hacker/show.do?curriculaId=${row.id}"><spring:message code="curricula.personalData.list" /></a>
 </display:column>
 
 
