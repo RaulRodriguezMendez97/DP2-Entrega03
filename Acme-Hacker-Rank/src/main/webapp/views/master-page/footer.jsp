@@ -19,4 +19,4 @@
 <hr />
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> <jstl:out value="${nameApp}"></jstl:out> Co., Inc.</b><br>
-<a target="_blank" href="https://localhost:8443/Acme-Parade/termsAndConditions/show.do"><spring:message code="Terminos.Condiciones" /></a>
+<a target="_blank" href="../Acme-Hacker-Rank/termsAndConditions/show.do"><spring:message code="Terminos.Condiciones" /></a>
