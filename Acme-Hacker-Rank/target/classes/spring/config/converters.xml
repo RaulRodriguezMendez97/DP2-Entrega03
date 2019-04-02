@@ -33,8 +33,8 @@
 		<bean class="converters.StringToFinderConverter" />
 		<bean class="converters.StringToCurriculaConverter" />
 		<bean class="converters.CurriculaToStringConverter" />
-		<bean class="converters.StringToProfileDataConverter" />
-		<bean class="converters.ProfileDataToStringConverter" />
+		<bean class="converters.StringToPersonalDataConverter" />
+		<bean class="converters.PersonalDataToStringConverter" />
 		<bean class="converters.StringToEducationDataConverter" />
 		<bean class="converters.EducationDataToStringConverter" />
 		<bean class="converters.StringToMiscellaneousDataConverter" />

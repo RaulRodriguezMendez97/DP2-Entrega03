@@ -16,38 +16,25 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('COMPANY')">
+<security:authorize access="hasRole('HACKER')">
 
-<b><spring:message code="position.ticker" /> : </b> <jstl:out value="${position.ticker}"></jstl:out><br/>
-<b><spring:message code="position.title" /> : </b> <jstl:out value="${position.title}"></jstl:out> <br/>
-<b><spring:message code="position.description" /> : </b> <jstl:out value="${position.description}"></jstl:out><br/>
-<b><spring:message code="position.deadline" /> : </b> <jstl:out value="${position.deadLine}"></jstl:out><br/>
-<b><spring:message code="position.requiredProfile" /> : </b> <jstl:out value="${position.requiredProfile}"></jstl:out><br/>
-<b><spring:message code="position.skillsRequired" /> : </b> <jstl:out value="${position.skillsRequired}"></jstl:out><br/>
-<b><spring:message code="position.technologiesRequired" /> : </b> <jstl:out value="${position.technologiesRequired}"></jstl:out><br/>
-<b><spring:message code="position.salary" /> : </b> <jstl:out value="${position.salary}"></jstl:out>
+<display:table pagesize="5" name="positions" id="row"
+requestURI="finder/hacker/show.do" >
 
-<br/>
-<br/>
-<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
-			onclick="javascript: relativeRedir('position/company/list.do');" />
+<display:column property="ticker" titleKey="position.ticker" />
+<display:column property="title" titleKey="position.title" />
+<display:column property="deadLine" titleKey="position.deadline" />
+<display:column property="salary" titleKey="position.salary" />
 
-</security:authorize>
 
-<security:authorize access="isAnonymous()">
+<display:column>
+<jstl:if test="${row.draftMode eq 1 }">
+	<a href="position/company/edit.do?positionId=${row.id}"><spring:message code="position.edit" /></a>
+</jstl:if>
+</display:column>
+</display:table>
 
-<b><spring:message code="position.ticker" /> : </b> <jstl:out value="${position.ticker}"></jstl:out><br/>
-<b><spring:message code="position.title" /> : </b> <jstl:out value="${position.title}"></jstl:out> <br/>
-<b><spring:message code="position.description" /> : </b> <jstl:out value="${position.description}"></jstl:out><br/>
-<b><spring:message code="position.deadline" /> : </b> <jstl:out value="${position.deadLine}"></jstl:out><br/>
-<b><spring:message code="position.requiredProfile" /> : </b> <jstl:out value="${position.requiredProfile}"></jstl:out><br/>
-<b><spring:message code="position.skillsRequired" /> : </b> <jstl:out value="${position.skillsRequired}"></jstl:out><br/>
-<b><spring:message code="position.technologiesRequired" /> : </b> <jstl:out value="${position.technologiesRequired}"></jstl:out><br/>
-<b><spring:message code="position.salary" /> : </b> <jstl:out value="${position.salary}"></jstl:out>
-
-<br/>
-<br/>
-<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
-			onclick="javascript: relativeRedir('position/list.do?companyId=${position.company.id}');" />
+	<input type="button" name="create" value="<spring:message code="position.create" />"
+			onclick="javascript: relativeRedir('position/company/create.do');" />
 
 </security:authorize>

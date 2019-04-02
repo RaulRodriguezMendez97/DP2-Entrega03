@@ -10,29 +10,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.ProfileDataRepository;
+import repositories.PersonalDataRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Curricula;
-import domain.ProfileData;
+import domain.PersonalData;
 
 @Service
 @Transactional
-public class ProfileDataService {
+public class PersonalDataService {
 
 	@Autowired
 	private CustomizableSystemService	customizableService;
 	@Autowired
-	private ProfileDataRepository		profileDataRepository;
+	private PersonalDataRepository		profileDataRepository;
 	@Autowired
 	private ActorService				actorS;
 	@Autowired
 	private CurriculaService			curriculaService;
 
 
-	public ProfileData create() {
-		final ProfileData res = new ProfileData();
+	public PersonalData create() {
+		final PersonalData res = new PersonalData();
 		final String telephoneCode = this.customizableService.getTelephoneCode();
 		res.setFullName("");
 		res.setStatement("");
@@ -42,12 +42,12 @@ public class ProfileDataService {
 		return res;
 	}
 
-	public Collection<ProfileData> findAll() {
+	public Collection<PersonalData> findAll() {
 		return this.profileDataRepository.findAll();
 	}
 
-	public ProfileData findOne(final Integer profileDataId) {
-		final ProfileData profileData = this.profileDataRepository.findOne(profileDataId);
+	public PersonalData findOne(final Integer profileDataId) {
+		final PersonalData profileData = this.profileDataRepository.findOne(profileDataId);
 		final Curricula curricula = this.curriculaService.getCurriculaByProfileData(profileData.getId());
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorS.getActorByUserAccount(user.getId());
@@ -56,7 +56,7 @@ public class ProfileDataService {
 		return profileData;
 	}
 
-	public ProfileData save(final ProfileData profileData) {
+	public PersonalData save(final PersonalData profileData) {
 		final Curricula curricula = this.curriculaService.getCurriculaByProfileData(profileData.getId());
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorS.getActorByUserAccount(user.getId());
@@ -64,7 +64,8 @@ public class ProfileDataService {
 			Assert.isTrue(curricula.getHacker() == a);
 
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
-		Assert.isTrue(profileData != null && profileData.getFullName() != null && profileData.getFullName() != "" && profileData.getStatement() != null && profileData.getGithubProfile() != null && profileData.getLinkedlnProfile() != null);
+		Assert.isTrue(profileData != null && profileData.getFullName() != null && profileData.getFullName() != "" && profileData.getStatement() != null && profileData.getStatement() != "" && profileData.getGithubProfile() != null
+			&& profileData.getGithubProfile() != "" && profileData.getLinkedlnProfile() != null && profileData.getLinkedlnProfile() != "");
 		if (a.getPhone() != "" || a.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";
 			final Pattern patternTelefono = Pattern.compile(regexTelefono);
@@ -74,7 +75,7 @@ public class ProfileDataService {
 		return this.profileDataRepository.save(profileData);
 	}
 
-	public void delete(final ProfileData profileData, final int curriculaId) {
+	public void delete(final PersonalData profileData, final int curriculaId) {
 		final Curricula curricula = this.curriculaService.findOne(curriculaId);
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
 		final Actor a = this.actorS.getActorByUserAccount(user.getId());

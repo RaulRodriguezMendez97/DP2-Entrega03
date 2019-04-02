@@ -15,8 +15,8 @@ import domain.Curricula;
 import domain.EducationData;
 import domain.Hacker;
 import domain.MiscellaneousData;
+import domain.PersonalData;
 import domain.PositionData;
-import domain.ProfileData;
 
 @Service
 @Transactional
@@ -37,7 +37,7 @@ public class CurriculaService {
 		res.setEducationData(new EducationData());
 		res.setMiscellaneousData(new MiscellaneousData());
 		res.setPositionData(new PositionData());
-		res.setProfileData(new ProfileData());
+		res.setPersonalData(new PersonalData());
 		return res;
 	}
 
@@ -59,7 +59,7 @@ public class CurriculaService {
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
 		Assert.isTrue(curricula != null);
 		Assert.isTrue(curricula.getHacker() != null);
-		Assert.isTrue(curricula.getEducationData() != null && curricula.getMiscellaneousData() != null && curricula.getPositionData() != null && curricula.getProfileData() != null);
+		Assert.isTrue(curricula.getEducationData() != null && curricula.getMiscellaneousData() != null && curricula.getPositionData() != null && curricula.getPersonalData() != null);
 		Assert.isTrue(curricula.getHacker().equals(this.hackerService.hackerUserAccount(user.getId())));
 		return this.curriculaRepository.save(curricula);
 	}

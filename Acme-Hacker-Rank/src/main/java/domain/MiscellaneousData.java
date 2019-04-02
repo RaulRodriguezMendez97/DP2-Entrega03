@@ -6,6 +6,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class MiscellaneousData extends DomainEntity {
@@ -15,6 +17,7 @@ public class MiscellaneousData extends DomainEntity {
 
 
 	@NotNull
+	@NotBlank
 	public String getText() {
 		return this.text;
 	}

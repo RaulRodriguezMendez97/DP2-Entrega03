@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class ProfileData extends DomainEntity {
+public class PersonalData extends DomainEntity {
 
 	private String	fullName;
 	private String	statement;
@@ -31,6 +31,7 @@ public class ProfileData extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getStatement() {
 		return this.statement;
 	}
@@ -51,6 +52,7 @@ public class ProfileData extends DomainEntity {
 
 	@NotNull
 	@URL
+	@NotBlank
 	public String getGithubProfile() {
 		return this.githubProfile;
 	}
@@ -61,6 +63,7 @@ public class ProfileData extends DomainEntity {
 
 	@NotNull
 	@URL
+	@NotBlank
 	public String getLinkedlnProfile() {
 		return this.linkedlnProfile;
 	}

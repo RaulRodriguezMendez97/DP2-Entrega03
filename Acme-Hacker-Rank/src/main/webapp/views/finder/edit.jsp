@@ -19,8 +19,8 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<security:authorize access="hasRole('COMPANY')">
-<form:form action="position/company/edit.do" modelAttribute="position">
+<security:authorize access="hasRole('HACKER')">
+<form:form action="finder/hacker/edit.do" modelAttribute="finder">
 
 <jstl:if test="${not empty exception}">
 		<p style="color:red"> <spring:message code="notification.error" /> </p>
@@ -29,30 +29,16 @@
 <form:hidden path="id"/>
 <form:hidden path="version"/>
 
-<acme:textbox code="position.title" path="title"/>
-<acme:textarea code="position.description" path="description"/>
-<acme:textbox code="position.deadline" path="deadLine"/>
-<acme:textarea code="position.requiredProfile" path="requiredProfile"/>
-<acme:textarea code="position.skillsRequired" path="skillsRequired"/>
-<acme:textarea code="position.technologiesRequired" path="technologiesRequired"/>
-<acme:textbox code="position.salary" path="salary"/>
-<jstl:if test="${position.id ne 0 }">
-<form:label path="draftMode"><spring:message code="position.draftMode" />:</form:label>
+<acme:textbox code="finder.keyWord" path="keyWord"/>
+<acme:textarea code="finder.deadLine" path="deadLine"/>
+<acme:textarea code="finder.maxDeadLine" path="maxDeadLine"/>
+<acme:textbox code="finder.minSalary" path="minSalary"/>
 
-<form:select path="draftMode">
-		<form:option value="1" label="Yes" />	
-		<form:option value="0" label="No" />	
-	</form:select>
-	<form:errors path="draftMode"/>
 
-</jstl:if>
-
-<br/>
 <input type="submit" name="save" 
 	value="<spring:message code="notification.save" />" />
 	
-<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
-			onclick="javascript: relativeRedir('position/company/list.do');" />
+
 </form:form>
 
 </security:authorize>

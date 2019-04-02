@@ -7,20 +7,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import repositories.ProfileDataRepository;
-import domain.ProfileData;
+import repositories.PersonalDataRepository;
+import domain.PersonalData;
 
 @Component
 @Transactional
-public class StringToProfileDataConverter implements Converter<String, ProfileData> {
+public class StringToPersonalDataConverter implements Converter<String, PersonalData> {
 
 	@Autowired
-	ProfileDataRepository	profileDataRepository;
+	PersonalDataRepository	profileDataRepository;
 
 
 	@Override
-	public ProfileData convert(final String text) {
-		ProfileData result;
+	public PersonalData convert(final String text) {
+		PersonalData result;
 		int id;
 
 		try {
