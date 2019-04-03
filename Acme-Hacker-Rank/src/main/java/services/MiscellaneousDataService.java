@@ -66,9 +66,9 @@ public class MiscellaneousDataService {
 		final Actor a = this.actorS.getActorByUserAccount(user.getId());
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
 		Assert.isTrue(curricula.getHacker() == a);
-		//Assert.isTrue(history.getLinkRecords().contains(linkRecord));
-		//history.getLinkRecords().remove(linkRecord);
+		Assert.isTrue(curricula.getMiscellaneousData().contains(miscellaneousData));
+		curricula.getMiscellaneousData().remove(miscellaneousData);
 		this.miscellaneousDataRepository.delete(miscellaneousData);
-		//this.historyService.save(history);
+		this.curriculaService.save(curricula);
 	}
 }
