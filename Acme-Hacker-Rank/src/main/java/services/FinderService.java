@@ -83,7 +83,7 @@ public class FinderService {
 		if (finder.getDeadLine() == null)
 			fecha = "";
 		else
-			fecha = finder.getDeadLine().toString();
+			fecha = this.getStringToDate(finder.getDeadLine());
 		final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
 		copy.setPositions(c);
 		this.validator.validate(copy, binding);
@@ -110,5 +110,25 @@ public class FinderService {
 
 	private int hackerUserAccountId() {
 		return LoginService.getPrincipal().getId();
+	}
+
+	private String getStringToDate(final Date date) {
+		String cadena = "";
+
+		cadena += date.toString().substring(24, 28);
+
+		final Integer month = date.getMonth() + 1;
+		if (month < 10)
+			cadena += "-" + "0" + month;
+		else
+			cadena += "-" + month;
+
+		if (date.getDate() < 10)
+			cadena += "-" + "0" + date.getDate();
+		else
+			cadena += "-" + date.getDate();
+
+		System.out.println(cadena);
+		return cadena;
 	}
 }

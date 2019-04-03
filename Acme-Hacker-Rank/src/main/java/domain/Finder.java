@@ -43,7 +43,7 @@ public class Finder extends DomainEntity {
 		this.positions = positions;
 	}
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDeadLine() {
 		return this.deadLine;
