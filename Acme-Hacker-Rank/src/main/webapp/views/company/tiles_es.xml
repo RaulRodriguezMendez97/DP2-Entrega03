@@ -16,6 +16,11 @@
       
 <tiles-definitions>
 
+	<definition name="company/create" extends="master.page">	
+		<put-attribute name="title" value="Compañia: Crear nueva compañia" />
+		<put-attribute name="body" value="/views/company/edit.jsp" />
+	</definition>
+
 	<definition name="company/list" extends="master.page">	
 		<put-attribute name="title" value="Compañia: Ver compañias" />
 		<put-attribute name="body" value="/views/company/list.jsp" />

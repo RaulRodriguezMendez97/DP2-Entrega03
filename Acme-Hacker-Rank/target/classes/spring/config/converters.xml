@@ -41,6 +41,14 @@
 		<bean class="converters.MiscellaneousDataToStringConverter" />
 		<bean class="converters.StringToPositionDataConverter" />
 		<bean class="converters.PositionDataToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToCompanyConverter" />
+		<bean class="converters.CompanyToStringConverter" />
+		<bean class="converters.StringToHackerConverter" />
+		<bean class="converters.HackerToStringConverter" />
 		
 		
 		

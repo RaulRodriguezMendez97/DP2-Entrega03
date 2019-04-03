@@ -49,7 +49,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="member/create.do"><spring:message code="master.page.member.register" /></a></li>
+					<li><a href="company/create.do"><spring:message code="master.page.company.register" /></a></li>
 					<li><a href="brotherhood/create.do"><spring:message code="master.page.brotherhood.register" /></a></li>
 				</ul>
 			<li><a href="company/list.do"><spring:message code="master.page.company" /></a></li>
