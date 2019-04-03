@@ -76,10 +76,14 @@ public class PositionService {
 	}
 
 	public Position save(final Position p) {
-		final Position saved = this.positionRepository.save(p);
 
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+		if (p.getId() != 0) {
+			final Position old = this.findOne(p.getId());
+			Assert.isTrue(old.getDraftMode() == 1);
+		}
 
 		if (p.getId() != 0)
 			if (p.getDraftMode() == 0)
@@ -95,6 +99,8 @@ public class PositionService {
 		Assert.isTrue(p.getSalary() >= 0.0);
 		Assert.isTrue(p.getTicker() != null && p.getTicker() != "");
 		Assert.isTrue(p.getDraftMode() == 0 || p.getDraftMode() == 1);
+
+		final Position saved = this.positionRepository.save(p);
 
 		return saved;
 	}
