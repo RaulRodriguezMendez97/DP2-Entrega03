@@ -258,6 +258,12 @@
 		<property name="ticker" value="poio-7654"/>
 		<property name="draftMode" value="1"/>
 		<property name="company" ref="company1"/>
+		<property name="problems">
+			<list>
+				<ref bean="problem1" />
+				<ref bean="problem2" />
+			</list>
+		</property>
 	
 	</bean>
 	
@@ -272,6 +278,11 @@
 		<property name="ticker" value="pdfo-7654"/>
 		<property name="draftMode" value="0"/>
 		<property name="company" ref="company1"/>
+		<property name="problems">
+			<list>
+				<ref bean="problem3" />
+			</list>
+		</property>
 	
 	</bean>
 	
@@ -286,6 +297,12 @@
 		<property name="ticker" value="phgo-7654"/>
 		<property name="draftMode" value="1"/>
 		<property name="company" ref="company2"/>
+		<property name="problems">
+			<list>
+				<ref bean="problem4" />
+				<ref bean="problem5" />
+			</list>
+		</property>
 	
 	</bean>
 	
@@ -301,8 +318,11 @@
 			</list>
 		</property>
 		<property name="draftMode" value="0"/>
-		<property name="position" ref="position1"/>
-	
+		<property name="applications">
+			<list>
+				<ref bean="application1" />
+			</list>
+		</property>	
 	</bean>
 	
 	<bean id="problem2" class="domain.Problem">
@@ -314,8 +334,12 @@
 			</list>
 		</property>
 		<property name="draftMode" value="1"/>
-		<property name="position" ref="position1"/>
-	
+		<property name="applications">
+			<list>
+			<ref bean="application2" />
+			<ref bean="application3" />
+			</list>
+		</property>		
 	</bean>
 	
 	<bean id="problem3" class="domain.Problem">
@@ -328,8 +352,11 @@
 			</list>
 		</property>
 		<property name="draftMode" value="0"/>
-		<property name="position" ref="position1"/>
-	
+		<property name="applications">
+			<list>
+			<ref bean="application4" />
+			</list>
+		</property>		
 	</bean>
 	
 	<bean id="problem4" class="domain.Problem">
@@ -342,8 +369,11 @@
 			</list>
 		</property>
 		<property name="draftMode" value="0"/>
-		<property name="position" ref="position2"/>
-	
+		<property name="applications">
+			<list>
+			<ref bean="application5" />
+			</list>
+		</property>		
 	</bean>
 	
 	<bean id="problem5" class="domain.Problem">
@@ -356,8 +386,10 @@
 			</list>
 		</property>
 		<property name="draftMode" value="0"/>
-		<property name="position" ref="position2"/>
-	
+		<property name="applications">
+			<list>
+			</list>
+		</property>		
 	</bean>
 	
 	<!-- APPLICATION -->
@@ -367,7 +399,6 @@
 		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
 		<property name="submitMoment" value="01/03/2019 23:59"/>
 		<property name="status" value="1"/>
-		<property name="problem" ref="problem5"/>
 		<property name="hacker" ref="hacker1"/>
 		<property name="curricula" ref="curricula1"/>
 	</bean>
@@ -378,7 +409,6 @@
 		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
 		<property name="submitMoment" value="01/03/2019 23:59"/>
 		<property name="status" value="1"/>
-		<property name="problem" ref="problem1"/>
 		<property name="hacker" ref="hacker1"/>
 		<property name="curricula" ref="curricula1"/>
 	</bean>
@@ -389,7 +419,6 @@
 		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
 		<property name="submitMoment" value="01/03/2019 23:59"/>
 		<property name="status" value="1"/>
-		<property name="problem" ref="problem1"/>
 		<property name="hacker" ref="hacker1"/>
 		<property name="curricula" ref="curricula1"/>
 	</bean>
@@ -400,7 +429,6 @@
 		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
 		<property name="submitMoment" value="01/03/2019 23:59"/>
 		<property name="status" value="1"/>
-		<property name="problem" ref="problem1"/>
 		<property name="hacker" ref="hacker2"/>
 		<property name="curricula" ref="curricula1"/>
 	</bean>
@@ -411,7 +439,6 @@
 		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
 		<property name="submitMoment" value="01/03/2019 23:59"/>
 		<property name="status" value="1"/>
-		<property name="problem" ref="problem1"/>
 		<property name="hacker" ref="hacker2"/>
 		<property name="curricula" ref="curricula1"/>
 	</bean>

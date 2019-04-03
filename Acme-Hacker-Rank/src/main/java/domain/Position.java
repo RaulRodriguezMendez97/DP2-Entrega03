@@ -1,13 +1,17 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -23,16 +27,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Position extends DomainEntity {
 
-	private String	title;
-	private String	description;
-	private Date	deadLine;
-	private String	requiredProfile;
-	private String	skillsRequired;
-	private String	technologiesRequired;
-	private Double	salary;
-	private String	ticker;
-	private int		draftMode;
-	private Company	company;
+	private String				title;
+	private String				description;
+	private Date				deadLine;
+	private String				requiredProfile;
+	private String				skillsRequired;
+	private String				technologiesRequired;
+	private Double				salary;
+	private String				ticker;
+	private int					draftMode;
+	private Company				company;
+	private Collection<Problem>	problems;
 
 
 	@NotNull
@@ -135,4 +140,19 @@ public class Position extends DomainEntity {
 	public void setDraftMode(final int draftMode) {
 		this.draftMode = draftMode;
 	}
+
+	@Valid
+	@ElementCollection
+	@NotNull
+	@OneToMany(cascade = {
+		CascadeType.REMOVE
+	})
+	public Collection<Problem> getProblems() {
+		return this.problems;
+	}
+
+	public void setProblems(final Collection<Problem> problems) {
+		this.problems = problems;
+	}
+
 }

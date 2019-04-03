@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Company;
 import domain.Position;
+import domain.Problem;
 
 @Service
 @Transactional
@@ -47,6 +49,7 @@ public class PositionService {
 		res.setSalary(0.0);
 		res.setTicker("");
 		res.setDraftMode(1);
+		res.setProblems(new HashSet<Problem>());
 
 		return res;
 
@@ -78,8 +81,9 @@ public class PositionService {
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
-		final Position old = this.positionRepository.findOne(p.getId());
-		Assert.isTrue(old.getDraftMode() == 1);
+		if (p.getId() != 0)
+			if (p.getDraftMode() == 0)
+				Assert.isTrue(p.getProblems().size() >= 2);
 
 		Assert.isTrue(p.getCompany().equals(a));
 		Assert.isTrue(p.getTitle() != null && p.getTitle() != "");
@@ -108,6 +112,7 @@ public class PositionService {
 			position.setCompany((Company) a);
 			position.setTicker(PositionService.generarTicker((Company) a));
 			position.setDraftMode(1);
+			position.setProblems(new HashSet<Problem>());
 			this.validator.validate(res, binding);
 
 			return res;
@@ -126,6 +131,8 @@ public class PositionService {
 			copy.setTitle(position.getTitle());
 			copy.setId(position.getId());
 			copy.setVersion(position.getVersion());
+			copy.setProblems(res.getProblems());
+
 			this.validator.validate(copy, binding);
 			return copy;
 

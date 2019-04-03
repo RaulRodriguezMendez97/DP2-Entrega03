@@ -5,9 +5,10 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -18,24 +19,13 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class Problem extends DomainEntity {
 
-	private String				title;
-	private String				statement;
-	private String				hint;
-	private Collection<String>	attachment;
-	private int					draftMode;
-	private Position			position;
+	private String					title;
+	private String					statement;
+	private String					hint;
+	private Collection<String>		attachment;
+	private int						draftMode;
+	private Collection<Application>	applications;
 
-
-	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
-	public Position getPosition() {
-		return this.position;
-	}
-
-	public void setPosition(final Position position) {
-		this.position = position;
-	}
 
 	@NotNull
 	@NotBlank
@@ -81,4 +71,19 @@ public class Problem extends DomainEntity {
 	public void setDraftMode(final int draftMode) {
 		this.draftMode = draftMode;
 	}
+
+	@Valid
+	@ElementCollection
+	@NotNull
+	@OneToMany(cascade = {
+		CascadeType.REMOVE
+	})
+	public Collection<Application> getApplications() {
+		return this.applications;
+	}
+
+	public void setApplications(final Collection<Application> applications) {
+		this.applications = applications;
+	}
+
 }

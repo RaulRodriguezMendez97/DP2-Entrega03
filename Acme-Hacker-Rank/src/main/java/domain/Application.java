@@ -24,7 +24,6 @@ public class Application extends DomainEntity {
 	private String		urlCode;
 	private Date		submitMoment;
 	private int			status;
-	private Problem		problem;
 	private Hacker		hacker;
 	private Curricula	curricula;
 
@@ -49,17 +48,6 @@ public class Application extends DomainEntity {
 
 	public void setHacker(final Hacker hacker) {
 		this.hacker = hacker;
-	}
-
-	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
-	public Problem getProblem() {
-		return this.problem;
-	}
-
-	public void setProblem(final Problem problem) {
-		this.problem = problem;
 	}
 
 	@Past
