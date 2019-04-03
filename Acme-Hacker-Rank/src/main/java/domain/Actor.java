@@ -33,7 +33,7 @@ public class Actor extends DomainEntity {
 	private String				phone;
 	private String				address;
 	private UserAccount			userAccount;
-	private CredictCard			credictCard;
+	private CreditCard			creditCard;
 
 
 	//Getters and Setters
@@ -109,12 +109,12 @@ public class Actor extends DomainEntity {
 	@Valid
 	@NotNull
 	@OneToOne(optional = false)
-	public CredictCard getCredictCard() {
-		return this.credictCard;
+	public CreditCard getCreditCard() {
+		return this.creditCard;
 	}
 
-	public void setCredictCard(final CredictCard credictCard) {
-		this.credictCard = credictCard;
+	public void setCreditCard(final CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 
 	@Valid

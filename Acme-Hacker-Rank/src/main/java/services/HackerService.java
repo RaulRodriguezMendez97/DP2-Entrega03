@@ -19,7 +19,7 @@ import org.springframework.validation.Validator;
 import repositories.HackerRepository;
 import security.Authority;
 import security.UserAccount;
-import domain.CredictCard;
+import domain.CreditCard;
 import domain.Finder;
 import domain.Hacker;
 import forms.RegistrationFormHacker;
@@ -56,7 +56,7 @@ public class HackerService {
 		res.setPhoto("");
 		res.setSurnames(new HashSet<String>());
 		res.setAddress("");
-		res.setCredictCard(new CredictCard());
+		res.setCredictCard(new CreditCard());
 
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();

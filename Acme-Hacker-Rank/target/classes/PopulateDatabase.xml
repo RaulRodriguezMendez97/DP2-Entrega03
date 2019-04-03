@@ -118,28 +118,7 @@
 		
 	</bean>
 	
-	<!-- Credict card -->
-	
-	<bean id="credictCard1" class="domain.CredictCard">
-	</bean>
-	
-	<bean id="credictCard2" class="domain.CredictCard">
-	</bean>
-	
-	<bean id="credictCard3" class="domain.CredictCard">
-	</bean>
-	
-	<bean id="credictCard4" class="domain.CredictCard">
-	</bean>
-	
-	<bean id="credictCard5" class="domain.CredictCard">
-	</bean>
-	
-	<bean id="credictCard6" class="domain.CredictCard">
-	</bean>
-	
-	<bean id="credictCard7" class="domain.CredictCard">
-	</bean>
+
 	
 	<!-- ADMINISTRATOR -->
 	
@@ -155,7 +134,7 @@
 		<property name="phone" value="654654654"/>
 		<property name="address" value="Sevilla"/>
 		<property name="userAccount" ref="userAccount1"/>
-		<property name="credictCard" ref="credictCard1"/>
+		<property name="creditCard" ref="creditCard1"/>
 	
 	</bean>
 	
@@ -174,7 +153,7 @@
 		<property name="phone" value="654654654"/>
 		<property name="address" value="Sevilla"/>
 		<property name="userAccount" ref="userAccount3"/>
-		<property name="credictCard" ref="credictCard2"/>
+		<property name="creditCard" ref="creditCard2"/>
 		<property name="nameCompany" value="Universidad de Sevilla"/>
 	
 	</bean>
@@ -191,7 +170,7 @@
 		<property name="phone" value="654654654"/>
 		<property name="address" value="Sevilla"/>
 		<property name="userAccount" ref="userAccount4"/>
-		<property name="credictCard" ref="credictCard3"/>
+		<property name="creditCard" ref="creditCard3"/>
 		<property name="nameCompany" value="Universidad de Huelva"/>
 	
 	</bean>
@@ -210,7 +189,7 @@
 		<property name="phone" value="666777888"/>
 		<property name="address" value="Sevilla"/>
 		<property name="userAccount" ref="userAccount5"/>
-		<property name="credictCard" ref="credictCard4"/>
+		<property name="creditCard" ref="creditCard4"/>
 		<property name="finder" ref="finder1"/>
 	
 	</bean>
@@ -229,7 +208,7 @@
 		<property name="phone" value="653234123"/>
 		<property name="address" value="Sevilla"/>
 		<property name="userAccount" ref="userAccount6"/>
-		<property name="credictCard" ref="credictCard5"/>
+		<property name="creditCard" ref="creditCard5"/>
 		<property name="finder" ref="finder2"/>
 	
 	
@@ -563,7 +542,54 @@
 		<property name="isCopy" value="0"/>
 	</bean>
 		
+	<!-- CreditCard -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="nombre1"></property>
+		<property name="brandName" value="VISA"></property>
+		<property name="number" value="123321"></property>
+		<property name="expirationMonth" value="3"></property>
+		<property name="expirationYear" value="2019"></property>
+		<property name="CW" value="101"></property>
+		
+	</bean>
+
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="nombre2"></property>
+		<property name="brandName" value="VISA"></property>
+		<property name="number" value="321123"></property>
+		<property name="expirationMonth" value="5"></property>
+		<property name="expirationYear" value="2020"></property>
+		<property name="CW" value="201"></property>
+		
+	</bean>
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="nombre3"></property>
+		<property name="brandName" value="VISA"></property>
+		<property name="number" value="321124"></property>
+		<property name="expirationMonth" value="6"></property>
+		<property name="expirationYear" value="2020"></property>
+		<property name="CW" value="202"></property>
+
+	</bean>
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="nombre4"></property>
+		<property name="brandName" value="VISA"></property>
+		<property name="number" value="321126"></property>
+		<property name="expirationMonth" value="2"></property>
+		<property name="expirationYear" value="2022"></property>
+		<property name="CW" value="203"></property>
 	
+	</bean>
+	
+		<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="nombre5"></property>
+		<property name="brandName" value="VISA"></property>
+		<property name="number" value="321125"></property>
+		<property name="expirationMonth" value="4"></property>
+		<property name="expirationYear" value="2030"></property>
+		<property name="CW" value="205"></property>
+	
+	</bean>
 	
 	
 </beans>

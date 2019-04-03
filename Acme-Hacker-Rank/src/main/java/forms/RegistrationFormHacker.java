@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 import security.Authority;
 import security.UserAccount;
 import domain.Actor;
-import domain.CredictCard;
+import domain.CreditCard;
 import domain.Finder;
 
 public class RegistrationFormHacker extends Actor {
@@ -83,7 +83,7 @@ public class RegistrationFormHacker extends Actor {
 		registrationForm.setPhoto("");
 		registrationForm.setSurnames(new HashSet<String>());
 		registrationForm.setAddress("");
-		registrationForm.setCredictCard(new CredictCard());
+		registrationForm.setCredictCard(new CreditCard());
 		registrationForm.setPassword("");
 
 		//PREGUNTAR
