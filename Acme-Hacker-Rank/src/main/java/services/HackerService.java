@@ -56,7 +56,7 @@ public class HackerService {
 		res.setPhoto("");
 		res.setSurnames(new HashSet<String>());
 		res.setAddress("");
-		res.setCredictCard(new CreditCard());
+		res.setCreditCard(new CreditCard());
 
 		//PREGUNTAR
 		final UserAccount user = new UserAccount();
@@ -87,7 +87,7 @@ public class HackerService {
 		Assert.isTrue(r.getFinder() != null, "Hacker.save -> Finder  invalid");
 		Assert.isTrue(r != null && r.getName() != null && r.getSurnames() != null && r.getName() != "" && r.getUserAccount() != null && r.getEmail() != null && r.getEmail() != "", "Company.save -> Name, Surname or email invalid");
 		Assert.isTrue(r.getVatNumber() != null, "Companny.save -> VatNumber  invalid");
-		Assert.isTrue(r.getCredictCard() != null, "Companny.save -> VatNumber  invalid");
+		Assert.isTrue(r.getCreditCard() != null, "Companny.save -> VatNumber  invalid");
 
 		final String regexEmail1 = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";
 		final Pattern patternEmail1 = Pattern.compile(regexEmail1);

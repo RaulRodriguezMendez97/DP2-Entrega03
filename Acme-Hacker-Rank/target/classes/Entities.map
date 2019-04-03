@@ -1,6 +1,8 @@
 #./src/main/resources/Entities.map
-#Wed Apr 03 19:07:52 CEST 2019
+#Wed Apr 03 19:31:57 CEST 2019
+creditCard2=544
 application5=566
+creditCard1=543
 application4=565
 problem5=560
 application3=564
@@ -15,11 +17,6 @@ personalData3=529
 problem1=556
 personalData2=528
 personalData1=527
-credictCard5=547
-credictCard4=546
-credictCard3=545
-credictCard2=544
-credictCard1=543
 miscellaneousData4=534
 miscellaneousData3=533
 miscellaneousData2=532
@@ -51,3 +48,6 @@ position2=554
 position1=553
 finder2=526
 finder1=525
+creditCard5=547
+creditCard4=546
+creditCard3=545

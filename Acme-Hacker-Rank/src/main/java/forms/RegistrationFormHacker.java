@@ -83,7 +83,7 @@ public class RegistrationFormHacker extends Actor {
 		registrationForm.setPhoto("");
 		registrationForm.setSurnames(new HashSet<String>());
 		registrationForm.setAddress("");
-		registrationForm.setCredictCard(new CreditCard());
+		registrationForm.setCreditCard(new CreditCard());
 		registrationForm.setPassword("");
 
 		//PREGUNTAR
