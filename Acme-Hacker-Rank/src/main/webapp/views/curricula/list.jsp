@@ -36,17 +36,17 @@ requestURI="curricula/hacker/list.do?idHacker=${row.hacker.id}" >
 
 
 <display:column titleKey="curricula.educationData"> 
-<a href="educationData/hacker/show.do?curriculaId=${row.id}"><spring:message code="curricula.educationData.list" /></a>
+<a href="educationData/hacker/list.do?curriculaId=${row.id}"><spring:message code="curricula.educationData.list" /></a>
 </display:column>
 
 
 <display:column titleKey="curricula.positionData"> 
-<a href="positionData/hacker/show.do?curriculaId=${row.id}"><spring:message code="curricula.positionData.list" /></a>
+<a href="positionData/hacker/list.do?curriculaId=${row.id}"><spring:message code="curricula.positionData.list" /></a>
 </display:column>
 
 
 <display:column titleKey="curricula.miscellaneousData"> 
-<a href="miscellaneousData/hacker/show.do?curriculaId=${row.id}"><spring:message code="curricula.miscellaneousData.list" /></a>
+<a href="miscellaneousData/hacker/list.do?curriculaId=${row.id}"><spring:message code="curricula.miscellaneousData.list" /></a>
 </display:column>
 
 </display:table>

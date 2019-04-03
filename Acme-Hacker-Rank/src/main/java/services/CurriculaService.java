@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,9 +35,9 @@ public class CurriculaService {
 		final Curricula res = new Curricula();
 		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
 		res.setHacker(this.hackerService.hackerUserAccount(user.getId()));
-		res.setEducationData(new EducationData());
-		res.setMiscellaneousData(new MiscellaneousData());
-		res.setPositionData(new PositionData());
+		res.setEducationData(new HashSet<EducationData>());
+		res.setMiscellaneousData(new HashSet<MiscellaneousData>());
+		res.setPositionData(new HashSet<PositionData>());
 		res.setPersonalData(new PersonalData());
 		res.setIsCopy(0);
 		return res;

@@ -20,14 +20,23 @@
 
 
 <security:authorize access="hasRole('HACKER')">
+<display:table pagesize="5" name="miscellaneousesData" id="row"
+requestURI="miscellaneousData/hacker/list.do?idCurricula=${curricula.id}" >
 
-<strong><spring:message code="educationData.degree"/></strong>: <jstl:out value=" ${educationData.degree}"></jstl:out><br>
-<strong><spring:message code="educationData.institution"/></strong>: <jstl:out value=" ${educationData.institution}"></jstl:out><br>
-<strong><spring:message code="educationData.mark"/></strong>: <jstl:out value=" ${educationData.mark}"></jstl:out><br>
-<strong><spring:message code="educationData.startDate"/></strong>: <jstl:out value=" ${educationData.startDate}"></jstl:out><br>
-<strong><spring:message code="educationData.endDate"/></strong>: <jstl:out value=" ${educationData.endDate}"></jstl:out><br>
+<display:column>
+	<a href="miscellaneousData/hacker/edit.do?miscellaneousDataId=${row.id}&curriculaId=${curricula.id}" ><spring:message code="edit" /></a>
+</display:column>
 
-<acme:cancel url="curricula/hacker/list.do" code="educationData.cancel"/>
+<display:column titleKey="miscellaneousData.text">
+<jstl:out value="${row.text}"></jstl:out>
+</display:column>
+<display:column titleKey="miscellaneousData.attachment">
+<jstl:out value="${row.attachment}"></jstl:out>
+</display:column>
+
+</display:table>
+<a href="miscellaneousData/hacker/create.do?curriculaId=${curricula.id}" ><spring:message code="create" /></a>
+<acme:cancel url="curricula/hacker/list.do" code="cancel"/>
 
 </security:authorize>
 

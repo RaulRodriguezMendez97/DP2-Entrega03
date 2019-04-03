@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,16 +25,15 @@ public class PositionDataHackerController extends AbstractController {
 	private PositionDataService	positionDataService;
 
 
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int curriculaId) {
 		ModelAndView result;
 		try {
 			final Curricula curricula = this.curriculaService.findOne(curriculaId);
-			//final PersonalData personalData = this.personalData.findOne(curricula.getPersonalData().getId());
-			final PositionData positionData = curricula.getPositionData();
-			result = new ModelAndView("positionData/show");
-			result.addObject("positionData", positionData);
-			//result.addObject("curriculaId", curriculaId);
+			final Collection<PositionData> positionData = curricula.getPositionData();
+			result = new ModelAndView("positionData/list");
+			result.addObject("positionsData", positionData);
+			result.addObject("curricula", curricula);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../curricula/hacker/list.do");
 		}

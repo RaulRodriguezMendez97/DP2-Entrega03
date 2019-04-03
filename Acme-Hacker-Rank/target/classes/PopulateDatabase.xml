@@ -545,9 +545,21 @@
 	<bean id="curricula1" class="domain.Curricula">
 		<property name="hacker" ref="hacker1"/>
 		<property name="personalData" ref="personalData1"/>
-		<property name="positionData" ref="positionData1"/>
-		<property name="educationData" ref="educationData1"/>
-		<property name="miscellaneousData" ref="miscellaneousData1"/>
+		<property name="positionData">
+			<list>
+				<ref bean="positionData1" />
+			</list>
+		</property>
+		<property name="educationData">
+			<list>
+				<ref bean="educationData1" />
+			</list>
+		</property>
+		<property name="miscellaneousData" >
+			<list>
+				<ref bean="miscellaneousData1" />
+			</list>
+		</property>
 		<property name="isCopy" value="0"/>
 	</bean>
 		
