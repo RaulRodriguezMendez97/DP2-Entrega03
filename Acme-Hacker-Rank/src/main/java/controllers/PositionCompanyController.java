@@ -116,7 +116,7 @@ public class PositionCompanyController extends AbstractController {
 		if (!(new Date().before(position.getDeadLine())))
 			binding.rejectValue("deadLine", "FutureBinding");
 
-		if (position.getId() != 0)
+		if (position.getId() != 0 && position.getDraftMode() == 0)
 			if (!(position.getProblems().size() >= 2))
 				binding.rejectValue("title", "ProblemSize");
 
