@@ -26,12 +26,6 @@ requestURI="finder/hacker/show.do" >
 <display:column property="deadLine" titleKey="position.deadline" />
 <display:column property="salary" titleKey="position.salary" />
 
-
-<display:column>
-<jstl:if test="${row.draftMode eq 1 }">
-	<a href="position/company/edit.do?positionId=${row.id}"><spring:message code="position.edit" /></a>
-</jstl:if>
-</display:column>
 </display:table>
 
 	<input type="button" name="create" value="<spring:message code="finder.back" />"

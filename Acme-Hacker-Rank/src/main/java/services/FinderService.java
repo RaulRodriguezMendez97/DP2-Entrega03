@@ -74,8 +74,18 @@ public class FinderService {
 		copy.setKeyWord(finder.getKeyWord());
 		copy.setDeadLine(finder.getDeadLine());
 		copy.setMaxSalary(finder.getMaxSalary());
-		copy.setPositions(this.finderRepository.filterPositions(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), finder.getDeadLine()));
 		copy.setMinSalary(finder.getMinSalary());
+		if (finder.getMinSalary() == null)
+			finder.setMinSalary(0.);
+		if (finder.getMaxSalary() == null)
+			finder.setMaxSalary(Double.MAX_VALUE);
+		String fecha;
+		if (finder.getDeadLine() == null)
+			fecha = "";
+		else
+			fecha = finder.getDeadLine().toString();
+		final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
+		copy.setPositions(c);
 		this.validator.validate(copy, binding);
 		return copy;
 
