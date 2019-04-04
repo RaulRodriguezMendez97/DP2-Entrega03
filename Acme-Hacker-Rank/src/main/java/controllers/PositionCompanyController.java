@@ -150,4 +150,42 @@ public class PositionCompanyController extends AbstractController {
 		return result;
 
 	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Position p, final BindingResult binding) {
+		ModelAndView result;
+		final Position position;
+
+		position = this.positionService.reconstruct(p, binding);
+
+		//try {
+
+		if (!binding.hasErrors()) {
+			this.positionService.delete(position);
+			result = new ModelAndView("redirect:list.do");
+		} else {
+			result = new ModelAndView("position/edit");
+			result.addObject("position", position);
+		}
+		//		} catch (final Exception e) {
+		//
+		//			final UserAccount user = LoginService.getPrincipal();
+		//			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		//
+		//			if (position.getCompany().equals(a)) {
+		//				if (position.getDraftMode() == 1) {
+		//
+		//					result = new ModelAndView("position/edit");
+		//					result.addObject("position", position);
+		//					result.addObject("exception", e);
+		//				} else
+		//					result = new ModelAndView("redirect:list.do");
+		//
+		//			} else
+		//				result = new ModelAndView("redirect:../../");
+		//		}
+
+		return result;
+
+	}
 }

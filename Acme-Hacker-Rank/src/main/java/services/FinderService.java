@@ -4,6 +4,7 @@ package services;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,5 +131,9 @@ public class FinderService {
 
 		System.out.println(cadena);
 		return cadena;
+	}
+
+	public List<Finder> getFinderByPosition(final Integer id) {
+		return this.finderRepository.getFinderByPosition(id);
 	}
 }

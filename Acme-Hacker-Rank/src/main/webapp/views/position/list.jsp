@@ -36,6 +36,9 @@ requestURI="position/company/list.do" >
 	<a href="position/company/edit.do?positionId=${row.id}"><spring:message code="position.edit" /></a>
 </jstl:if>
 </display:column>
+<display:column>
+	<a href="problem/company/list.do?positionId=${row.id}"><spring:message code="position.problem" /></a>
+</display:column>
 </display:table>
 
 	<input type="button" name="create" value="<spring:message code="position.create" />"

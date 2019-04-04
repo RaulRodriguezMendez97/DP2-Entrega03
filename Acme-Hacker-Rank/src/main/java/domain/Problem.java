@@ -38,6 +38,7 @@ public class Problem extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getStatement() {
 		return this.statement;
 	}

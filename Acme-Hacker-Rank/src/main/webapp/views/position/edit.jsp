@@ -51,6 +51,9 @@
 <input type="submit" name="save" 
 	value="<spring:message code="position.save" />" />
 	
+<input type="submit" name="delete" 
+	value="<spring:message code="position.delete" />" />
+	
 <input type="button" name="cancel" value="<spring:message code="position.cancel" />"
 			onclick="javascript: relativeRedir('position/company/list.do');" />
 </form:form>

@@ -13,11 +13,13 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.FinderRepository;
 import repositories.PositionRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Company;
+import domain.Finder;
 import domain.Position;
 import domain.Problem;
 
@@ -33,6 +35,12 @@ public class PositionService {
 
 	@Autowired
 	private Validator			validator;
+
+	@Autowired
+	private FinderService		finderService;
+
+	@Autowired
+	private FinderRepository	finderRepository;
 
 
 	public Position create() {
@@ -144,6 +152,21 @@ public class PositionService {
 
 		}
 
+	}
+
+	public void delete(final Position p) {
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		Assert.isTrue(p.getCompany().equals(a));
+		Assert.isTrue(p.getDraftMode() == 1);
+
+		final List<Finder> finders = this.finderService.getFinderByPosition(p.getId());
+		for (int i = 0; i < finders.size(); i++) {
+			finders.get(i).getPositions().remove(p);
+			this.finderRepository.save(finders.get(i));
+		}
+
+		this.positionRepository.delete(p);
 	}
 
 	//TICKER
