@@ -264,6 +264,7 @@
 				<ref bean="problem2" />
 			</list>
 		</property>
+		<property name="isCancelled" value="0" />
 	
 	</bean>
 	
@@ -283,6 +284,7 @@
 				<ref bean="problem3" />
 			</list>
 		</property>
+		<property name="isCancelled" value="0"/>
 	
 	</bean>
 	
@@ -303,6 +305,7 @@
 				<ref bean="problem5" />
 			</list>
 		</property>
+		<property name="isCancelled" value="0"/>
 	
 	</bean>
 	

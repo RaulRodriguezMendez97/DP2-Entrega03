@@ -36,6 +36,7 @@ public class Position extends DomainEntity {
 	private Double				salary;
 	private String				ticker;
 	private int					draftMode;
+	private int					isCancelled;
 	private Company				company;
 	private Collection<Problem>	problems;
 
@@ -153,6 +154,15 @@ public class Position extends DomainEntity {
 
 	public void setProblems(final Collection<Problem> problems) {
 		this.problems = problems;
+	}
+
+	@Range(min = 0, max = 1)
+	public int getIsCancelled() {
+		return this.isCancelled;
+	}
+
+	public void setIsCancelled(final int isCancelled) {
+		this.isCancelled = isCancelled;
 	}
 
 }

@@ -57,6 +57,7 @@ public class PositionService {
 		res.setSalary(0.0);
 		res.setTicker("");
 		res.setDraftMode(1);
+		res.setIsCancelled(0);
 		res.setProblems(new HashSet<Problem>());
 
 		return res;
@@ -107,6 +108,7 @@ public class PositionService {
 		Assert.isTrue(p.getSalary() >= 0.0);
 		Assert.isTrue(p.getTicker() != null && p.getTicker() != "");
 		Assert.isTrue(p.getDraftMode() == 0 || p.getDraftMode() == 1);
+		Assert.isTrue(p.getIsCancelled() == 0);
 
 		final Position saved = this.positionRepository.save(p);
 
@@ -126,6 +128,7 @@ public class PositionService {
 			position.setCompany((Company) a);
 			position.setTicker(PositionService.generarTicker((Company) a));
 			position.setDraftMode(1);
+			position.setIsCancelled(0);
 			position.setProblems(new HashSet<Problem>());
 			this.validator.validate(res, binding);
 
@@ -146,6 +149,7 @@ public class PositionService {
 			copy.setId(position.getId());
 			copy.setVersion(position.getVersion());
 			copy.setProblems(res.getProblems());
+			copy.setIsCancelled(res.getIsCancelled());
 
 			this.validator.validate(copy, binding);
 			return copy;
@@ -167,6 +171,14 @@ public class PositionService {
 		}
 
 		this.positionRepository.delete(p);
+	}
+
+	public void cancel(final Position p) {
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		Assert.isTrue(p.getCompany().equals(a));
+		Assert.isTrue(p.getDraftMode() == 0);
+		p.setIsCancelled(1);
 	}
 
 	//TICKER

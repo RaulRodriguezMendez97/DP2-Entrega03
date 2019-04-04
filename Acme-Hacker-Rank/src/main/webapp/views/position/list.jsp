@@ -35,6 +35,14 @@ requestURI="position/company/list.do" >
 <jstl:if test="${row.draftMode eq 1 }">
 	<a href="position/company/edit.do?positionId=${row.id}"><spring:message code="position.edit" /></a>
 </jstl:if>
+
+<jstl:if test="${(row.isCancelled eq 0) and (row.draftMode eq 0 )}">
+	<a href="position/company/cancel.do?positionId=${row.id}"><spring:message code="position.canceled" /></a>
+</jstl:if>
+
+<jstl:if test="${(row.isCancelled eq 1) and (row.draftMode eq 0 )}">
+	Cancel
+</jstl:if>
 </display:column>
 <display:column>
 	<a href="problem/company/list.do?positionId=${row.id}"><spring:message code="position.problem" /></a>
@@ -62,8 +70,5 @@ requestURI="position/list.do" >
 <display:column property="salary" titleKey="position.salary" />
 
 </display:table>
-
-	<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
-			onclick="javascript: relativeRedir('company/list.do');" />
 
 </security:authorize>

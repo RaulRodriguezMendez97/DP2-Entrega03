@@ -158,32 +158,51 @@ public class PositionCompanyController extends AbstractController {
 
 		position = this.positionService.reconstruct(p, binding);
 
-		//try {
+		try {
 
-		if (!binding.hasErrors()) {
-			this.positionService.delete(position);
-			result = new ModelAndView("redirect:list.do");
-		} else {
-			result = new ModelAndView("position/edit");
-			result.addObject("position", position);
+			if (!binding.hasErrors()) {
+				this.positionService.delete(position);
+				result = new ModelAndView("redirect:list.do");
+			} else {
+				result = new ModelAndView("position/edit");
+				result.addObject("position", position);
+			}
+		} catch (final Exception e) {
+
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+			if (position.getCompany().equals(a)) {
+				if (position.getDraftMode() == 1) {
+
+					result = new ModelAndView("position/edit");
+					result.addObject("position", position);
+					result.addObject("exception", e);
+				} else
+					result = new ModelAndView("redirect:list.do");
+
+			} else
+				result = new ModelAndView("redirect:../../");
 		}
-		//		} catch (final Exception e) {
-		//
-		//			final UserAccount user = LoginService.getPrincipal();
-		//			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-		//
-		//			if (position.getCompany().equals(a)) {
-		//				if (position.getDraftMode() == 1) {
-		//
-		//					result = new ModelAndView("position/edit");
-		//					result.addObject("position", position);
-		//					result.addObject("exception", e);
-		//				} else
-		//					result = new ModelAndView("redirect:list.do");
-		//
-		//			} else
-		//				result = new ModelAndView("redirect:../../");
-		//		}
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/cancel", method = RequestMethod.GET)
+	public ModelAndView cancel(@RequestParam final Integer positionId) {
+		ModelAndView result;
+
+		try {
+			final Position position;
+
+			position = this.positionService.findOne(positionId);
+
+			this.positionService.cancel(position);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
 
 		return result;
 
