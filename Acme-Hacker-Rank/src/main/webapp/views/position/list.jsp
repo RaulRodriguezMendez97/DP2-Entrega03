@@ -15,6 +15,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('COMPANY')">
 
@@ -70,5 +71,8 @@ requestURI="position/list.do" >
 <display:column property="salary" titleKey="position.salary" />
 
 </display:table>
+
+<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
+			onclick="javascript: relativeRedir('company/list.do');" />
 
 </security:authorize>

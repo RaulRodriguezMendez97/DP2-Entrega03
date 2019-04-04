@@ -81,6 +81,7 @@
 		<security:intercept-url pattern="/position/list.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/company/list.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/position/listAll.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/position/search.do" access="isAnonymous()" />
 		 
 		 
 		<security:intercept-url pattern="/member/create.do" access="isAnonymous()" />

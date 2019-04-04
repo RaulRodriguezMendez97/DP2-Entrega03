@@ -129,6 +129,9 @@ public class PositionCompanyController extends AbstractController {
 				result = new ModelAndView("position/edit");
 				result.addObject("position", position);
 			}
+			//		} catch (final ValidationException opps) {
+			//			result = new ModelAndView("position/edit");
+			//			result.addObject("position", position);
 		} catch (final Exception e) {
 
 			final UserAccount user = LoginService.getPrincipal();
@@ -150,7 +153,6 @@ public class PositionCompanyController extends AbstractController {
 		return result;
 
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Position p, final BindingResult binding) {
 		ModelAndView result;

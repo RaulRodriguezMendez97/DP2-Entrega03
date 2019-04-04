@@ -152,6 +152,8 @@ public class PositionService {
 			copy.setIsCancelled(res.getIsCancelled());
 
 			this.validator.validate(copy, binding);
+			//			if (binding.hasErrors())
+			//				throw new ValidationException();
 			return copy;
 
 		}
@@ -213,5 +215,9 @@ public class PositionService {
 
 	public String getPositionWithWorstSalary() {
 		return this.positionRepository.getPositionWithWorstSalary();
+	}
+
+	public Collection<Position> getPositionsByFinder(final String word) {
+		return this.positionRepository.getPositionByFinder(word);
 	}
 }
