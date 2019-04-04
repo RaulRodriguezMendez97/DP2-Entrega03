@@ -21,7 +21,7 @@ import security.Authority;
 import security.UserAccount;
 import domain.Company;
 import domain.CreditCard;
-import forms.RegistrationFormCompany;
+import forms.RegistrationFormCompanyAndCreditCard;
 
 @Service
 @Transactional
@@ -125,7 +125,7 @@ public class CompanyService {
 		return this.companyRepository.companyUserAccount(id);
 	}
 
-	public Company reconstruct(final RegistrationFormCompany registrationForm, final BindingResult binding) {
+	public Company reconstruct(final RegistrationFormCompanyAndCreditCard registrationForm, final BindingResult binding) {
 		Company res = new Company();
 
 		if (registrationForm.getId() == 0) {
@@ -138,6 +138,7 @@ public class CompanyService {
 			res.setPhone(registrationForm.getPhone());
 			res.setPhoto(registrationForm.getPhoto());
 			res.setSurnames(registrationForm.getSurnames());
+			res.setCreditCard(registrationForm.getCreditCard());
 			final Authority ad = new Authority();
 			final UserAccount user = new UserAccount();
 			user.setAuthorities(new HashSet<Authority>());
@@ -177,6 +178,7 @@ public class CompanyService {
 			p.setPhoto(registrationForm.getPhoto());
 			p.setSurnames(registrationForm.getSurnames());
 			p.setNameCompany(registrationForm.getNameCompany());
+			p.setCreditCard(registrationForm.getCreditCard());
 
 			if (p.getPhone().length() <= 5)
 				p.setPhone("");

@@ -8,9 +8,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CreditCardRepository;
 import domain.CreditCard;
+import forms.RegistrationFormCompanyAndCreditCard;
 
 @Service
 @Transactional
@@ -19,9 +22,15 @@ public class CreditCardService {
 	@Autowired
 	private CreditCardRepository	creditCardRepository;
 
+	@Autowired
+	private Validator				validator;
+
 
 	public Collection<CreditCard> findAll() {
 		return this.creditCardRepository.findAll();
+	}
+	public CreditCard findOne(final Integer creditCardId) {
+		return this.creditCardRepository.findOne(creditCardId);
 	}
 	//Metodo create
 	public CreditCard create() {
@@ -45,5 +54,40 @@ public class CreditCardService {
 
 	public Collection<Integer> getAllNumbers() {
 		return this.creditCardRepository.getAllNumbercreditCards();
+	}
+
+	public CreditCard reconstruct(final RegistrationFormCompanyAndCreditCard registrationForm, final BindingResult binding) {
+		CreditCard res = new CreditCard();
+
+		if (registrationForm.getId() == 0) {
+			res.setId(registrationForm.getId());
+			res.setVersion(registrationForm.getVersion());
+			res.setBrandName(registrationForm.getBrandName());
+			res.setHolderName(registrationForm.getHolderName());
+			res.setNumber(registrationForm.getNumber());
+			res.setExpirationMonth(registrationForm.getExpirationMonth());
+			res.setExpirationYear(registrationForm.getExpirationYear());
+			res.setCW(registrationForm.getCW());
+
+			this.validator.validate(res, binding);
+
+		} else {
+
+			res = this.creditCardRepository.findOne(registrationForm.getId());
+			final CreditCard p = new CreditCard();
+			p.setId(res.getId());
+			p.setVersion(res.getVersion());
+			p.setBrandName(registrationForm.getBrandName());
+			p.setHolderName(registrationForm.getHolderName());
+			p.setNumber(registrationForm.getNumber());
+			p.setExpirationMonth(registrationForm.getExpirationMonth());
+			p.setExpirationYear(registrationForm.getExpirationYear());
+			p.setCW(registrationForm.getCW());
+
+			this.validator.validate(p, binding);
+			res = p;
+
+		}
+		return res;
 	}
 }

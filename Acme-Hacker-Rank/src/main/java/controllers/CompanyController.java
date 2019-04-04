@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CompanyService;
+import services.CreditCardService;
 import services.CustomizableSystemService;
 import domain.Company;
-import forms.RegistrationFormCompany;
+import domain.CreditCard;
+import forms.RegistrationFormCompanyAndCreditCard;
 
 @Controller
 @RequestMapping("/company")
@@ -23,6 +25,8 @@ public class CompanyController extends AbstractController {
 
 	@Autowired
 	private CompanyService				companyService;
+	@Autowired
+	private CreditCardService			creditCardService;
 	@Autowired
 	private CustomizableSystemService	customizableService;
 
@@ -44,9 +48,10 @@ public class CompanyController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView createForm() {
 		ModelAndView result;
-		RegistrationFormCompany registrationForm = new RegistrationFormCompany();
+		RegistrationFormCompanyAndCreditCard registrationForm = new RegistrationFormCompanyAndCreditCard();
 
-		registrationForm = registrationForm.createToCompany();
+		registrationForm = registrationForm.createToCompanyAndCreditCard();
+
 		final String telephoneCode = this.customizableService.getTelephoneCode();
 		registrationForm.setPhone(telephoneCode + " ");
 
@@ -57,14 +62,18 @@ public class CompanyController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("registrationForm") final RegistrationFormCompany registrationForm, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("registrationForm") final RegistrationFormCompanyAndCreditCard registrationForm, final BindingResult binding) {
 		ModelAndView result;
 		Company company = null;
+		CreditCard creditcard = null;
 
 		try {
-
+			creditcard = this.creditCardService.reconstruct(registrationForm, binding);
+			registrationForm.setCreditCard(creditcard);
 			company = this.companyService.reconstruct(registrationForm, binding);
 			if (!binding.hasErrors() && registrationForm.getUserAccount().getPassword().equals(registrationForm.getPassword())) {
+				final CreditCard creditCardSave = this.creditCardService.save(creditcard);
+				company.setCreditCard(creditCardSave);
 				this.companyService.save(company);
 				result = new ModelAndView("redirect:/");
 			} else {
@@ -81,5 +90,4 @@ public class CompanyController extends AbstractController {
 
 		return result;
 	}
-
 }
