@@ -70,10 +70,10 @@ public class EducationDataService {
 		final Actor a = this.actorS.getActorByUserAccount(user.getId());
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
 		Assert.isTrue(curricula.getHacker() == a);
-		//Assert.isTrue(history.getLinkRecords().contains(linkRecord));
-		//history.getLinkRecords().remove(linkRecord);
+		Assert.isTrue(curricula.getEducationData().contains(educationData));
+		curricula.getEducationData().remove(educationData);
 		this.educationDataRepository.delete(educationData);
-		//this.historyService.save(history);
+		this.curriculaService.save(curricula);
 	}
 
 }

@@ -27,7 +27,8 @@
 <strong><spring:message code="personalData.githubProfile"/></strong>: <jstl:out value=" ${personalData.githubProfile}"></jstl:out><br>
 <strong><spring:message code="personalData.linkedlnProfile"/></strong>: <jstl:out value=" ${personalData.linkedlnProfile}"></jstl:out><br>
 
-<acme:cancel url="curricula/hacker/list.do" code="personalData.cancel"/>
+<a href="personalData/hacker/delete.do?personalDataId=${personalData.id}"><spring:message code="delete" /></a>
+<acme:cancel url="curricula/hacker/list.do" code="cancel"/>
 
 </security:authorize>
 

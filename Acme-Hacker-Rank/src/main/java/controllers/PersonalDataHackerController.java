@@ -1,8 +1,11 @@
 
 package controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,4 +41,61 @@ public class PersonalDataHackerController extends AbstractController {
 		}
 		return result;
 	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		final ModelAndView result;
+		final PersonalData personalData = this.personalData.create();
+		result = new ModelAndView("personalData/edit");
+		result.addObject("personalData", personalData);
+		return result;
+	}
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int personalDataId) {
+		ModelAndView result;
+		try {
+			final PersonalData personalData = this.personalData.findOne(personalDataId);
+			result = new ModelAndView("personalData/edit");
+			result.addObject("personalData", personalData);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../curricula/hacker/list.do");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final PersonalData personalData, final BindingResult binding) {
+		ModelAndView result;
+		try {
+			if (binding.hasErrors()) {
+				result = new ModelAndView("personalData/edit");
+				result.addObject("personalData", personalData);
+			} else {
+				this.personalData.save(personalData);
+				result = new ModelAndView("redirect:../../curricula/hacker/list.do");
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("personalData/edit");
+			result.addObject("personalData", personalData);
+			result.addObject("exception", "e");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int personalDataId) {
+		ModelAndView result;
+		try {
+			final PersonalData personalData = this.personalData.findOne(personalDataId);
+			this.personalData.delete(personalData);
+			result = new ModelAndView("redirect:../../curricula/hacker/list.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../curricula/hacker/list.do");
+			result.addObject("exception", e);
+			//			final Collection<InceptionRecord> allMyInceptionRecord = this.inceptionRecordService.getAllMyInceptionRecords();
+			//			result.addObject("inceptionRecords", allMyInceptionRecord);
+		}
+		return result;
+	}
+
 }

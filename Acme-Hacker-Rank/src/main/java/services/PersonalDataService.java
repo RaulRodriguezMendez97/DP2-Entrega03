@@ -15,6 +15,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Curricula;
+import domain.Hacker;
 import domain.PersonalData;
 
 @Service
@@ -24,11 +25,13 @@ public class PersonalDataService {
 	@Autowired
 	private CustomizableSystemService	customizableService;
 	@Autowired
-	private PersonalDataRepository		profileDataRepository;
+	private PersonalDataRepository		personalDataRepository;
 	@Autowired
 	private ActorService				actorS;
 	@Autowired
 	private CurriculaService			curriculaService;
+	@Autowired
+	HackerService						hackerService;
 
 
 	public PersonalData create() {
@@ -43,11 +46,11 @@ public class PersonalDataService {
 	}
 
 	public Collection<PersonalData> findAll() {
-		return this.profileDataRepository.findAll();
+		return this.personalDataRepository.findAll();
 	}
 
-	public PersonalData findOne(final Integer profileDataId) {
-		final PersonalData profileData = this.profileDataRepository.findOne(profileDataId);
+	public PersonalData findOne(final Integer personalDataId) {
+		final PersonalData profileData = this.personalDataRepository.findOne(personalDataId);
 		final Curricula curricula = this.curriculaService.getCurriculaByProfileData(profileData.getId());
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorS.getActorByUserAccount(user.getId());
@@ -56,34 +59,28 @@ public class PersonalDataService {
 		return profileData;
 	}
 
-	public PersonalData save(final PersonalData profileData) {
-		final Curricula curricula = this.curriculaService.getCurriculaByProfileData(profileData.getId());
-		final UserAccount user = LoginService.getPrincipal();
-		final Actor a = this.actorS.getActorByUserAccount(user.getId());
-		if (profileData.getId() != 0)
-			Assert.isTrue(curricula.getHacker() == a);
-
-		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
-		Assert.isTrue(profileData != null);
-		if (a.getPhone() != "" || a.getPhone() != null) {
+	public PersonalData save(final PersonalData personalData) {
+		final PersonalData personalDataSave;
+		final Hacker h = this.hackerService.hackerUserAccount(LoginService.getPrincipal().getId());
+		if (h.getPhone() != "" || h.getPhone() != null) {
 			final String regexTelefono = "^\\+[1-9][0-9]{0,2}\\ \\([1-9][0-9]{0,2}\\)\\ [0-9]{4,}$|^\\+[1-9][0-9]{0,2}\\ [0-9]{4,}$|^[0-9]{4,}$";
 			final Pattern patternTelefono = Pattern.compile(regexTelefono);
-			final Matcher matcherTelefono = patternTelefono.matcher(a.getPhone());
+			final Matcher matcherTelefono = patternTelefono.matcher(h.getPhone());
 			Assert.isTrue(matcherTelefono.find() == true, "ProfileDataService.save -> Telefono no valido");
 		}
-		return this.profileDataRepository.save(profileData);
+		personalDataSave = this.personalDataRepository.save(personalData);
+		if (personalData.getId() == 0) {
+			final Curricula curricula = this.curriculaService.create();
+			curricula.setHacker(h);
+			curricula.setPersonalData(personalDataSave);
+			this.curriculaService.save(curricula);
+		}
+		return personalDataSave;
 	}
+	public void delete(final PersonalData personalData) {
+		final Curricula curricula = this.curriculaService.getCurriculaByProfileData(personalData.getId());
+		this.curriculaService.delete(curricula);
 
-	public void delete(final PersonalData profileData, final int curriculaId) {
-		final Curricula curricula = this.curriculaService.findOne(curriculaId);
-		final UserAccount user = this.actorS.getActorLogged().getUserAccount();
-		final Actor a = this.actorS.getActorByUserAccount(user.getId());
-		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
-		Assert.isTrue(curricula.getHacker() == a);
-		//Assert.isTrue(history.getLinkRecords().contains(linkRecord));
-		//history.getLinkRecords().remove(linkRecord);
-		this.profileDataRepository.delete(profileData);
-		//this.historyService.save(history);
 	}
 
 }

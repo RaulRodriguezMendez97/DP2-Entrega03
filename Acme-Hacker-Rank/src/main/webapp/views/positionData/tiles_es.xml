@@ -20,6 +20,10 @@
 		<put-attribute name="title" value="Datos posicionales" />
 		<put-attribute name="body" value="/views/positionData/list.jsp" />
 	</definition>
+	<definition name="positionData/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar datos posicionales" />
+		<put-attribute name="body" value="/views/positionData/edit.jsp" />
+	</definition>
 
 	
 </tiles-definitions>
