@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CustomizableSystemService;
 import services.FinderService;
 import domain.Finder;
 
@@ -18,7 +19,9 @@ import domain.Finder;
 public class FinderHackerController extends AbstractController {
 
 	@Autowired
-	private FinderService	finderService;
+	private FinderService				finderService;
+	@Autowired
+	private CustomizableSystemService	customizableSystemService;
 
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -28,6 +31,7 @@ public class FinderHackerController extends AbstractController {
 
 		result = new ModelAndView("finder/show");
 		result.addObject("positions", finder.getPositions());
+		result.addObject("ñapa", this.customizableSystemService.getMaxResults());
 		return result;
 
 	}
