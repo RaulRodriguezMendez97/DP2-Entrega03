@@ -41,4 +41,19 @@
 
 </form:form>
 
+<a ></a>
+
+<button type="button" onclick="exportFunction()"><spring:message code="finder.clear.results" /></button>
+<p id="message"></p>
+<script type="text/javascript">
+	function exportFunction() {
+		$.ajax({
+			type:'GET',
+			url:'finder/hacker/clear.do',
+			success: function(res) {
+				document.getElementById("message").innerHTML = res;
+		    }
+		});
+	}
+</script>
 </security:authorize>

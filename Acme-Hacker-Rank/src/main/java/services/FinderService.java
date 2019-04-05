@@ -136,4 +136,10 @@ public class FinderService {
 	public List<Finder> getFinderByPosition(final Integer id) {
 		return this.finderRepository.getFinderByPosition(id);
 	}
+
+	public void clearResults() {
+		final Finder f = this.findOne();
+		f.setPositions(new HashSet<Position>());
+		this.save(f);
+	}
 }
