@@ -15,20 +15,30 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('COMPANY')">
 
-<display:table pagesize="5" name="problems" id="row"
-requestURI="problem/company/list.do" >
+<form:form action="problemcompany/edit.do?positionId=${position.id }" modelAttribute="problem">
+
+<acme:textbox code="problem.title" path="title"/>
+<acme:textbox code="problem.statement" path="statement"/>
+<acme:textbox code="problem.hint" path="hint"/>
+<acme:textbox code="problem.attachment" path="attachment"/>
+
+<jstl:if test="${problem.id ne 0 }">
+<form:label path="draftMode"><spring:message code="problem.draftMode" />:</form:label>
+
+<form:select path="draftMode">
+		<form:option value="1" label="Yes" />	
+		<form:option value="0" label="No" />	
+	</form:select>
+	<form:errors path="draftMode"/>
+
+</jstl:if>
 
 
-<display:column property="title" titleKey="problem.title" />
-<display:column> ${row.id} </display:column>
-
-</display:table>
-
-<input type="button" name="create" value="<spring:message code="problem.create" />"
-			onclick="javascript: relativeRedir('problem/company/create.do?positionId=${position.id}');" />
+</form:form>
 
 </security:authorize>
 

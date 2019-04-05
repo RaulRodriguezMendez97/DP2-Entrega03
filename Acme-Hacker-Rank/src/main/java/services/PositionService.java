@@ -220,4 +220,8 @@ public class PositionService {
 	public Collection<Position> getPositionsByFinder(final String word) {
 		return this.positionRepository.getPositionByFinder(word);
 	}
+
+	public Position getPositionByProblem(final Integer id) {
+		return this.positionRepository.getPositionByProblem(id);
+	}
 }
