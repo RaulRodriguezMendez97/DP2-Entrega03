@@ -52,7 +52,7 @@ requestURI="curricula/hacker/list.do?idHacker=${row.hacker.id}" >
 </display:table>
 
 <input type="button" name="create" value="<spring:message code="curricula.create" />"
-			onclick="javascript: relativeRedir('curricula/hacker/create.do');" /><br>
+			onclick="javascript: relativeRedir('personalData/hacker/create.do');" /><br>
 
 </security:authorize>
 

@@ -28,7 +28,7 @@ public class PositionDataService {
 	private CurriculaService		curriculaService;
 
 
-	public PositionData reate() {
+	public PositionData create() {
 		final PositionData res = new PositionData();
 		res.setTitle("");
 		res.setDescription("");
@@ -69,9 +69,9 @@ public class PositionDataService {
 		final Actor a = this.actorS.getActorByUserAccount(user.getId());
 		Assert.isTrue(user.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
 		Assert.isTrue(curricula.getHacker() == a);
-		//Assert.isTrue(history.getLinkRecords().contains(linkRecord));
-		//history.getLinkRecords().remove(linkRecord);
+		Assert.isTrue(curricula.getPositionData().contains(positionData));
+		curricula.getPositionData().remove(positionData);
 		this.positionDataRepository.delete(positionData);
-		//this.historyService.save(history);
+		this.curriculaService.save(curricula);
 	}
 }
