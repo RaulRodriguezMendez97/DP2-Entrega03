@@ -41,7 +41,8 @@
 
 </form:form>
 
-<a ></a>
+<input type="button" name="cancel" value="<spring:message code="finder.show" />"
+			onclick="javascript: relativeRedir('finder/hacker/show.do');" />
 
 <button type="button" onclick="exportFunction()"><spring:message code="finder.clear.results" /></button>
 <p id="message"></p>
