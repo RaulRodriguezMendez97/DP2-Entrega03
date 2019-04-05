@@ -69,7 +69,7 @@ public class FinderHackerController extends AbstractController {
 			this.finderService.clearResults();
 			res = new ResponseEntity<String>("Ok", HttpStatus.OK);
 		} catch (final Exception e) {
-			res = new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
+			res = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return res;
 	}
