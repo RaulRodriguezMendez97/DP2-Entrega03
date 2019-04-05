@@ -27,11 +27,13 @@
 	
 	<input type="submit" name="save" value="<spring:message code="position.search" />" />
 
+	<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
+			onclick="javascript: relativeRedir('position/listAll.do');" />
 </form:form>
 
 
 <display:table pagesize="5" name="positions" id="row"
-requestURI="position/list.do" >
+requestURI="position/listAll.do" >
 
 <display:column>
 	<a href="position/show.do?positionId=${row.id}"><spring:message code="position.moreDetails" /></a>
