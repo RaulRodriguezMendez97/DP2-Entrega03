@@ -115,7 +115,6 @@ public class FinderService {
 
 	private String getStringToDate(final Date date) {
 		String cadena = "";
-
 		cadena += date.toString().substring(24, 28);
 
 		final Integer month = date.getMonth() + 1;
@@ -129,7 +128,6 @@ public class FinderService {
 		else
 			cadena += "-" + date.getDate();
 
-		System.out.println(cadena);
 		return cadena;
 	}
 
@@ -138,8 +136,15 @@ public class FinderService {
 	}
 
 	public void clearResults() {
-		final Finder f = this.findOne();
-		f.setPositions(new HashSet<Position>());
-		this.save(f);
+		final Finder finder = this.findOne();
+		String fecha;
+		final Date a = finder.getDeadLine();
+		if (finder.getDeadLine() == null)
+			fecha = "";
+		else
+			fecha = this.getStringToDate(new Date(a.getYear(), a.getMonth(), a.getDate()));
+		final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
+		finder.setPositions(c);
+		this.save(finder);
 	}
 }
