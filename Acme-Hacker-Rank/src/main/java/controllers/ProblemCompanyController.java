@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -106,6 +107,30 @@ public class ProblemCompanyController extends AbstractController {
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
 		}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(final Problem problem, final BindingResult binding, @RequestParam final int positionId) {
+		ModelAndView result;
+		final Problem p = this.problemService.reconstruct(problem, binding);
+
+		if (!binding.hasErrors()) {
+			final Problem saved = this.problemService.save(p);
+			final Position position = this.positionService.findOne(positionId);
+			if (!position.getProblems().contains(saved)) {
+				position.getProblems().add(saved);
+				this.positionService.save(position);
+			}
+			result = new ModelAndView("redirect:list.do?positionId=" + positionId);
+
+		} else {
+			final Position position1 = this.positionService.findOne(positionId);
+			result = new ModelAndView("problem/edit");
+			result.addObject("problem", problem);
+			result.addObject("position", position1);
+		}
+
 		return result;
 	}
 

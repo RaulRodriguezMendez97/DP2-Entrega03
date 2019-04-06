@@ -20,7 +20,7 @@
 
 
 <security:authorize access="hasRole('COMPANY')">
-<form:form action="problem/company/edit.do?positionId?${position.id }" modelAttribute="position">
+<form:form action="position/company/edit.do" modelAttribute="position">
 
 <jstl:if test="${not empty exception}">
 		<p style="color:red"> <spring:message code="position.error" /> </p>

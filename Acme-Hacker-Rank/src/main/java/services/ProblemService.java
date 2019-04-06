@@ -78,12 +78,29 @@ public class ProblemService {
 	public Problem reconstruct(final Problem problem, final BindingResult binding) {
 		final Problem res;
 
-		res = problem;
-		res.setDraftMode(1);
-		res.setApplications(new HashSet<Application>());
+		if (problem.getId() == 0) {
 
-		this.validator.validate(res, binding);
-		return res;
+			res = problem;
+			problem.setDraftMode(1);
+			problem.setApplications(new HashSet<Application>());
+
+			this.validator.validate(res, binding);
+			return res;
+		} else {
+			res = this.problemRepository.findOne(problem.getId());
+			final Problem copy = new Problem();
+
+			copy.setId(res.getId());
+			copy.setVersion(res.getVersion());
+			copy.setApplications(res.getApplications());
+			copy.setTitle(problem.getTitle());
+			copy.setStatement(problem.getStatement());
+			copy.setHint(problem.getHint());
+			copy.setAttachment(problem.getAttachment());
+			copy.setDraftMode(problem.getDraftMode());
+
+			this.validator.validate(copy, binding);
+			return copy;
+		}
 	}
-
 }

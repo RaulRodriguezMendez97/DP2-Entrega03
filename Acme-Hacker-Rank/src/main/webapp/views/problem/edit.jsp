@@ -19,7 +19,10 @@
 
 <security:authorize access="hasRole('COMPANY')">
 
-<form:form action="problemcompany/edit.do?positionId=${position.id }" modelAttribute="problem">
+<form:form action="problem/company/edit.do?positionId=${position.id }" modelAttribute="problem">
+
+<form:hidden path="id"/>
+<form:hidden path="version"/>
 
 <acme:textbox code="problem.title" path="title"/>
 <acme:textbox code="problem.statement" path="statement"/>
@@ -36,6 +39,10 @@
 	<form:errors path="draftMode"/>
 
 </jstl:if>
+
+<br/>
+<input type="submit" name="save" 
+	value="<spring:message code="problem.save" />" />
 
 <input type="button" name="cancel" value="<spring:message code="problem.cancel" />"
 			onclick="javascript: relativeRedir('problem/company/list.do?positionId=${position.id}');" />
