@@ -23,7 +23,11 @@ requestURI="problem/company/list.do" >
 
 
 <display:column property="title" titleKey="problem.title" />
-<display:column> ${row.id} </display:column>
+<display:column>
+<jstl:if test="${row.draftMode eq 1 }">
+	<a href="problem/company/edit.do?problemId=${row.id}&positionId=${position.id}"><spring:message code="position.edit" /></a>
+</jstl:if>
+</display:column>
 
 </display:table>
 

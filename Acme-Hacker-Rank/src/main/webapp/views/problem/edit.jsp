@@ -37,7 +37,8 @@
 
 </jstl:if>
 
-
+<input type="button" name="cancel" value="<spring:message code="problem.cancel" />"
+			onclick="javascript: relativeRedir('problem/company/list.do?positionId=${position.id}');" />
 </form:form>
 
 </security:authorize>

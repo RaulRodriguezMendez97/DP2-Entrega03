@@ -66,6 +66,7 @@ public class ProblemService {
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
 			final Position p = this.positionRepository.getPositionByProblem(problem.getId());
 			Assert.isTrue(p.getCompany().equals(a));
+			//Assert.isTrue(p.getDraftMode() == 1);
 			final Problem old = this.findOne(problem.getId());
 			Assert.isTrue(old.getDraftMode() == 1);
 		}

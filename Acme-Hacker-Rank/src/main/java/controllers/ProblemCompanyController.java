@@ -81,4 +81,32 @@ public class ProblemCompanyController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final Integer positionId, @RequestParam final Integer problemId) {
+		ModelAndView result;
+
+		try {
+			final Problem problem;
+			final Position position;
+			position = this.positionService.findOne(positionId);
+
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
+
+			Assert.isTrue(position.getCompany().equals(a));
+
+			problem = this.problemService.findOne(problemId);
+
+			Assert.isTrue(position.getProblems().contains(problem));
+
+			result = new ModelAndView("problem/edit");
+			result.addObject("problem", problem);
+			result.addObject("position", position);
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
+		return result;
+	}
+
 }

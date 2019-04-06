@@ -45,7 +45,7 @@ requestURI="position/company/list.do" >
 	Cancel
 </jstl:if>
 </display:column>
-<display:column>
+<display:column titleKey="position.problem">
 	<a href="problem/company/list.do?positionId=${row.id}"><spring:message code="position.problem" /></a>
 </display:column>
 </display:table>
