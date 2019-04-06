@@ -25,4 +25,10 @@ public interface CustomizableSystemRepository extends JpaRepository<Customizable
 	@Query("select c.nameSystem from CustomizableSystem c")
 	public String getNameApp();
 
+	@Query("select c.timeCache from CustomizableSystem c")
+	public int getTimeCache();
+
+	@Query("select c.maxResults from CustomizableSystem c")
+	public int getMaxResults();
+
 }

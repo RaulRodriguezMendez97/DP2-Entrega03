@@ -221,6 +221,7 @@
 		<property name="deadLine" value="12/10/2019 23:59"/>
 		<property name="minSalary" value="10.0"/>
 		<property name="maxSalary" value="100.0"/>
+		<property name="moment" value="04/05/2019 23:30"/>
 		<property name="positions">
 			<list>
 				<ref bean="position1" />
@@ -235,6 +236,7 @@
 		<property name="deadLine" value="12/10/2019 23:59"/>
 		<property name="minSalary" value="10.0"/>
 		<property name="maxSalary" value="100.0"/>
+		<property name="moment" value="04/05/2019 23:30"/>
 		<property name="positions">
 			<list>
 				<ref bean="position3" />

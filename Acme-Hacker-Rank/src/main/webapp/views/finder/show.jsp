@@ -15,10 +15,11 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ page import="java.util.ArrayList"%>
 
 <security:authorize access="hasRole('HACKER')">
 
-<display:table pagesize="5" name="positions" id="row"
+<!--<display:table pagesize="5" name="positions" id="row"
 requestURI="finder/hacker/show.do" >
 
 <display:column property="ticker" titleKey="position.ticker" />
@@ -26,8 +27,53 @@ requestURI="finder/hacker/show.do" >
 <display:column property="deadLine" titleKey="position.deadline" />
 <display:column property="salary" titleKey="position.salary" />
 
-</display:table>
-
+</display:table>-->
+<table >
+    <thead>
+      <tr>
+        <th><spring:message code="position.ticker" /></th>
+        <th><spring:message code="position.title" /></th>
+        <th><spring:message code="position.deadline" /></th>
+        <th><spring:message code="position.salary" /></th>
+      </tr>
+    </thead>
+    <tbody>
+      <jstl:forEach begin="0" end="${ ñapa }" step="1" varStatus="loopCounter" items="${positions}" var="p">
+	      <jstl:if test="${loopCounter.count%2 eq 0 }">
+		   <tr style=" background-color: #f2f2f2">
+		        <td>
+		            <jstl:out value="${p.ticker}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.title}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.deadLine}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.salary}" />
+		        </td>
+		    </tr>
+		  </jstl:if>
+		  <jstl:if test="${loopCounter.count%2 != 0 }">
+		   <tr style=" background-color: skyblue">
+		        <td>
+		            <jstl:out value="${p.ticker}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.title}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.deadLine}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.salary}" />
+		        </td>
+		    </tr>
+		  </jstl:if>
+      </jstl:forEach>
+    </tbody>
+  </table>
 	<input type="button" name="create" value="<spring:message code="finder.back" />"
 			onclick="javascript: relativeRedir('finder/hacker/edit.do');" />
 

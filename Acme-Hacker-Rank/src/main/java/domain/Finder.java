@@ -23,6 +23,7 @@ public class Finder extends DomainEntity {
 	private Double					minSalary;
 	private Double					maxSalary;
 	private Collection<Position>	positions;
+	private Date					moment;
 
 
 	public String getKeyWord() {
@@ -67,6 +68,14 @@ public class Finder extends DomainEntity {
 
 	public void setMaxSalary(final Double maxSalary) {
 		this.maxSalary = maxSalary;
+	}
+
+	public Date getMoment() {
+		return this.moment;
+	}
+
+	public void setMoment(final Date moment) {
+		this.moment = moment;
 	}
 
 }

@@ -74,4 +74,12 @@ public class CustomizableSystemService {
 	public String getNameApp() {
 		return this.customizableSystemRepository.getNameApp();
 	}
+
+	public int getTimeCache() {
+		return this.customizableSystemRepository.getTimeCache();
+	}
+
+	public int getMaxResults() {
+		return this.customizableSystemRepository.getMaxResults();
+	}
 }

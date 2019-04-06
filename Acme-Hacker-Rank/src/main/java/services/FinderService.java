@@ -24,10 +24,13 @@ import domain.Position;
 public class FinderService {
 
 	@Autowired
-	private FinderRepository	finderRepository;
+	private FinderRepository			finderRepository;
 
 	@Autowired
-	private Validator			validator;
+	private Validator					validator;
+
+	@Autowired
+	private CustomizableSystemService	customizableSystemService;
 
 
 	public Finder create() {
@@ -37,6 +40,7 @@ public class FinderService {
 		res.setKeyWord("");
 		res.setMinSalary(0.);
 		res.setPositions(new HashSet<Position>());
+		res.setMoment(new Date());
 		return res;
 
 	}
@@ -61,6 +65,7 @@ public class FinderService {
 			savedFinder.setKeyWord(f.getKeyWord());
 			savedFinder.setMinSalary(f.getMinSalary());
 			savedFinder.setPositions(f.getPositions());
+			savedFinder.setMoment(f.getMoment());
 			saved = this.finderRepository.save(savedFinder);
 		}
 		return saved;
@@ -80,13 +85,18 @@ public class FinderService {
 			finder.setMinSalary(0.);
 		if (finder.getMaxSalary() == null)
 			finder.setMaxSalary(Double.MAX_VALUE);
-		String fecha;
-		if (finder.getDeadLine() == null)
-			fecha = "";
-		else
-			fecha = this.getStringToDate(finder.getDeadLine());
-		final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
-		copy.setPositions(c);
+		if ((new Date().getTime() - res.getMoment().getTime()) / 3600000 > this.customizableSystemService.getTimeCache()) {
+			String fecha;
+			if (finder.getDeadLine() == null)
+				fecha = "";
+			else
+				fecha = this.getStringToDate(finder.getDeadLine());
+			final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
+			copy.setPositions(c);
+			finder.setMoment(new Date());
+		} else
+			copy.setPositions(res.getPositions());
+
 		this.validator.validate(copy, binding);
 		return copy;
 
