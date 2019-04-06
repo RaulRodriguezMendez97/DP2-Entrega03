@@ -81,7 +81,6 @@ public class Application extends DomainEntity {
 		this.urlCode = urlCode;
 	}
 
-	@NotNull
 	@Past
 	public Date getSubmitMoment() {
 		return this.submitMoment;
