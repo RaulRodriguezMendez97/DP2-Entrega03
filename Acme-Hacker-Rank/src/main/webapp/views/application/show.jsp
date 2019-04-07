@@ -60,6 +60,7 @@
 <spring:message code="application.status.cancel"/>
 </jstl:if>
 <br>
+<jstl:out value="${problem}"></jstl:out><br>
 <input type="button" name="create" value="<spring:message code="application.back" />"
 			onclick="javascript: relativeRedir('application/hacker/list.do');" />
 

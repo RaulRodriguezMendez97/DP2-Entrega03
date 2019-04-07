@@ -30,7 +30,7 @@
 <form:hidden path="id"/>
 <form:hidden path="version"/>
 
-<acme:textbox code="application.urlCode" path="urlCode"/>
+<acme:selectWithoutNullOption items="${curriculas}" itemLabel="id" code="application.curricula" path="curricula"/>
 
 <input type="submit" name="save" 
 	value="<spring:message code="application.create" />" />

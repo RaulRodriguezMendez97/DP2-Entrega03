@@ -18,6 +18,7 @@ import security.UserAccount;
 import domain.Application;
 import domain.Curricula;
 import domain.Hacker;
+import domain.Problem;
 
 @Service
 @Transactional
@@ -31,6 +32,8 @@ public class ApplicationService {
 	private HackerService			hackerService;
 	@Autowired
 	private CurriculaService		curriculaService;
+	@Autowired
+	private ProblemService			problemService;
 
 
 	public Application create() {
@@ -58,8 +61,16 @@ public class ApplicationService {
 
 		if (application.getId() != 0)
 			Assert.isTrue(this.getAllMyApplicationsHacker().contains(application));
-
+		else {
+			final Collection<Curricula> c = this.curriculaService.getCurriculasByHacker(this.hackerService.hackerUserAccount(LoginService.getPrincipal().getId()).getId());
+			Assert.isTrue(c.contains(application.getCurricula()));
+		}
 		savedApplication = this.applicationRepository.save(application);
+		if (application.getId() == 0) {
+			final Problem p = this.problemService.getAleatoryProblem();
+			p.getApplications().add(savedApplication);
+			this.problemService.saveApplication(p);
+		}
 		return savedApplication;
 	}
 	//RECONSTRUCT
@@ -72,9 +83,11 @@ public class ApplicationService {
 			final UserAccount user = LoginService.getPrincipal();
 			final Hacker h = this.hackerService.hackerUserAccount(user.getId());
 
-			application.setHacker(h);
-			application.setStatus(0);
-			application.setMoment(new Date());
+			res.setHacker(h);
+			res.setStatus(0);
+			res.setMoment(new Date());
+			res.setExplication("");
+			res.setUrlCode("");
 
 			this.validator.validate(res, binding);
 
