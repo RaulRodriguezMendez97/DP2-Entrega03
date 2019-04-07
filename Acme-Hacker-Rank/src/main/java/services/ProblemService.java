@@ -37,6 +37,9 @@ public class ProblemService {
 	@Autowired
 	private Validator			validator;
 
+	@Autowired
+	private PositionService		positionService;
+
 
 	public Problem create() {
 		final Problem p = new Problem();
@@ -103,4 +106,18 @@ public class ProblemService {
 			return copy;
 		}
 	}
+
+	//	public void delete(final Problem problem, final Integer positionId) {
+	//		final UserAccount user = LoginService.getPrincipal();
+	//		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+	//		final Position p = this.positionRepository.findOne(positionId);
+	//		Assert.isTrue(p.getCompany().equals(a));
+	//		//Assert.isTrue(p.getProblems().contains(problem));
+	//		//Assert.isTrue(p.getDraftMode()==1 && p.getIsCancelled()==0);
+	//		Assert.isTrue(problem.getDraftMode() == 1);
+	//		p.getProblems().remove(problem);
+	//		this.problemRepository.delete(problem);
+	//		this.positionService.save(p);
+	//
+	//	}
 }

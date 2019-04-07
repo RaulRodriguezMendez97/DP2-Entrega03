@@ -24,16 +24,19 @@ requestURI="problem/company/list.do" >
 
 <display:column property="title" titleKey="problem.title" />
 <display:column>
-<jstl:if test="${row.draftMode eq 1 }">
+<jstl:if test="${(row.draftMode eq 1) and (position.draftMode eq 1 )}">
 	<a href="problem/company/edit.do?problemId=${row.id}&positionId=${position.id}"><spring:message code="position.edit" /></a>
 </jstl:if>
 </display:column>
 
 </display:table>
-
+<jstl:if test="${position.draftMode eq 1 }">
 <input type="button" name="create" value="<spring:message code="problem.create" />"
 			onclick="javascript: relativeRedir('problem/company/create.do?positionId=${position.id}');" />
+</jstl:if>
 
+<input type="button" name="cancel" value="<spring:message code="problem.cancel" />"
+			onclick="javascript: relativeRedir('position/company/list.do');" />
 </security:authorize>
 
 
