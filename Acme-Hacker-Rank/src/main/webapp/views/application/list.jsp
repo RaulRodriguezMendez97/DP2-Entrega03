@@ -116,6 +116,8 @@ requestURI="application/hacker/list.do" >
 </display:column>
 
 </display:table>
+<input type="button" name="create" value="<spring:message code="application.create" />"
+			onclick="javascript: relativeRedir('application/hacker/create.do');" />
 
 </security:authorize>
 

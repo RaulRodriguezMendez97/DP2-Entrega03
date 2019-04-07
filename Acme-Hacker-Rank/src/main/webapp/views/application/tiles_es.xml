@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="application/list" extends="master.page">	
-		<put-attribute name="title" value="Aplicaciónn: Lista" />
+		<put-attribute name="title" value="Aplicación: Lista" />
 		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
 	
@@ -29,6 +29,11 @@
 	<definition name="application/show" extends="master.page">	
 		<put-attribute name="title" value="Mostrar aplicación" />
 		<put-attribute name="body" value="/views/application/show.jsp" />
+	</definition>
+	
+	<definition name="application/create" extends="master.page">	
+		<put-attribute name="title" value="Crear aplicación" />
+		<put-attribute name="body" value="/views/application/create.jsp" />
 	</definition>
 	
 </tiles-definitions>
