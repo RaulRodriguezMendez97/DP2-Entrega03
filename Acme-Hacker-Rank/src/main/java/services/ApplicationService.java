@@ -97,7 +97,7 @@ public class ApplicationService {
 			final Application a = new Application();
 			a.setId(application.getId());
 			a.setVersion(application.getVersion());
-			a.setCurricula(application.getCurricula());
+			a.setCurricula(res.getCurricula());
 			a.setExplication(application.getExplication());
 			a.setUrlCode(application.getUrlCode());
 			a.setStatus(application.getStatus());
