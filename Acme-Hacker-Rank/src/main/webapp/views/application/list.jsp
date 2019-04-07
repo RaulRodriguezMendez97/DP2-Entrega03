@@ -68,7 +68,7 @@ requestURI="application/company/list.do" >
 
 <security:authorize access="hasRole('HACKER')">
 
-<display:table pagesize="5" name="application" id="row"
+<display:table pagesize="5" name="applications" id="row"
 requestURI="application/hacker/list.do" >
 
 <display:column sortable="true" titleKey="application.status">
@@ -89,7 +89,7 @@ requestURI="application/hacker/list.do" >
 	<spring:message code="application.status.cancel" />
 </jstl:if>
 </display:column>
-<display:column property="curricula" titleKey="application.curricula" />
+<display:column property="curricula.id" titleKey="application.curricula" />
 <display:column property="moment" titleKey="application.moment" />
 <display:column property="explication" titleKey="application.explication" />
 <display:column property="urlCode" titleKey="application.urlCode" />
@@ -108,7 +108,7 @@ requestURI="application/hacker/list.do" >
 
 <display:column>
 	<jstl:if test="${row.status eq 1 }">
-		<a href="application/hacker/edit.do?appicationId=${row.procession.id}"><spring:message code="application.rechazar" /></a>
+		<a href="application/hacker/edit.do?appicationId=${row.id}"><spring:message code="application.reject" /></a>
 	</jstl:if>
 	<jstl:if test="${row.status eq 0 or row.status eq 2 }">
 	-
