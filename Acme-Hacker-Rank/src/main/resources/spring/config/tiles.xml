@@ -38,6 +38,7 @@
 		<value>/views/termsAndConditions/tiles.xml</value>
 		
 		<value>/views/problem/tiles.xml</value>
+		<value>/views/application/tiles.xml</value>
 		
 	
 		

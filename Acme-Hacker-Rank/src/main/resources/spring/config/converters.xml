@@ -49,6 +49,8 @@
 		<bean class="converters.CompanyToStringConverter" />
 		<bean class="converters.StringToHackerConverter" />
 		<bean class="converters.HackerToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		<bean class="converters.ApplicationToStringConverter" />
 		
 		
 		
