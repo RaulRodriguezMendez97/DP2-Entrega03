@@ -1,8 +1,10 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -120,4 +122,19 @@ public class ProblemService {
 	//		this.positionService.save(p);
 	//
 	//	}
+
+	public Problem getProblemByApplication(final Application a) {
+		return this.problemRepository.getProblemByApplication(a);
+	}
+	public Problem getAleatoryProblem() {
+		final Collection<Problem> ps = this.findAll();
+		final List<Problem> list = new ArrayList<Problem>(ps);
+		final int number = (int) Math.random() % list.size();
+		return list.get(number);
+	}
+
+	public Problem saveApplication(final Problem p) {
+		return this.problemRepository.save(p);
+	}
+
 }

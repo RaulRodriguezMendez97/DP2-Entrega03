@@ -20,17 +20,15 @@
 
 <security:authorize access="hasRole('HACKER')">
 
-<form:form action="application/hacker/edit.do?status=1" modelAttribute="application">
+<form:form action="application/hacker/edit.do" modelAttribute="application">
 <form:hidden path="id"/>
 <form:hidden path="version"/>
 
-<acme:textbox code="application.urlCode" path="urlCode"/>
-<acme:textbox code="application.explication" path="explication"/>
+<acme:selectWithoutNullOption items="${curriculas}" itemLabel="id" code="application.curricula" path="curricula"/>
 
 <input type="submit" name="save" 
-	value="<spring:message code="position.save" />" />
+	value="<spring:message code="application.create" />" />
 	
-
 <input type="button" name="cancel" value="<spring:message code="application.cancel" />"
 			onclick="javascript: relativeRedir('application/hacker/list.do');" />
 </form:form>

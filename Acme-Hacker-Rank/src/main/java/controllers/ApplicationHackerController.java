@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.ProblemService;
 import domain.Application;
+import domain.Problem;
 
 @Controller
 @RequestMapping("/application/hacker")
@@ -21,6 +23,8 @@ public class ApplicationHackerController extends AbstractController {
 
 	@Autowired
 	private ApplicationService	applicationService;
+	@Autowired
+	private ProblemService		problemService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -55,6 +59,7 @@ public class ApplicationHackerController extends AbstractController {
 		try {
 			application = this.applicationService.findOne(applicationId);
 			Assert.notNull(application);
+			Assert.isTrue(application.getStatus() == 0);
 			result = new ModelAndView("application/edit");
 			result.addObject("application", application);
 			result.addObject("curriculas", this.applicationService.getCurriculaHacker());
@@ -66,9 +71,10 @@ public class ApplicationHackerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(Application newApplication, final BindingResult binding) {
+	public ModelAndView edit(Application newApplication, final BindingResult binding, @RequestParam(value = "status", defaultValue = "0") final int status) {
 		ModelAndView result;
-
+		if (status == 1)
+			newApplication.setStatus(1);
 		try {
 			newApplication = this.applicationService.reconstruct(newApplication, binding);
 			if (!binding.hasErrors()) {
@@ -114,8 +120,12 @@ public class ApplicationHackerController extends AbstractController {
 			Assert.notNull(application);
 			final Collection<Application> applications = this.applicationService.getAllMyApplicationsHacker();
 			Assert.isTrue(applications.contains(application));
+
+			final Problem p = this.problemService.getProblemByApplication(application);
+
 			result = new ModelAndView("application/show");
 			result.addObject("application", application);
+			result.addObject("problem", p);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do");
 		}
