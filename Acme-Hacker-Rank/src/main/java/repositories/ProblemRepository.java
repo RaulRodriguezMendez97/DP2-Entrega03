@@ -11,7 +11,7 @@ import domain.Problem;
 @Repository
 public interface ProblemRepository extends JpaRepository<Problem, Integer> {
 
-	@Query("select p from Problem p where ?1 in p.applications")
+	@Query("SELECT p FROM Problem p WHERE ?1 MEMBER OF p.applications")
 	public Problem getProblemByApplication(Application a);
 
 }

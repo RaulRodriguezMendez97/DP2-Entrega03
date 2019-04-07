@@ -59,9 +59,10 @@ public class ApplicationService {
 	public Application save(final Application application) {
 		Application savedApplication;
 
-		if (application.getId() != 0)
+		if (application.getId() != 0) {
 			Assert.isTrue(this.getAllMyApplicationsHacker().contains(application));
-		else {
+			Assert.isTrue(this.applicationRepository.findOne(application.getId()).getStatus() == 0);
+		} else {
 			final Collection<Curricula> c = this.curriculaService.getCurriculasByHacker(this.hackerService.hackerUserAccount(LoginService.getPrincipal().getId()).getId());
 			Assert.isTrue(c.contains(application.getCurricula()));
 		}
@@ -102,7 +103,7 @@ public class ApplicationService {
 			a.setStatus(application.getStatus());
 			a.setMoment(res.getMoment());
 			a.setHacker(res.getHacker());
-			a.setSubmitMoment(res.getSubmitMoment());
+			a.setSubmitMoment(new Date());
 
 			this.validator.validate(a, binding);
 

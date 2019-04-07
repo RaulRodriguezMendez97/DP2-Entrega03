@@ -17,52 +17,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <security:authorize access="hasRole('COMPANY')">
-<jstl:if test="${exception eq 'e'}">
-	<b style="color:red;"><spring:message code="application.cant.delete"/></b><br>
-</jstl:if>
-<display:table pagesize="5" name="applications" id="row"
-requestURI="application/company/list.do" >
 
-<display:column sortable="true" class="color" titleKey="application.status">
-
-<jstl:if test="${row.status eq 0 }">
-	<spring:message code="application.status.pending" />
-</jstl:if>
-
-<jstl:if test="${row.status eq 2 }">
-	<spring:message code="application.status.accepted" />
-</jstl:if>
-
-<jstl:if test="${row.status eq 3 }">
-	<spring:message code="application.status.cancel" />
-</jstl:if>
-<jstl:if test="${row.status eq 1 }">
-	<spring:message code="application.status.submitted" />
-</jstl:if>
-</display:column>
-
-<display:column class="color" property="columna" titleKey="request.columna" />
-<display:column class="color" property="row" titleKey="request.row" />
-<display:column class="color" property="description" titleKey="request.description" />
-<display:column class="color" property="procession.title" titleKey="request.procession" />
-
-<display:column class="color">
-<a href="request/member/show.do?requestId=${row.id}"><spring:message code="request.show" /></a>
-</display:column>
-
-<display:column class="color">
-	<jstl:if test="${row.status eq 1 }">
-		<a href="request/member/delete.do?requestId=${row.id}"><spring:message code="request.delete" /></a>
-	</jstl:if>
-	<jstl:if test="${row.status eq 0 or row.status eq 2 }">
-	-
-	</jstl:if>
-</display:column>
-
-</display:table>
-
-<input type="button" name="create" value="<spring:message code="request.create" />"
-			onclick="javascript: relativeRedir('request/member/create.do');" />
+<!-- Poner aqui lo de company -->
 
 </security:authorize>
 
@@ -98,19 +54,10 @@ requestURI="application/hacker/list.do" >
 <a href="application/hacker/show.do?applicationId=${row.id}"><spring:message code="application.show" /></a>
 </display:column>
 <display:column>
-	<jstl:if test="${row.status eq 1 }">
-		<a href="application/hacker/edit.do?papplicationId=${row.id}"><spring:message code="application.aceptar" /></a>
+	<jstl:if test="${row.status eq 0 }">
+		<a href="application/hacker/edit.do?applicationId=${row.id}"><spring:message code="application.edit" /></a>
 	</jstl:if>
-	<jstl:if test="${row.status eq 0 or row.status eq 2 }">
-	-
-	</jstl:if>
-</display:column>
-
-<display:column>
-	<jstl:if test="${row.status eq 1 }">
-		<a href="application/hacker/edit.do?appicationId=${row.id}"><spring:message code="application.reject" /></a>
-	</jstl:if>
-	<jstl:if test="${row.status eq 0 or row.status eq 2 }">
+	<jstl:if test="${row.status eq 1 or row.status eq 2 or row.status eq 3 }">
 	-
 	</jstl:if>
 </display:column>
@@ -121,30 +68,3 @@ requestURI="application/hacker/list.do" >
 
 </security:authorize>
 
-<script type="text/javascript">
-var x = document.getElementsByClassName("color");
-var i = 0;
-while (i < x.length) {
-	var estado = x[i].innerHTML;
-	
-	if(estado.trim() === "Accepted" || estado.trim() === "Aceptada"){
-		var casilla = 0;
-		for (casilla ; casilla< 7; casilla++) {
-			document.getElementsByClassName("color")[i+casilla].style.background='green';
-		}
-	}else if(estado.trim() === "Pending" || estado.trim() === "Pendiente"){
-		var casilla = 0;
-		for (casilla ; casilla< 7; casilla++) {
-			document.getElementsByClassName("color")[i+casilla].style.background='grey';
-		}
-	}else{
-		var casilla = 0;
-		for (casilla ; casilla< 7; casilla++) {
-			document.getElementsByClassName("color")[i+casilla].style.background='orange';
-		}
-	}
-	
-	i= i+7;
-}
-
-</script>

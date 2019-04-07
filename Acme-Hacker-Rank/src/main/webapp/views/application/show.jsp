@@ -16,26 +16,9 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('BROTHERHOOD')">
+<security:authorize access="hasRole('COMPANY')">
 
-<spring:message code="request.row"/>:<jstl:out value=" ${request.row}"></jstl:out><br>
-<spring:message code="request.columna"/>: <jstl:out value="${request.columna}"></jstl:out><br>
-<spring:message code="request.description"/>: <jstl:out value="${request.description}"></jstl:out><br>
-<spring:message code="request.member.name"/>: <jstl:out value="${request.member.name}"></jstl:out><br>
-<spring:message code="request.procession"/>: <jstl:out value="${request.procession.title}"></jstl:out><br>
-<spring:message code="request.status"/>: 
-<jstl:if test="${request.status eq 1 }">
-<spring:message code="request.pending"/>
-</jstl:if>
-<jstl:if test="${request.status eq 0 }">
-<spring:message code="request.accepted"/>
-</jstl:if>
-<jstl:if test="${request.status eq 2 }">
-<spring:message code="request.rejected"/>
-</jstl:if>
-<br>
-<input type="button" name="create" value="<spring:message code="procession.back" />"
-			onclick="javascript: relativeRedir('parade/brotherhood/list.do');" />
+<!-- POner aqui el codigo para company -->
 
 </security:authorize>
 
@@ -60,7 +43,15 @@
 <spring:message code="application.status.cancel"/>
 </jstl:if>
 <br>
-<jstl:out value="${problem}"></jstl:out><br>
+
+<display:table pagesize="1" name="problem" id="row" >
+
+	<display:column property="title" titleKey="application.problem.title" />
+	<display:column property="statement" titleKey="application.problem.statement" />
+	<display:column property="hint" titleKey="application.problem.hint" />
+	<display:column property="attachment" titleKey="application.problem.attachment" />
+	
+</display:table>
 <input type="button" name="create" value="<spring:message code="application.back" />"
 			onclick="javascript: relativeRedir('application/hacker/list.do');" />
 

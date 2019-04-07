@@ -19,12 +19,6 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('HACKER')">
-<!-- <select id="select-prueba" name="brotherhoodId">
-	<option value="-1">---</option>
-    <jstl:forEach var="item" items="${brotherhoods}">		
-		<option value="${item.id}">${item.title}</option>
-    </jstl:forEach>
-</select>  -->
 
 <form:form action="application/hacker/edit.do" modelAttribute="application">
 <form:hidden path="id"/>
@@ -39,28 +33,5 @@
 			onclick="javascript: relativeRedir('application/hacker/list.do');" />
 </form:form>
 
-<!-- <script type="text/javascript">
-	$(document).ready(function(){
-		$('#select-prueba').change(function(){
-			var brotherhoodId = $('#select-prueba option:selected').attr('value');
-			$.ajax({
-				type:'GET',
-				url:'parade/member/list.do?brotherhoodId='+brotherhoodId,
-				success: function(res) {
-					var procesiones = res.split(';');
-					var i;
-					var injectar = "";
-					for (i = 0; i < procesiones.length; i++) { 
-						p = procesiones[i].split(':');
-						injectar += '<option value="'+p[1]+'">'+p[0]+'</option>';
-					}
-					document.getElementById("rellenarme").innerHTML =injectar;
-			       /*  console.log(injectar);
-			        alert(injectar); */
-			    }
-			});
-		});
-	});
-</script> -->
 </security:authorize>
 

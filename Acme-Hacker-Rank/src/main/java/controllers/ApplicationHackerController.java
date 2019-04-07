@@ -59,6 +59,7 @@ public class ApplicationHackerController extends AbstractController {
 		try {
 			application = this.applicationService.findOne(applicationId);
 			Assert.notNull(application);
+			Assert.isTrue(application.getStatus() == 0);
 			result = new ModelAndView("application/edit");
 			result.addObject("application", application);
 			result.addObject("curriculas", this.applicationService.getCurriculaHacker());
@@ -70,9 +71,10 @@ public class ApplicationHackerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(Application newApplication, final BindingResult binding) {
+	public ModelAndView edit(Application newApplication, final BindingResult binding, @RequestParam(value = "status", defaultValue = "0") final int status) {
 		ModelAndView result;
-
+		if (status == 1)
+			newApplication.setStatus(1);
 		try {
 			newApplication = this.applicationService.reconstruct(newApplication, binding);
 			if (!binding.hasErrors()) {
