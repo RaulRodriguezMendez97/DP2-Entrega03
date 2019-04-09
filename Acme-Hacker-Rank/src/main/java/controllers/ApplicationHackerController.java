@@ -86,7 +86,6 @@ public class ApplicationHackerController extends AbstractController {
 				result.addObject("curriculas", this.applicationService.getCurriculaHacker());
 			}
 		} catch (final Exception e) {
-			System.out.println(e.toString());
 			if (newApplication.getId() == 0) {
 				result = new ModelAndView("application/create");
 				result.addObject("curriculas", this.applicationService.getCurriculaHacker());
