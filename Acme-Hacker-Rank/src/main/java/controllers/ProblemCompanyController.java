@@ -3,6 +3,8 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import repositories.PositionRepository;
 import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
@@ -26,13 +29,16 @@ import domain.Problem;
 public class ProblemCompanyController extends AbstractController {
 
 	@Autowired
-	private PositionService	positionService;
+	private PositionService		positionService;
 
 	@Autowired
-	private ProblemService	problemService;
+	private PositionRepository	positionRepository;
 
 	@Autowired
-	private ActorService	actorService;
+	private ProblemService		problemService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -141,28 +147,29 @@ public class ProblemCompanyController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Problem problem, final BindingResult binding, @RequestParam final int positionId) {
 		ModelAndView result;
-		final Problem p = this.problemService.reconstruct(problem, binding);
+		Problem p = null;
+		final Position position = this.positionService.findOne(positionId);
 
 		try {
-
-			//PARA NO CREAR PROBLEM A UNA POSITION CANCELADA O FUERA DEL MODO FINAL
-			final Position position = this.positionService.findOne(positionId);
-			Assert.isTrue(position.getDraftMode() == 1 && position.getIsCancelled() == 0);
+			p = this.problemService.reconstruct(problem, binding);
 
 			if (!binding.hasErrors()) {
 				final Problem saved = this.problemService.save(p);
 				if (!position.getProblems().contains(saved)) {
 					position.getProblems().add(saved);
-					this.positionService.save(position);
+					this.positionRepository.save(position);
 				}
 				result = new ModelAndView("redirect:list.do?positionId=" + positionId);
 
 			} else {
-				final Position position1 = this.positionService.findOne(positionId);
 				result = new ModelAndView("problem/edit");
 				result.addObject("problem", problem);
-				result.addObject("position", position1);
+				result.addObject("position", position);
 			}
+		} catch (final ValidationException opps) {
+			result = new ModelAndView("problem/edit");
+			result.addObject("problem", problem);
+			result.addObject("position", position);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
 		}
@@ -177,19 +184,16 @@ public class ProblemCompanyController extends AbstractController {
 
 		try {
 
-			//PARA NO CREAR PROBLEM A UNA POSITION CANCELADA O FUERA DEL MODO FINAL
 			final Position position = this.positionService.findOne(positionId);
-			Assert.isTrue(position.getDraftMode() == 1 && position.getIsCancelled() == 0);
 
 			if (!binding.hasErrors()) {
 				this.problemService.delete(p, positionId);
 				result = new ModelAndView("redirect:list.do?positionId=" + positionId);
 
 			} else {
-				final Position position1 = this.positionService.findOne(positionId);
 				result = new ModelAndView("problem/edit");
 				result.addObject("problem", problem);
-				result.addObject("position", position1);
+				result.addObject("position", position);
 			}
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");

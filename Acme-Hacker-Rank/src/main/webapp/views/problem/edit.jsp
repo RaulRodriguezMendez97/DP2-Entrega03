@@ -46,10 +46,10 @@
 
 <input type="button" name="cancel" value="<spring:message code="problem.cancel" />"
 			onclick="javascript: relativeRedir('problem/company/list.do?positionId=${position.id}');" />
-			
+<jstl:if test="${problem.id ne 0 }">	
 <input type="submit" name="delete" 
 	value="<spring:message code="problem.delete" />" />
-			
+</jstl:if>		
 </form:form>
 
 </security:authorize>

@@ -50,10 +50,12 @@
 <br/>
 <input type="submit" name="save" 
 	value="<spring:message code="position.save" />" />
-	
+
+<jstl:if test="${position.id ne 0 }">
 <input type="submit" name="delete" 
 	value="<spring:message code="position.delete" />" />
-	
+</jstl:if>
+
 <input type="button" name="cancel" value="<spring:message code="position.cancel" />"
 			onclick="javascript: relativeRedir('position/company/list.do');" />
 </form:form>

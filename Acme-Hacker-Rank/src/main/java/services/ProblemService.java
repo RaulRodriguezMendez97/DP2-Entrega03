@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,6 @@ public class ProblemService {
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
 			final Position p = this.positionRepository.getPositionByProblem(problem.getId());
 			Assert.isTrue(p.getCompany().equals(a));
-			//Assert.isTrue(p.getDraftMode() == 1);
 			final Problem old = this.findOne(problem.getId());
 			Assert.isTrue(old.getDraftMode() == 1);
 		}
@@ -105,6 +105,8 @@ public class ProblemService {
 			copy.setDraftMode(problem.getDraftMode());
 
 			this.validator.validate(copy, binding);
+			if (binding.hasErrors())
+				throw new ValidationException();
 			return copy;
 		}
 	}
@@ -115,11 +117,10 @@ public class ProblemService {
 		final Position p = this.positionRepository.findOne(positionId);
 		Assert.isTrue(p.getCompany().equals(a));
 		Assert.isTrue(p.getProblems().contains(problem));
-		//Assert.isTrue(p.getDraftMode()==1 && p.getIsCancelled()==0);
 		Assert.isTrue(problem.getDraftMode() == 1);
 		p.getProblems().remove(problem);
 		this.problemRepository.delete(problem);
-		this.positionService.save(p);
+		this.positionRepository.save(p);
 
 	}
 

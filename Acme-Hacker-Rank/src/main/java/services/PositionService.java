@@ -168,7 +168,6 @@ public class PositionService {
 		}
 
 	}
-
 	public void delete(final Position p) {
 		final UserAccount user = LoginService.getPrincipal();
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
