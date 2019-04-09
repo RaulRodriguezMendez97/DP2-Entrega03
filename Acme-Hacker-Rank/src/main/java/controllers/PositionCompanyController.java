@@ -2,7 +2,8 @@
 package controllers;
 
 import java.util.Collection;
-import java.util.Date;
+
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -109,31 +110,24 @@ public class PositionCompanyController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(final Position p, final BindingResult binding) {
 		ModelAndView result;
-		final Position position;
-
-		position = this.positionService.reconstruct(p, binding);
-
-		if (!(new Date().before(position.getDeadLine())))
-			binding.rejectValue("deadLine", "FutureBinding");
-
-		if (position.getId() != 0 && position.getDraftMode() == 0)
-			if (!(position.getProblems().size() >= 2))
-				binding.rejectValue("title", "ProblemSize");
+		Position position = null;
 
 		try {
+
+			position = this.positionService.reconstruct(p, binding);
 
 			if (!binding.hasErrors()) {
 				this.positionService.save(position);
 				result = new ModelAndView("redirect:list.do");
 			} else {
 				result = new ModelAndView("position/edit");
-				result.addObject("position", position);
+				result.addObject("position", p);
 			}
-			//		} catch (final ValidationException opps) {
-			//			result = new ModelAndView("position/edit");
-			//			result.addObject("position", position);
+		} catch (final ValidationException opps) {
+			result = new ModelAndView("position/edit");
+			result.addObject("position", p);
 		} catch (final Exception e) {
-
+			position = this.positionService.reconstruct(p, binding);
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
@@ -141,7 +135,7 @@ public class PositionCompanyController extends AbstractController {
 				if (position.getDraftMode() == 1) {
 
 					result = new ModelAndView("position/edit");
-					result.addObject("position", position);
+					result.addObject("position", p);
 					result.addObject("exception", e);
 				} else
 					result = new ModelAndView("redirect:list.do");

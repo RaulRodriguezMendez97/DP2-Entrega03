@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -151,9 +153,16 @@ public class PositionService {
 			copy.setProblems(res.getProblems());
 			copy.setIsCancelled(res.getIsCancelled());
 
+			if (!(new Date().before(copy.getDeadLine())))
+				binding.rejectValue("deadLine", "FutureBinding");
+
+			if (copy.getId() != 0 && copy.getDraftMode() == 0)
+				if (!(copy.getProblems().size() >= 2))
+					binding.rejectValue("title", "ProblemSize");
+
 			this.validator.validate(copy, binding);
-			//			if (binding.hasErrors())
-			//				throw new ValidationException();
+			if (binding.hasErrors())
+				throw new ValidationException();
 			return copy;
 
 		}
