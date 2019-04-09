@@ -21,11 +21,16 @@
 <display:table pagesize="5" name="problems" id="row"
 requestURI="problem/company/list.do" >
 
+<display:column>
+	<a href="problem/company/show.do?problemId=${row.id}&positionId=${position.id}"><spring:message code="problem.show" /></a>
+</display:column>
 
 <display:column property="title" titleKey="problem.title" />
+<display:column property="statement" titleKey="problem.statement" />
+
 <display:column>
 <jstl:if test="${(row.draftMode eq 1) and (position.draftMode eq 1 )}">
-	<a href="problem/company/edit.do?problemId=${row.id}&positionId=${position.id}"><spring:message code="position.edit" /></a>
+	<a href="problem/company/edit.do?problemId=${row.id}&positionId=${position.id}"><spring:message code="problem.edit" /></a>
 </jstl:if>
 </display:column>
 

@@ -26,4 +26,9 @@
 		<put-attribute name="body" value="/views/problem/edit.jsp" />
 	</definition>
 	
+	<definition name="problem/show" extends="master.page">	
+		<put-attribute name="title" value="Problems: Show" />
+		<put-attribute name="body" value="/views/problem/show.jsp" />
+	</definition>
+	
 </tiles-definitions>
