@@ -15,7 +15,6 @@ import org.springframework.validation.Validator;
 
 import repositories.FinderRepository;
 import security.LoginService;
-import domain.Company;
 import domain.Finder;
 import domain.Position;
 
@@ -85,7 +84,10 @@ public class FinderService {
 			finder.setMinSalary(0.);
 		if (finder.getMaxSalary() == null)
 			finder.setMaxSalary(Double.MAX_VALUE);
-		if ((new Date().getTime() - res.getMoment().getTime()) / 3600000 > this.customizableSystemService.getTimeCache()) {
+
+		final long a = (new Date().getTime() - res.getMoment().getTime()) / 3600000;
+		final long b = this.customizableSystemService.getTimeCache();
+		if (a > b) {
 			String fecha;
 			if (finder.getDeadLine() == null)
 				fecha = "";
@@ -93,29 +95,12 @@ public class FinderService {
 				fecha = this.getStringToDate(finder.getDeadLine());
 			final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
 			copy.setPositions(c);
-			finder.setMoment(new Date());
+			copy.setMoment(new Date());
 		} else
 			copy.setPositions(res.getPositions());
 
 		this.validator.validate(copy, binding);
 		return copy;
-
-	}
-	//TICKER
-	public static String generarTicker(final Company company) {
-		final int tam = 4;
-
-		final String d = company.getNameCompany().substring(0, 3);
-
-		String ticker = "-";
-		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-		for (int i = 0; i < tam; i++) {
-			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());
-			ticker = ticker + a.charAt(random);
-		}
-
-		return d + ticker;
 
 	}
 

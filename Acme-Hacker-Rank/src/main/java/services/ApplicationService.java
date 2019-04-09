@@ -67,11 +67,14 @@ public class ApplicationService {
 			Assert.isTrue(c.contains(application.getCurricula()));
 		}
 		savedApplication = this.applicationRepository.save(application);
-		if (application.getId() == 0) {
+		if (application.getId() == 0 && this.problemService.getProblemDraftModeOut().size() > 0) {
 			final Problem p = this.problemService.getAleatoryProblem();
 			p.getApplications().add(savedApplication);
 			this.problemService.saveApplication(p);
-		}
+		} else if (application.getId() != 0)
+			Assert.isTrue(true);
+		else
+			Assert.isTrue(false);
 		return savedApplication;
 	}
 	//RECONSTRUCT

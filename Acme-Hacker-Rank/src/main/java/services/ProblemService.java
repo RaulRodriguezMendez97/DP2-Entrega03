@@ -127,15 +127,21 @@ public class ProblemService {
 	public Problem getProblemByApplication(final Application a) {
 		return this.problemRepository.getProblemByApplication(a);
 	}
+
 	public Problem getAleatoryProblem() {
-		final Collection<Problem> ps = this.findAll();
+		final Collection<Problem> ps = this.problemRepository.getProblemDraftModeOut();
 		final List<Problem> list = new ArrayList<Problem>(ps);
-		final int number = (int) Math.random() % list.size();
-		return list.get(number);
+		final int number = (int) Math.floor(Math.random() * ((list.size() - 1) - 0 + 1) + (0));
+		final Problem aleatory = list.get(number);
+		return aleatory;
 	}
 
 	public Problem saveApplication(final Problem p) {
 		return this.problemRepository.save(p);
+	}
+
+	public Collection<Problem> getProblemDraftModeOut() {
+		return this.problemRepository.getProblemDraftModeOut();
 	}
 
 }

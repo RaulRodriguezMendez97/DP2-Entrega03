@@ -81,15 +81,19 @@ public class ApplicationHackerController extends AbstractController {
 				this.applicationService.save(newApplication);
 				result = new ModelAndView("redirect:list.do");
 			} else {
-				result = new ModelAndView("application/edit");
+				result = new ModelAndView("application/create");
 				result.addObject("application", newApplication);
 				result.addObject("curriculas", this.applicationService.getCurriculaHacker());
 			}
 		} catch (final Exception e) {
-			result = new ModelAndView("application/edit");
+			System.out.println(e.toString());
+			if (newApplication.getId() == 0) {
+				result = new ModelAndView("application/create");
+				result.addObject("curriculas", this.applicationService.getCurriculaHacker());
+			} else
+				result = new ModelAndView("application/edit");
 			result.addObject("exception", "e");
 			result.addObject("application", newApplication);
-			result.addObject("curriculas", this.applicationService.getCurriculaHacker());
 		}
 		return result;
 
