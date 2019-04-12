@@ -70,7 +70,13 @@
 <legend><spring:message code="administrator.salary" /></legend>
 <b><spring:message code="administrator.best" /></b>: <jstl:out value="${getPositionWithBestSalary}"></jstl:out><br/>
 <b><spring:message code="administrator.worst" /></b>: <jstl:out value="${getPositionWithWorstSalary}"></jstl:out><br/>
+</fieldset>
 
+<fieldset>
+<legend><spring:message code="administrator.curricula-finder" /></legend>
+<b><spring:message code="administrator.curricula-finder.curricula" /></b>: <jstl:out value="${getPositionWithBestSalary}"></jstl:out><br/>
+<b><spring:message code="administrator.curricula-finder.finder1" /></b>: <jstl:out value="${getPositionWithWorstSalary}"></jstl:out><br/>
+<b><spring:message code="administrator.curricula-finder.finder2" /></b>: <jstl:out value="${getPositionWithWorstSalary}"></jstl:out><br/>
 </fieldset>
 
 </security:authorize>
