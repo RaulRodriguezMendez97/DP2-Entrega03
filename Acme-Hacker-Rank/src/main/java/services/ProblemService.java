@@ -21,6 +21,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Application;
+import domain.Company;
 import domain.Position;
 import domain.Problem;
 
@@ -41,7 +42,7 @@ public class ProblemService {
 	private Validator			validator;
 
 	@Autowired
-	private PositionService		positionService;
+	private CompanyService		companyService;
 
 
 	public Problem create() {
@@ -144,4 +145,9 @@ public class ProblemService {
 		return this.problemRepository.getProblemDraftModeOut();
 	}
 
+	public Collection<Problem> getProblemsByCompany() {
+		final int idUser = LoginService.getPrincipal().getId();
+		final Company c = this.companyService.companyUserAccount(idUser);
+		return this.problemRepository.getProblemsByCompany(c.getId());
+	}
 }

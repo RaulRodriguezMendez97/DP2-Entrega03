@@ -2,6 +2,7 @@
 package controllers;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ import domain.Application;
 import domain.Problem;
 
 @Controller
-@RequestMapping("/application/hacker")
-public class ApplicationHackerController extends AbstractController {
+@RequestMapping("/application/comanpy")
+public class ApplicationCompanyController extends AbstractController {
 
 	@Autowired
 	private ApplicationService	applicationService;
@@ -30,25 +31,15 @@ public class ApplicationHackerController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView result;
-		final Collection<Application> applications;
-		applications = this.applicationService.getAllMyApplicationsHacker();
+		final Collection<Application> applications = new HashSet<Application>();
+		final Collection<Problem> problems = this.problemService.getProblemsByCompany();
+		for (final Problem p : problems)
+			if (p.getDraftMode() == 1)
+				applications.addAll(p.getApplications());
 		result = new ModelAndView("application/list");
 		result.addObject("applications", applications);
 		return result;
 
-	}
-
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		final ModelAndView result;
-		final Application application;
-
-		application = this.applicationService.create();
-
-		result = new ModelAndView("application/create");
-		result.addObject("application", application);
-		result.addObject("curriculas", this.applicationService.getCurriculaHacker());
-		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -97,32 +88,20 @@ public class ApplicationHackerController extends AbstractController {
 		return result;
 
 	}
-	//	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	//	public ModelAndView delete(@RequestParam final int applicationId) {
-	//		ModelAndView result;
-	//
-	//		try {
-	//			final Application application = this.applicationService.findOne(applicationId);
-	//			Assert.notNull(application);
-	//			this.applicationService.delete(application);
-	//			result = new ModelAndView("redirect:list.do");
-	//		} catch (final Exception e) {
-	//			result = new ModelAndView("application/list");
-	//			result.addObject("exception", "e");
-	//			result.addObject("applications", this.applicationService.getAllMyApplicationsHacker());
-	//		}
-	//		return result;
-	//	}
 
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int applicationId) {
 		ModelAndView result;
 		Application application;
 		try {
+			boolean isYourApplication = false;
 			application = this.applicationService.findOne(applicationId);
 			Assert.notNull(application);
-			final Collection<Application> applications = this.applicationService.getAllMyApplicationsHacker();
-			Assert.isTrue(applications.contains(application));
+			final Collection<Problem> problems = this.problemService.getProblemsByCompany();
+			for (final Problem p : problems)
+				if (p.getApplications().contains(application))
+					isYourApplication = true;
+			Assert.isTrue(isYourApplication);
 
 			final Problem p = this.problemService.getProblemByApplication(application);
 
