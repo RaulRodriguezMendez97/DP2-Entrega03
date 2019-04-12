@@ -69,7 +69,6 @@
 		<security:intercept-url pattern="/problem/company/edit.do" access="hasRole('COMPANY')" />
 		<security:intercept-url pattern="/problem/company/show.do" access="hasRole('COMPANY')" />
 		
-		
 		<security:intercept-url pattern="/application/hacker/list.do" access="hasRole('HACKER')" />
 		<security:intercept-url pattern="/application/hacker/edit.do" access="hasRole('HACKER')" />
 		<security:intercept-url pattern="/application/hacker/show.do" access="hasRole('HACKER')" />

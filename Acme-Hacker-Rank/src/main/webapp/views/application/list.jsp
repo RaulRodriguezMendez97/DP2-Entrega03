@@ -24,7 +24,7 @@
 
 <security:authorize access="hasRole('HACKER')">
 
-<display:table pagesize="5" name="applications" id="row"
+<display:table pagesize="10" name="applications" id="row"
 requestURI="application/hacker/list.do" >
 
 <display:column sortable="true" titleKey="application.status">
@@ -68,3 +68,55 @@ requestURI="application/hacker/list.do" >
 
 </security:authorize>
 
+<security:authorize access="hasRole('COMPANY')">
+
+<display:table pagesize="10" name="applications" id="row"
+requestURI="application/company/list.do" >
+
+<display:column sortable="true" titleKey="application.status">
+
+<jstl:if test="${row.status eq 0 }">
+	<spring:message code="application.status.pending" />
+</jstl:if>
+
+<jstl:if test="${row.status eq 1 }">
+	<spring:message code="application.status.submitted" />
+</jstl:if>
+
+<jstl:if test="${row.status eq 2 }">
+	<spring:message code="application.status.accepted" />
+</jstl:if>
+
+<jstl:if test="${row.status eq 3 }">
+	<spring:message code="application.status.cancel" />
+</jstl:if>
+</display:column>
+<display:column property="curricula.id" titleKey="application.curricula" />
+<display:column property="moment" titleKey="application.moment" />
+<display:column property="explication" titleKey="application.explication" />
+<display:column property="urlCode" titleKey="application.urlCode" />
+<display:column property="submitMoment" titleKey="application.submitMoment" />
+<display:column >
+<a href="application/company/show.do?applicationId=${row.id}"><spring:message code="application.show" /></a>
+</display:column>
+<display:column>
+	<jstl:if test="${row.status eq 1 }">
+		<a href="application/company/edit.do?applicationId=${row.id}&status=2"><spring:message code="application.aceptar" /></a>
+	</jstl:if>
+	<jstl:if test="${row.status eq 0 or row.status eq 2 or row.status eq 3 }">
+	-
+	</jstl:if>
+</display:column>
+
+<display:column>
+	<jstl:if test="${row.status eq 1 }">
+		<a href="application/company/edit.do?applicationId=${row.id}&status=3"><spring:message code="application.reject" /></a>
+	</jstl:if>
+	<jstl:if test="${row.status eq 0 or row.status eq 2 or row.status eq 3 }">
+	-
+	</jstl:if>
+</display:column>
+
+</display:table>
+
+</security:authorize>

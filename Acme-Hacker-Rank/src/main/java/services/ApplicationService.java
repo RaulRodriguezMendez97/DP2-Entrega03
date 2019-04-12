@@ -134,4 +134,8 @@ public class ApplicationService {
 		Assert.isTrue(this.getAllMyApplicationsHacker().contains(application));
 		this.applicationRepository.delete(application);
 	}
+
+	public Application saveCompany(final Application a) {
+		return this.applicationRepository.save(a);
+	}
 }
