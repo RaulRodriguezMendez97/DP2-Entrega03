@@ -19,7 +19,7 @@ public interface ProblemRepository extends JpaRepository<Problem, Integer> {
 	@Query("select p from Problem p where p.draftMode = 1")
 	public Collection<Problem> getProblemDraftModeOut();
 
-	@Query("select p.problems from Position p where p.company.id = ?1 where p.draftMode = 1")
+	@Query("select p.problems from Position p where p.company.id = ?1 and p.draftMode = 1")
 	public Collection<Problem> getProblemsByCompany(int idCompany);
 
 }
