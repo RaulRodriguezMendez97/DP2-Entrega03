@@ -97,11 +97,11 @@ requestURI="application/company/list.do" >
 <display:column property="urlCode" titleKey="application.urlCode" />
 <display:column property="submitMoment" titleKey="application.submitMoment" />
 <display:column >
-<a href="application/company/show.do?applicationId=${row.id}"><spring:message code="application.show" /></a>
+<a style="color:orange;" href="application/company/show.do?applicationId=${row.id}"><spring:message code="application.show" /></a>
 </display:column>
 <display:column>
 	<jstl:if test="${row.status eq 1 }">
-		<a href="application/company/edit.do?applicationId=${row.id}&status=2"><spring:message code="application.aceptar" /></a>
+		<a style="color:green;" href="application/company/edit.do?applicationId=${row.id}&status=2"><spring:message code="application.aceptar" /></a>
 	</jstl:if>
 	<jstl:if test="${row.status eq 0 or row.status eq 2 or row.status eq 3 }">
 	-
@@ -110,7 +110,7 @@ requestURI="application/company/list.do" >
 
 <display:column>
 	<jstl:if test="${row.status eq 1 }">
-		<a href="application/company/edit.do?applicationId=${row.id}&status=3"><spring:message code="application.reject" /></a>
+		<a style="color:red;" href="application/company/edit.do?applicationId=${row.id}&status=3"><spring:message code="application.reject" /></a>
 	</jstl:if>
 	<jstl:if test="${row.status eq 0 or row.status eq 2 or row.status eq 3 }">
 	-
