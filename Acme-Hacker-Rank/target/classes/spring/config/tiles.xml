@@ -39,6 +39,7 @@
 		
 		<value>/views/problem/tiles.xml</value>
 		<value>/views/application/tiles.xml</value>
+		<value>/views/profile/tiles.xml</value>
 		
 	
 		

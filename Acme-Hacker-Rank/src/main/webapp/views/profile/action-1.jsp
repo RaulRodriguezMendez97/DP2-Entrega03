@@ -23,25 +23,36 @@
 
 <img src="<jstl:out value='${actor.photo }'/> ">  <br/>
 <br/>
+<fieldset>
+	<legend><spring:message code="profile.personalDatas" /></legend>
 <b><spring:message code="profile.action.2.name" /> </b> <jstl:out value="${actor.name }"/> <br/>
-<b><spring:message code="profile.action.2.middleName" /></b> <jstl:out value="${actor.middleName }"/> <br/>
-<b><spring:message code="profile.action.2.surname" /></b> <jstl:out value="${actor.surname }"/> <br/>
+<b><spring:message code="profile.action.2.surname" /></b> <jstl:out value="${actor.surnames}"/> <br/>
+<b><spring:message code="profile.action.2.vatNumber" /></b> <jstl:out value="${actor.vatNumber }"/> <br/>
 <b><spring:message code="profile.action.2.email" /></b> <jstl:out value="${actor.email }"/> <br/>
 <b><spring:message code="profile.action.2.phone" /></b> <jstl:out value="${actor.phone }"/> <br/>
 <b><spring:message code="profile.action.2.address" /></b> <jstl:out value="${actor.address }"/> <br/>
 
-<security:authorize access="hasRole('BROTHERHOOD')">
-<b><spring:message code="profile.brotherhood.title" /></b> <jstl:out value="${actor.title }"/> <br/>
-<b><spring:message code="profile.brotherhood.establishmentDate" /></b> <jstl:out value="${actor.establishmentDate }"/> <br/>
-
-<display:table name="${pictures}" id="row">
-<display:column titleKey="profile.brotherhood.pictures" ><img src="${row.url}" width="130px" height="80px"></display:column>
-</display:table>
-
+<security:authorize access="hasRole('COMPANY')">
+<b><spring:message code="profile.company.nameCompany" /></b> <jstl:out value="${actor.nameCompany }"/> <br/>
 </security:authorize>
+</fieldset>
 
-<br/>
-<acme:cancel url="welcome/index.do" code="administrator.cancel"/>
+<fieldset>
+	 <legend><spring:message code="creditCard.Data" /></legend>
+	 <b><spring:message code="profile.creditCard.brandName" /> </b> <jstl:out value="${creditCard.brandName}"/> <br/>
+	 <b><spring:message code="profile.creditCard.holderName" /> </b> <jstl:out value="${creditCard.holderName}"/> <br/>
+	 <b><spring:message code="profile.creditCard.number" /> </b> <jstl:out value="${creditCard.number}"/> <br/>
+	 <b><spring:message code="profile.creditCard.expirationMonth" /> </b> <jstl:out value="${creditCard.expirationMonth}"/> <br/>
+	 <b><spring:message code="profile.creditCard.expirationYear" /> </b> <jstl:out value="${creditCard.expirationYear}"/> <br/>
+	 <b><spring:message code="profile.creditCard.CW" /> </b> <jstl:out value="${creditCard.CW}"/> <br/>
+	 
+	 <br />
+	</fieldset>
+
+
+
+
+<acme:cancel url="welcome/index.do" code="action1.volver"/>
 
 
 </security:authorize>
@@ -53,8 +64,8 @@
 </security:authorize>
 
 
-<security:authorize access="hasRole('BROTHERHOOD')">
-<form action="profile/edit-brotherhood.do">
+<security:authorize access="hasRole('COMPANY')">
+<form action="profile/edit-company.do">
     <input type="submit" value="<spring:message code="profile.edit.profile" />" />
 </form>
 </security:authorize>

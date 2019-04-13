@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.CreditCardRepository;
+import domain.Company;
 import domain.CreditCard;
 import forms.RegistrationFormCompanyAndCreditCard;
 
@@ -21,6 +22,8 @@ public class CreditCardService {
 
 	@Autowired
 	private CreditCardRepository	creditCardRepository;
+	@Autowired
+	private CompanyService			companyService;
 
 	@Autowired
 	private Validator				validator;
@@ -44,9 +47,11 @@ public class CreditCardService {
 		return cc;
 	}
 	public CreditCard save(final CreditCard cc) {
+		if (cc.getId() == 0) {
+			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			Assert.isTrue(!creditCardsNumbers.contains(cc.getNumber()));
+		}
 
-		final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
-		Assert.isTrue(!creditCardsNumbers.contains(cc.getNumber()));
 		Assert.isTrue(cc != null && cc.getBrandName() != null && cc.getHolderName() != null && cc.getBrandName() != "" && cc.getHolderName() != "");
 		return this.creditCardRepository.save(cc);
 
@@ -72,8 +77,9 @@ public class CreditCardService {
 			this.validator.validate(res, binding);
 
 		} else {
-
-			res = this.creditCardRepository.findOne(registrationForm.getId());
+			Company company;
+			company = this.companyService.findOne(registrationForm.getId());
+			res = company.getCreditCard();
 			final CreditCard p = new CreditCard();
 			p.setId(res.getId());
 			p.setVersion(res.getVersion());

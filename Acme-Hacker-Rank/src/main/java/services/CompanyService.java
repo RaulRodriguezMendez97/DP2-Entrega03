@@ -201,6 +201,8 @@ public class CompanyService {
 				p.setUserAccount(user);
 			}
 
+			p.getUserAccount().setUsername(registrationForm.getUserAccount().getUsername());
+
 			this.validator.validate(p, binding);
 			res = p;
 

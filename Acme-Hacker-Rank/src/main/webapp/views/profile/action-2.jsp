@@ -32,12 +32,14 @@
 	<form:hidden path="version" />
 	<form:hidden path = "patternPhone" />
 	
-	
+	<fieldset>
+	<legend><spring:message code="edit.personalDatas" /></legend>
 	<acme:textbox code="profile.action.3.name" path="name"/>
 	
-	<acme:textbox code="profile.action.3.middleName" path="middleName"/>
+
+	<acme:textbox code="profile.action.3.surname" path="surnames"/>
 	
-	<acme:textbox code="profile.action.3.surname" path="surname"/>
+	<acme:textbox code="profile.action.3.vatNumber" path="vatNumber"/>	
 	
 	<acme:textbox code="profile.action.3.email" path="email"/>	
 
@@ -47,30 +49,36 @@
 	
 	<acme:textbox code="profile.action.3.address" path="address"/>
 	
-	<acme:password code="profile.pass1" path="userAccount.password"/>
 	
-	<security:authorize access="hasRole('MEMBER')">
-	<acme:password code="profile.pass2" path="password2"/>
-	</security:authorize>
-	
-	
-	<security:authorize access="hasAnyRole('BROTHERHOOD,ADMIN')">
-	
-	<acme:password code="profile.pass2" path="password"/>
-	
-	</security:authorize>
-	
-	
-	<security:authorize access="hasRole('BROTHERHOOD')">
+	<security:authorize access="hasRole('COMPANY')">
 	
 
-	<acme:textbox code="profile.brotherhood.title" path="title"/>
-	
-	<acme:textbox code="profile.brotherhood.establishmentDate" path="establishmentDate"/>
+	<acme:textbox code="company.nameCompany" path="nameCompany"/>
 	
 	</security:authorize>
 	
+	</fieldset>
 	<br />
+	
+	<fieldset>
+	 <legend><spring:message code="profile.creditCard.Data" /></legend>
+	<acme:textbox code="creditCard.brandName" path="brandName"/>
+	<acme:textbox code="creditCard.holderName" path="holderName"/>		
+	<acme:textbox code="creditCard.number" path="number"/>
+	<acme:textbox code="creditCard.expirationMonth" path="expirationMonth"/>
+	<acme:textbox code="creditCard.expirationYear" path="ExpirationYear"/>
+	<acme:textbox code="creditCard.CW" path="CW"/>
+	<br />
+	</fieldset>
+	
+	<fieldset>
+	 <legend><spring:message code="company.userAccount" /></legend>
+	<acme:textbox code="company.username" path="userAccount.username"/>	
+	<acme:password code="profile.pass1" path="userAccount.password"/>
+	<acme:password code="profile.pass2" path="password"/>
+	</fieldset>
+	<br />
+	
 	<input type="submit" name="save" onclick=" return validar(); "
 	value="<spring:message code="profile.action.3.save" />" />
 	<acme:cancel url="profile/personal-datas.do" code="administrator.cancel"/>
