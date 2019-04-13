@@ -48,8 +48,8 @@
 		
 		<security:intercept-url pattern="/profile/personal-datas.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/edit-administrator.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/profile/edit-brotherhood.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/profile/edit-member.do" access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/profile/edit-company.do" access="hasRole('COMPANY')" />
+		<security:intercept-url pattern="/profile/edit-hacker.do" access="hasRole('HACKER')" />
 		<security:intercept-url pattern="/export/json.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/notification/actor/list.do" access="isAuthenticated()" />
