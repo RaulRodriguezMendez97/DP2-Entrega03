@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,10 @@ public class CurriculaService {
 	}
 	public Collection<Curricula> getCurriculasByHacker(final Integer hackerId) {
 		return this.curriculaRepository.getCurriculasByHacker(hackerId);
+	}
+
+	public List<Double> getMinMaxAvgDesvCurriculaPerHacker() {
+		return this.curriculaRepository.getMinMaxAvgDesvCurriculaPerHacker();
 	}
 
 }

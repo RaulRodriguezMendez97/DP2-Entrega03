@@ -26,4 +26,11 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 
 	@Query("select f from Finder f where ?1 member of f.positions")
 	public List<Finder> getFinderByPosition(Integer id);
+
+	@Query("select min(f.positions.size),max(f.positions.size),avg(f.positions.size), sqrt(1.0*sum(f.positions.size * f.positions.size) / count(f) - avg(f.positions.size) * avg(f.positions.size)) from Finder f")
+	public List<Double> getMinMaxAvgDesvResultsFinder();
+
+	@Query("select count(f) from Finder f where f.positions.size = 0 / 1.0 * (select count(f) from Finder f where f.positions.size > 0)")
+	public Double ratioEmptyNotEmtpyFinder();
+
 }

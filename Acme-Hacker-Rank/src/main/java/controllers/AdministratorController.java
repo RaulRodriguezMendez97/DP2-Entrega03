@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.CompanyService;
+import services.CurriculaService;
+import services.FinderService;
 import services.HackerService;
 import services.PositionService;
 
@@ -37,6 +39,12 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private HackerService		hackerService;
+
+	@Autowired
+	private CurriculaService	curriculaService;
+
+	@Autowired
+	private FinderService		finderService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -97,6 +105,10 @@ public class AdministratorController extends AbstractController {
 
 		result.addObject("getPositionWithBestSalary", getPositionWithBestSalary);
 		result.addObject("getPositionWithWorstSalary", getPositionWithWorstSalary);
+
+		result.addObject("curricula", this.curriculaService.getMinMaxAvgDesvCurriculaPerHacker());
+		result.addObject("resultsFinder", this.finderService.getMinMaxAvgDesvResultsFinder());
+		result.addObject("emptyVSnotEmpty", this.finderService.ratioEmptyNotEmtpyFinder());
 
 		return result;
 	}

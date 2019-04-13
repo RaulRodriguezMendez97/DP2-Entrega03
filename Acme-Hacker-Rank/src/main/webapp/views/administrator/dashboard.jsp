@@ -74,9 +74,9 @@
 
 <fieldset>
 <legend><spring:message code="administrator.curricula-finder" /></legend>
-<b><spring:message code="administrator.curricula-finder.curricula" /></b>: <jstl:out value="${getPositionWithBestSalary}"></jstl:out><br/>
-<b><spring:message code="administrator.curricula-finder.finder1" /></b>: <jstl:out value="${getPositionWithWorstSalary}"></jstl:out><br/>
-<b><spring:message code="administrator.curricula-finder.finder2" /></b>: <jstl:out value="${getPositionWithWorstSalary}"></jstl:out><br/>
+<b><spring:message code="administrator.curricula-finder.curricula" /></b>: <jstl:out value="Min: ${curricula[0][0]}, Max: ${curricula[0][1]}, Avg: ${curricula[0][2]}, Desv: ${curricula[0][3]}"></jstl:out><br/>
+<b><spring:message code="administrator.curricula-finder.finder1" /></b>: <jstl:out value="Min: ${resultsFinder[0][0]}, Max: ${resultsFinder[0][1]}, Avg: ${resultsFinder[0][2]}, Desv: ${resultsFinder[0][3]}"></jstl:out><br/>
+<b><spring:message code="administrator.curricula-finder.finder2" /></b>: <jstl:out value="Ratio: ${emptyVSnotEmpty}"></jstl:out><br/>
 </fieldset>
 
 </security:authorize>

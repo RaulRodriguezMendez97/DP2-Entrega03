@@ -142,4 +142,12 @@ public class FinderService {
 		finder.setPositions(c);
 		this.save(finder);
 	}
+
+	public List<Double> getMinMaxAvgDesvResultsFinder() {
+		return this.finderRepository.getMinMaxAvgDesvResultsFinder();
+	}
+
+	public Double ratioEmptyNotEmtpyFinder() {
+		return this.finderRepository.ratioEmptyNotEmtpyFinder();
+	}
 }
