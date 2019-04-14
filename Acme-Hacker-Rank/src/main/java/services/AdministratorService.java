@@ -41,7 +41,7 @@ public class AdministratorService {
 		final Administrator admin = new Administrator();
 		admin.setName("");
 		admin.setVatNumber("");
-		admin.setSurnames(new HashSet<String>());
+		admin.setSurnames("");
 		admin.setPhoto("");
 		admin.setEmail("");
 		admin.setPhone("");
