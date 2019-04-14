@@ -1,13 +1,10 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -25,15 +22,15 @@ import security.UserAccount;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Actor extends DomainEntity {
 
-	private String				name;
-	private Collection<String>	surnames;
-	private String				vatNumber;
-	private String				photo;
-	private String				email;
-	private String				phone;
-	private String				address;
-	private UserAccount			userAccount;
-	private CreditCard			creditCard;
+	private String		name;
+	private String		surnames;
+	private String		vatNumber;
+	private String		photo;
+	private String		email;
+	private String		phone;
+	private String		address;
+	private UserAccount	userAccount;
+	private CreditCard	creditCard;
 
 
 	//Getters and Setters
@@ -58,13 +55,12 @@ public class Actor extends DomainEntity {
 	}
 
 	@Valid
-	@ElementCollection
 	@NotNull
-	public Collection<String> getSurnames() {
+	public String getSurnames() {
 		return this.surnames;
 	}
 
-	public void setSurnames(final Collection<String> surnames) {
+	public void setSurnames(final String surnames) {
 		this.surnames = surnames;
 	}
 

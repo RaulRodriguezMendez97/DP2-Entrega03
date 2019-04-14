@@ -50,7 +50,7 @@ public class CompanyService {
 		final String telephoneCode = this.customizableService.getTelephoneCode();
 		res.setPhone(telephoneCode + " ");
 		res.setPhoto("");
-		res.setSurnames(new HashSet<String>());
+		res.setSurnames("");
 		res.setAddress("");
 		res.setCreditCard(new CreditCard());
 		res.setNameCompany("");

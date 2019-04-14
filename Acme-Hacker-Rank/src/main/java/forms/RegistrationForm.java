@@ -64,7 +64,7 @@ public class RegistrationForm extends Actor {
 		registrationForm.setName("");
 		registrationForm.setVatNumber("");
 		registrationForm.setPhoto("");
-		registrationForm.setSurnames(new HashSet<String>());
+		registrationForm.setSurnames("");
 		registrationForm.setAddress("");
 		registrationForm.setCreditCard(new CreditCard());
 		registrationForm.setPassword("");
