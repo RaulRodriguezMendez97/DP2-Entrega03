@@ -25,8 +25,10 @@ import services.AdministratorService;
 import services.CompanyService;
 import services.CreditCardService;
 import domain.Actor;
+import domain.Administrator;
 import domain.Company;
 import domain.CreditCard;
+import forms.RegistrationForm;
 import forms.RegistrationFormCompanyAndCreditCard;
 
 @Controller
@@ -136,6 +138,82 @@ public class ProfileController extends AbstractController {
 		} catch (final Exception e) {
 
 			result = new ModelAndView("profile/editCompany");
+			result.addObject("actor", registrationForm);
+			result.addObject("exception", e);
+
+		}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit-administrator", method = RequestMethod.GET)
+	public ModelAndView editAdmin() {
+		ModelAndView result;
+		final RegistrationForm registrationForm = new RegistrationForm();
+		Administrator admin;
+		CreditCard creditCard;
+		try {
+
+			admin = this.adminService.findOne(this.adminService.getAdministratorByUserAccount(LoginService.getPrincipal().getId()).getId());
+			creditCard = admin.getCreditCard();
+			Assert.notNull(admin);
+			registrationForm.setId(admin.getId());
+			registrationForm.setVersion(admin.getVersion());
+			registrationForm.setName(admin.getName());
+			registrationForm.setVatNumber(admin.getVatNumber());
+			registrationForm.setSurnames(admin.getSurnames());
+			registrationForm.setPhoto(admin.getPhoto());
+			registrationForm.setEmail(admin.getEmail());
+			registrationForm.setPhone(admin.getPhone());
+			registrationForm.setCreditCard(admin.getCreditCard());
+			registrationForm.setAddress(admin.getAddress());
+			registrationForm.setPassword(admin.getUserAccount().getPassword());
+			registrationForm.setPatternPhone(false);
+			final UserAccount userAccount = new UserAccount();
+			userAccount.setUsername(admin.getUserAccount().getUsername());
+			userAccount.setPassword(admin.getUserAccount().getPassword());
+			registrationForm.setUserAccount(userAccount);
+			registrationForm.setBrandName(creditCard.getBrandName());
+			registrationForm.setHolderName(creditCard.getHolderName());
+			registrationForm.setNumber(creditCard.getNumber());
+			registrationForm.setExpirationMonth(creditCard.getExpirationMonth());
+			registrationForm.setExpirationYear(creditCard.getExpirationYear());
+			registrationForm.setCW(creditCard.getCW());
+
+			result = new ModelAndView("profile/editAdmin");
+			result.addObject("actor", registrationForm);
+			result.addObject("action", "profile/edit-administrator.do");
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit-administrator", method = RequestMethod.POST, params = "save")
+	public ModelAndView editAdmin(final RegistrationForm registrationForm, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			final CreditCard creditCard = this.creditCardService.reconstruct(registrationForm, binding);
+			registrationForm.setCreditCard(creditCard);
+			final Administrator admin = this.adminService.reconstruct(registrationForm, binding);
+			if (!binding.hasErrors()) {
+				final CreditCard creditCardSave = this.creditCardService.save(creditCard);
+				admin.setCreditCard(creditCardSave);
+				this.adminService.save(admin);
+
+				result = new ModelAndView("redirect:personal-datas.do");
+			} else {
+				result = new ModelAndView("profile/editAdmin");
+				result.addObject("actor", registrationForm);
+
+			}
+		} catch (final Exception e) {
+
+			result = new ModelAndView("profile/editAdmin");
 			result.addObject("actor", registrationForm);
 			result.addObject("exception", e);
 

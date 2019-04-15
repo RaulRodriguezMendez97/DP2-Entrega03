@@ -24,7 +24,7 @@
 <img src="<jstl:out value='${actor.photo }'/> ">  <br/>
 <br/>
 <fieldset>
-	<legend><spring:message code="profile.personalDatas" /></legend>
+	<legend><spring:message code="profile.personalDatas" /></legend>	
 <b><spring:message code="profile.action.2.name" /> </b> <jstl:out value="${actor.name }"/> <br/>
 <b><spring:message code="profile.action.2.surname" /></b> <jstl:out value="${actor.surnames}"/> <br/>
 <b><spring:message code="profile.action.2.vatNumber" /></b> <jstl:out value="${actor.vatNumber }"/> <br/>
@@ -48,6 +48,14 @@
 	 
 	 <br />
 	</fieldset>
+
+
+	<fieldset>
+	 <legend><spring:message code="company.userAccount" /></legend>
+	 <b><spring:message code="see.username" /></b> <jstl:out value="${actor.userAccount.username }"/> <br/>
+	 </fieldset>
+	<br />
+	
 
 
 

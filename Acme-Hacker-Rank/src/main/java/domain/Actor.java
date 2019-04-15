@@ -46,6 +46,7 @@ public class Actor extends DomainEntity {
 	}
 
 	@NotNull
+	@NotBlank
 	public String getVatNumber() {
 		return this.vatNumber;
 	}
@@ -56,6 +57,7 @@ public class Actor extends DomainEntity {
 
 	@Valid
 	@NotNull
+	@NotBlank
 	public String getSurnames() {
 		return this.surnames;
 	}
