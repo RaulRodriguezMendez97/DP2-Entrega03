@@ -140,7 +140,18 @@ public class AdministratorService {
 			res.setPhone(registrationForm.getPhone());
 			res.setPhoto(registrationForm.getPhoto());
 			res.setSurnames(registrationForm.getSurnames());
-			res.setUserAccount(registrationForm.getUserAccount());
+			res.setCreditCard(registrationForm.getCreditCard());
+			final Authority ad = new Authority();
+			final UserAccount user = new UserAccount();
+			user.setAuthorities(new HashSet<Authority>());
+			ad.setAuthority(Authority.ADMIN);
+			user.getAuthorities().add(ad);
+			res.setUserAccount(user);
+			user.setUsername(registrationForm.getUserAccount().getUsername());
+			user.setPassword(registrationForm.getUserAccount().getPassword());
+
+			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
+
 			if (res.getPhone().length() <= 5)
 				res.setPhone("");
 
@@ -166,6 +177,7 @@ public class AdministratorService {
 			a.setPhone(registrationForm.getPhone());
 			a.setPhoto(registrationForm.getPhoto());
 			a.setSurnames(registrationForm.getSurnames());
+			a.setCreditCard(registrationForm.getCreditCard());
 
 			if (a.getPhone().length() <= 5)
 				a.setPhone("");
@@ -187,6 +199,7 @@ public class AdministratorService {
 				user.setPassword(hash);
 				a.setUserAccount(user);
 			}
+			a.getUserAccount().setUsername(registrationForm.getUserAccount().getUsername());
 
 			this.validator.validate(res, binding);
 			res = a;

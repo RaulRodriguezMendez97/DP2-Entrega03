@@ -124,10 +124,7 @@
 	
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Cristian"/>
-		<property name="surnames">
-			<list>
-			</list>
-		</property>
+		<property name="surnames" value="Lorca"/>
 		<property name="vatNumber" value="85473"/>
 		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
 		<property name="email" value="cristian@hotmail.com"/>
@@ -142,11 +139,7 @@
 	
 	<bean id="company1" class="domain.Company">
 		<property name="name" value="Antonio"/>
-		<property name="surnames">
-			<list>
-			
-			</list>
-		</property>
+		<property name="surnames" value=""/>
 		<property name="vatNumber" value="745"/>
 		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
 		<property name="email" value="company@hotmail.com"/>
@@ -160,10 +153,7 @@
 	
 	<bean id="company2" class="domain.Company">
 		<property name="name" value="Jesús"/>
-		<property name="surnames">
-			<list>
-			</list>
-		</property>
+		<property name="surnames" value="Elias"/>
 		<property name="vatNumber" value="745"/>
 		<property name="photo"><null/></property>
 		<property name="email" value="companyOfJesus@hotmail.com"/>
@@ -179,10 +169,7 @@
 	
 	<bean id="hacker1" class="domain.Hacker">
 		<property name="name" value="Cristian"/>
-		<property name="surnames">
-			<list>
-			</list>
-		</property>
+		<property name="surnames" value="Lorca"/>
 		<property name="vatNumber" value="800"/>
 		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
 		<property name="email" value="Cristian@hotmail.com"/>
@@ -196,12 +183,7 @@
 	
 		<bean id="hacker2" class="domain.Hacker">
 		<property name="name" value="Raul"/>
-		<property name="surnames">
-			<list>
-			<value>Rodriguez</value>
-				<value>Mendez</value>
-			</list>
-		</property>
+		<property name="surnames" value="Rodriguez"/>
 		<property name="vatNumber" value="900"/>
 		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
 		<property name="email" value="Raul@hotmail.com"/>

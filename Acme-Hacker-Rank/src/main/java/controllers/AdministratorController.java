@@ -10,41 +10,60 @@
 
 package controllers;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdministratorService;
 import services.ApplicationService;
 import services.CompanyService;
+import services.CreditCardService;
 import services.CurriculaService;
+import services.CustomizableSystemService;
 import services.FinderService;
 import services.HackerService;
 import services.PositionService;
+import domain.Administrator;
+import domain.CreditCard;
+import forms.RegistrationForm;
 
 @Controller
 @RequestMapping("/administrator")
 public class AdministratorController extends AbstractController {
 
 	@Autowired
-	private PositionService		positionService;
+	private PositionService				positionService;
 
 	@Autowired
-	private ApplicationService	applicationService;
+	private ApplicationService			applicationService;
 
 	@Autowired
-	private CompanyService		companyService;
+	private CompanyService				companyService;
 
 	@Autowired
-	private HackerService		hackerService;
+	private HackerService				hackerService;
 
 	@Autowired
-	private CurriculaService	curriculaService;
+	private CurriculaService			curriculaService;
 
 	@Autowired
-	private FinderService		finderService;
+	private FinderService				finderService;
+
+	@Autowired
+	private CreditCardService			creditCardService;
+
+	@Autowired
+	private CustomizableSystemService	customizableService;
+
+	@Autowired
+	private AdministratorService		administratorService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -118,5 +137,54 @@ public class AdministratorController extends AbstractController {
 	//
 	//	select p.title from Position p where p.salary=(select max(p.salary) from Position p)
 	//	select p.title from Position p where p.salary=(select min(p.salary) from Position p)
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView createForm() {
+		ModelAndView result;
+		RegistrationForm registrationForm = new RegistrationForm();
+
+		registrationForm = registrationForm.createToAdmin();
+
+		final String telephoneCode = this.customizableService.getTelephoneCode();
+		registrationForm.setPhone(telephoneCode + " ");
+
+		result = new ModelAndView("administrator/create");
+		result.addObject("registrationForm", registrationForm);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@ModelAttribute("registrationForm") final RegistrationForm registrationForm, final BindingResult binding) {
+		ModelAndView result;
+		Administrator admin = null;
+		CreditCard creditcard = null;
+
+		try {
+			creditcard = this.creditCardService.reconstruct(registrationForm, binding);
+			registrationForm.setCreditCard(creditcard);
+			admin = this.administratorService.reconstruct(registrationForm, binding);
+			if (!binding.hasErrors() && registrationForm.getUserAccount().getPassword().equals(registrationForm.getPassword())) {
+				final CreditCard creditCardSave = this.creditCardService.save(creditcard);
+				admin.setCreditCard(creditCardSave);
+				this.administratorService.save(admin);
+				result = new ModelAndView("redirect:/");
+			} else {
+
+				result = new ModelAndView("administrator/create");
+				result.addObject("registrationForm", registrationForm);
+			}
+		} catch (final Exception e) {
+			final Collection<Integer> creditCardsNumbers = this.creditCardService.getAllNumbers();
+			if (creditCardsNumbers.contains(creditcard.getNumber()))
+				this.creditCardService.delete(creditcard);
+			result = new ModelAndView("administrator/create");
+			result.addObject("exception", e);
+			result.addObject("registrationForm", registrationForm);
+
+		}
+
+		return result;
+	}
 
 }
