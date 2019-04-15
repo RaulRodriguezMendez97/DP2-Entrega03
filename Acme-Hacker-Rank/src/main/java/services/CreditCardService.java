@@ -75,6 +75,10 @@ public class CreditCardService {
 		return this.creditCardRepository.getAllNumbercreditCards();
 	}
 
+	public CreditCard getCreditCardByNumber(final Integer number) {
+		return this.creditCardRepository.CreditCardByNumber(number);
+	}
+
 	public CreditCard reconstruct(final RegistrationFormCompanyAndCreditCard registrationForm, final BindingResult binding) {
 		CreditCard res = new CreditCard();
 
