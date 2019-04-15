@@ -21,7 +21,10 @@
 <display:table pagesize="5" name="companies" id="row"
 requestURI="company/list.do" >
 
-<display:column property="nameCompany" titleKey="company.nameCompany" />
+<display:column property="nameCompany" titleKey="list.nameCompany" />
+<display:column property="phone" titleKey="list.phone" />
+<display:column property="email" titleKey="list.email" />
+
 
 <display:column>
 	<a href="position/list.do?companyId=${row.id}"><spring:message code="position.list" /></a>
