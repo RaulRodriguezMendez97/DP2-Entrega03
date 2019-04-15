@@ -74,6 +74,15 @@ public class PositionService {
 		return this.positionRepository.findOne(id);
 	}
 
+	public Position findOneWithCredentials(final Integer id) {
+		Position res;
+		res = this.positionRepository.findOne(id);
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		Assert.isTrue(res.getCompany().equals(a));
+		return res;
+	}
+
 	public Collection<Position> getPositionsByCompany(final Integer id) {
 		return this.positionRepository.getPositionsByCompany(id);
 	}

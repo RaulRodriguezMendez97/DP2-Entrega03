@@ -133,6 +133,7 @@ public class ProblemCompanyController extends AbstractController {
 			problem = this.problemService.findOne(problemId);
 
 			Assert.isTrue(position.getProblems().contains(problem));
+			Assert.isTrue(problem.getDraftMode() == 1);
 
 			result = new ModelAndView("problem/edit");
 			result.addObject("problem", problem);
