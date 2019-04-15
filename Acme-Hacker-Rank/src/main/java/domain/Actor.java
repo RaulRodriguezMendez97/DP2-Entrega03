@@ -48,7 +48,7 @@ public class Actor extends DomainEntity {
 
 	@NotNull
 	@NotBlank
-	@Pattern(regexp = "[0-9A-Z][0-9]{7}[0-9A-Z]")
+	@Pattern(regexp = "[A-Z]{2}[0-9]{8}[A-z]$")
 	public String getVatNumber() {
 		return this.vatNumber;
 	}
