@@ -17,9 +17,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="company/edit.do" modelAttribute="registrationForm">
+<form:form action="hacker/edit.do" modelAttribute="registrationForm">
 <jstl:if test="${not empty exception}">
-		<p style="color:red"> <spring:message code="company.error" /> </p>
+		<p style="color:red"> <spring:message code="hacker.error" /> </p>
 </jstl:if>
 	<form:hidden path="id"/>
 	<form:hidden path="version" />
@@ -28,42 +28,36 @@
 	
 	
 	<fieldset>
-	<legend><spring:message code="company.personalDatas" /></legend>
+	<legend><spring:message code="hacker.personalDatas" /></legend>
 	
-	<acme:textbox code="company.name" path="name"/>
+	<acme:textbox code="hacker.name" path="name"/>
 		
 	
-	<acme:textbox code="company.surnames" path="surnames"/>
+	<acme:textbox code="hacker.surnames" path="surnames"/>
 	
 	
-	<acme:textbox code="company.vatNumber" path="vatNumber"/>
+	<acme:textbox code="hacker.vatNumber" path="vatNumber"/>
 	
 		
-	<acme:textbox code="company.photo" path="photo"/>	
+	<acme:textbox code="hacker.photo" path="photo"/>	
 		
-	<acme:textbox code="company.email" path="email"/>	
+	<acme:textbox code="hacker.email" path="email"/>	
 	
 	
-	<acme:textbox code="company.phone" path="phone"/>	
+	<acme:textbox code="hacker.phone" path="phone"/>	
 
 	
-	<acme:textbox code="company.address" path="address"/>	
+	<acme:textbox code="hacker.address" path="address"/>	
 	
 	
 	<br />
-	<p><spring:message code="company.information" /></p>
+	<p><spring:message code="hacker.information" /></p>
 	</fieldset>
 	<br />
-	
-	<fieldset>
-	 <legend><spring:message code="company.Data" /></legend>
-	<acme:textbox code="company.registro.nameCompany" path="nameCompany"/>	
-	<br />
-	</fieldset>
 	
 	<fieldset>
 	 <legend><spring:message code="creditCard.Data" /></legend>
-	<acme:textbox code="creditCard.registro.brandName" path="brandName"/>
+	<acme:textbox code="creditCard.registro.brandName" path ="brandName"/>
 	<acme:textbox code="creditCard.registro.holderName" path="holderName"/>		
 	<acme:textbox code="creditCard.registro.number" path="number"/>
 	<acme:textbox code="creditCard.registro.expirationMonth" path="expirationMonth"/>
@@ -73,19 +67,20 @@
 	</fieldset>
 	
 	<fieldset>
-	 <legend><spring:message code="company.userAccount" /></legend>
-	<acme:textbox code="company.username" path="userAccount.username"/>	
-	<acme:password code="company.password" path="userAccount.password"/>
-	<acme:password code="company.confirmation.password" path="password"/>
+	 <legend><spring:message code="hacker.userAccount" /></legend>
+	<acme:textbox code="hacker.username" path="userAccount.username"/>	
+	<acme:password code="hacker.password" path="userAccount.password"/>
+	<acme:password code="hacker.confirmation.password" path="password"/>
 	</fieldset>
 	<br />
 	
 	<acme:checkbox code="Terminos.Condiciones" path="check" />
 	
-	<input type="submit" name="save" onclick=" return validar(); "
-	value="<spring:message code="company.save" />" />
 	
-	<acme:cancel url="welcome/index.do" code="company.cancel"/>
+	<input type="submit" name="save" onclick=" return validar(); "
+	value="<spring:message code="hacker.save" />" />
+	
+	<acme:cancel url="welcome/index.do" code="hacker.cancel"/>
 	
 </form:form>
 

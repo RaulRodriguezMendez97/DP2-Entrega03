@@ -119,9 +119,6 @@ public class HackerService {
 			final UserAccount user = r.getUserAccount();
 			user.setPassword(hash);
 
-			final Finder finder = this.finderService.create();
-			final Finder savedFinder = this.finderService.save(finder);
-			r.setFinder(savedFinder);
 		}
 
 		res = this.hackerRepository.save(r);
@@ -145,6 +142,7 @@ public class HackerService {
 			res.setPhone(registrationForm.getPhone());
 			res.setPhoto(registrationForm.getPhoto());
 			res.setSurnames(registrationForm.getSurnames());
+			res.setCreditCard(registrationForm.getCreditCard());
 			final Authority ad = new Authority();
 			final UserAccount user = new UserAccount();
 			user.setAuthorities(new HashSet<Authority>());
@@ -153,10 +151,12 @@ public class HackerService {
 			res.setUserAccount(user);
 			user.setUsername(registrationForm.getUserAccount().getUsername());
 			user.setPassword(registrationForm.getUserAccount().getPassword());
-			res.setFinder(registrationForm.getFinder());
+
+			final Finder finder = this.finderService.create();
+			final Finder savedFinder = this.finderService.save(finder);
+			res.setFinder(savedFinder);
 
 			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
-			Assert.isTrue(registrationForm.getCheck() == true);
 
 			if (res.getPhone().length() <= 5)
 				res.setPhone("");
@@ -169,6 +169,8 @@ public class HackerService {
 			}
 
 			this.validator.validate(res, binding);
+
+			Assert.isTrue(registrationForm.getCheck() == true);
 
 		} else {
 			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
@@ -183,7 +185,8 @@ public class HackerService {
 			p.setPhone(registrationForm.getPhone());
 			p.setPhoto(registrationForm.getPhoto());
 			p.setSurnames(registrationForm.getSurnames());
-			p.setFinder(registrationForm.getFinder());
+			p.setFinder(res.getFinder());
+			p.setCreditCard(registrationForm.getCreditCard());
 
 			if (p.getPhone().length() <= 5)
 				p.setPhone("");
@@ -205,6 +208,8 @@ public class HackerService {
 				user.setPassword(hash);
 				p.setUserAccount(user);
 			}
+
+			p.getUserAccount().setUsername(registrationForm.getUserAccount().getUsername());
 
 			this.validator.validate(p, binding);
 			res = p;

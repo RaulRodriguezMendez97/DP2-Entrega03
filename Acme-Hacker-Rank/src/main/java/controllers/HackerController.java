@@ -5,87 +5,72 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.CompanyService;
 import services.CreditCardService;
 import services.CustomizableSystemService;
-import domain.Company;
+import services.HackerService;
 import domain.CreditCard;
-import forms.RegistrationFormCompanyAndCreditCard;
+import domain.Hacker;
+import forms.RegistrationFormHacker;
 
 @Controller
-@RequestMapping("/company")
-public class CompanyController extends AbstractController {
+@RequestMapping("/hacker")
+public class HackerController extends AbstractController {
 
 	@Autowired
-	private CompanyService				companyService;
+	private HackerService				hackerService;
 	@Autowired
 	private CreditCardService			creditCardService;
 	@Autowired
 	private CustomizableSystemService	customizableService;
 
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView company() {
-		final ModelAndView result;
-		final Collection<Company> companies;
-
-		companies = this.companyService.findAll();
-		Assert.notNull(companies);
-
-		result = new ModelAndView("company/list");
-		result.addObject("companies", companies);
-		return result;
-
-	}
-
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView createForm() {
 		ModelAndView result;
-		RegistrationFormCompanyAndCreditCard registrationForm = new RegistrationFormCompanyAndCreditCard();
+		RegistrationFormHacker registrationForm = new RegistrationFormHacker();
 
-		registrationForm = registrationForm.createToCompanyAndCreditCard();
+		registrationForm = registrationForm.createToHacker();
 
 		final String telephoneCode = this.customizableService.getTelephoneCode();
 		registrationForm.setPhone(telephoneCode + " ");
 
-		result = new ModelAndView("company/create");
+		result = new ModelAndView("hacker/create");
 		result.addObject("registrationForm", registrationForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("registrationForm") final RegistrationFormCompanyAndCreditCard registrationForm, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("registrationForm") final RegistrationFormHacker registrationForm, final BindingResult binding) {
 		ModelAndView result;
-		Company company = null;
+		Hacker hacker = null;
 		CreditCard creditcard = null;
 
 		try {
 			creditcard = this.creditCardService.reconstruct(registrationForm, binding);
 			registrationForm.setCreditCard(creditcard);
-			company = this.companyService.reconstruct(registrationForm, binding);
+			hacker = this.hackerService.reconstruct(registrationForm, binding);
 			if (!binding.hasErrors() && registrationForm.getUserAccount().getPassword().equals(registrationForm.getPassword())) {
 				final CreditCard creditCardSave = this.creditCardService.save(creditcard);
-				company.setCreditCard(creditCardSave);
-				this.companyService.save(company);
+				hacker.setCreditCard(creditCardSave);
+				this.hackerService.save(hacker);
 				result = new ModelAndView("redirect:/");
 			} else {
 
-				result = new ModelAndView("company/create");
+				result = new ModelAndView("hacker/create");
 				result.addObject("registrationForm", registrationForm);
 			}
 		} catch (final Exception e) {
 			final Collection<Integer> creditCardsNumbers = this.creditCardService.getAllNumbers();
 			if (creditCardsNumbers.contains(creditcard.getNumber()))
 				this.creditCardService.delete(creditcard);
-			result = new ModelAndView("company/create");
+			result = new ModelAndView("hacker/create");
 			result.addObject("exception", e);
 			result.addObject("registrationForm", registrationForm);
 

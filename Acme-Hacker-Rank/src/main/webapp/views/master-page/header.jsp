@@ -51,7 +51,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="company/create.do"><spring:message code="master.page.company.register" /></a></li>
-					<li><a href="brotherhood/create.do"><spring:message code="master.page.brotherhood.register" /></a></li>
+					<li><a href="hacker/create.do"><spring:message code="master.page.hacker.register" /></a></li>
 				</ul>
 			<li><a href="company/list.do"><spring:message code="master.page.company" /></a></li>
 			<li><a href="position/listAll.do"><spring:message code="master.page.position" /></a></li>

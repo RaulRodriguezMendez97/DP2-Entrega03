@@ -24,12 +24,15 @@ import services.ActorService;
 import services.AdministratorService;
 import services.CompanyService;
 import services.CreditCardService;
+import services.HackerService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Company;
 import domain.CreditCard;
+import domain.Hacker;
 import forms.RegistrationForm;
 import forms.RegistrationFormCompanyAndCreditCard;
+import forms.RegistrationFormHacker;
 
 @Controller
 @RequestMapping("/profile")
@@ -43,6 +46,9 @@ public class ProfileController extends AbstractController {
 
 	@Autowired
 	private CompanyService			companyService;
+
+	@Autowired
+	private HackerService			hackerService;
 
 	@Autowired
 	private CreditCardService		creditCardService;
@@ -214,6 +220,83 @@ public class ProfileController extends AbstractController {
 		} catch (final Exception e) {
 
 			result = new ModelAndView("profile/editAdmin");
+			result.addObject("actor", registrationForm);
+			result.addObject("exception", e);
+
+		}
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit-hacker", method = RequestMethod.GET)
+	public ModelAndView editHacker() {
+		ModelAndView result;
+		final RegistrationFormHacker registrationForm = new RegistrationFormHacker();
+		Hacker hacker;
+		CreditCard creditCard;
+		try {
+
+			hacker = this.hackerService.findOne(this.hackerService.hackerUserAccount(LoginService.getPrincipal().getId()).getId());
+			creditCard = hacker.getCreditCard();
+			Assert.notNull(hacker);
+			registrationForm.setId(hacker.getId());
+			registrationForm.setVersion(hacker.getVersion());
+			registrationForm.setName(hacker.getName());
+			registrationForm.setVatNumber(hacker.getVatNumber());
+			registrationForm.setSurnames(hacker.getSurnames());
+			registrationForm.setPhoto(hacker.getPhoto());
+			registrationForm.setEmail(hacker.getEmail());
+			registrationForm.setPhone(hacker.getPhone());
+			registrationForm.setCreditCard(hacker.getCreditCard());
+			registrationForm.setAddress(hacker.getAddress());
+			registrationForm.setPassword(hacker.getUserAccount().getPassword());
+			registrationForm.setCheck(true);
+			registrationForm.setPatternPhone(false);
+			final UserAccount userAccount = new UserAccount();
+			userAccount.setUsername(hacker.getUserAccount().getUsername());
+			userAccount.setPassword(hacker.getUserAccount().getPassword());
+			registrationForm.setUserAccount(userAccount);
+			registrationForm.setBrandName(creditCard.getBrandName());
+			registrationForm.setHolderName(creditCard.getHolderName());
+			registrationForm.setNumber(creditCard.getNumber());
+			registrationForm.setExpirationMonth(creditCard.getExpirationMonth());
+			registrationForm.setExpirationYear(creditCard.getExpirationYear());
+			registrationForm.setCW(creditCard.getCW());
+
+			result = new ModelAndView("profile/editHacker");
+			result.addObject("actor", registrationForm);
+			result.addObject("action", "profile/edit-hacker.do");
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit-hacker", method = RequestMethod.POST, params = "save")
+	public ModelAndView editHacker(final RegistrationFormHacker registrationForm, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			final CreditCard creditCard = this.creditCardService.reconstruct(registrationForm, binding);
+			registrationForm.setCreditCard(creditCard);
+			final Hacker hacker = this.hackerService.reconstruct(registrationForm, binding);
+			if (!binding.hasErrors()) {
+				final CreditCard creditCardSave = this.creditCardService.save(creditCard);
+				hacker.setCreditCard(creditCardSave);
+				this.hackerService.save(hacker);
+
+				result = new ModelAndView("redirect:personal-datas.do");
+			} else {
+				result = new ModelAndView("profile/editHacker");
+				result.addObject("actor", registrationForm);
+
+			}
+		} catch (final Exception e) {
+
+			result = new ModelAndView("profile/editHacker");
 			result.addObject("actor", registrationForm);
 			result.addObject("exception", e);
 

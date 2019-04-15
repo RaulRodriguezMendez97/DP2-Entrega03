@@ -4,6 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -45,7 +46,7 @@ public class CreditCard extends DomainEntity {
 	public void setNumber(final int number) {
 		this.number = number;
 	}
-
+	@Max(12)
 	public int getExpirationMonth() {
 		return this.expirationMonth;
 	}

@@ -150,7 +150,6 @@ public class CompanyService {
 			res.setNameCompany(registrationForm.getNameCompany());
 
 			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
-			Assert.isTrue(registrationForm.getCheck() == true);
 
 			if (res.getPhone().length() <= 5)
 				res.setPhone("");
@@ -163,6 +162,8 @@ public class CompanyService {
 			}
 
 			this.validator.validate(res, binding);
+
+			Assert.isTrue(registrationForm.getCheck() == true);
 
 		} else {
 			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));

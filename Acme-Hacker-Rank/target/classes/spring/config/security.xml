@@ -90,18 +90,15 @@
 		
 		<security:intercept-url pattern="/company/create.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/company/edit.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/hacker/create.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/hacker/edit.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/position/show.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/position/list.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/company/list.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/position/listAll.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/position/search.do" access="isAnonymous()" />
 		 
-		 
-		<security:intercept-url pattern="/member/create.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/member/edit.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/brotherhood/create.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/brotherhood/edit.do" access="isAnonymous()" />
-	
+
 	
 		<security:intercept-url pattern="/customizableSystem/administrator/edit.do" access="hasRole('ADMIN')" />
 		

@@ -15,8 +15,10 @@ import repositories.CreditCardRepository;
 import domain.Administrator;
 import domain.Company;
 import domain.CreditCard;
+import domain.Hacker;
 import forms.RegistrationForm;
 import forms.RegistrationFormCompanyAndCreditCard;
+import forms.RegistrationFormHacker;
 
 @Service
 @Transactional
@@ -29,6 +31,9 @@ public class CreditCardService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private HackerService			hackerService;
 
 	@Autowired
 	private Validator				validator;
@@ -125,6 +130,42 @@ public class CreditCardService {
 			Administrator admin;
 			admin = this.administratorService.findOne(registrationForm.getId());
 			res = admin.getCreditCard();
+			final CreditCard p = new CreditCard();
+			p.setId(res.getId());
+			p.setVersion(res.getVersion());
+			p.setBrandName(registrationForm.getBrandName());
+			p.setHolderName(registrationForm.getHolderName());
+			p.setNumber(registrationForm.getNumber());
+			p.setExpirationMonth(registrationForm.getExpirationMonth());
+			p.setExpirationYear(registrationForm.getExpirationYear());
+			p.setCW(registrationForm.getCW());
+
+			this.validator.validate(p, binding);
+			res = p;
+
+		}
+		return res;
+	}
+
+	public CreditCard reconstruct(final RegistrationFormHacker registrationForm, final BindingResult binding) {
+		CreditCard res = new CreditCard();
+
+		if (registrationForm.getId() == 0) {
+			res.setId(registrationForm.getId());
+			res.setVersion(registrationForm.getVersion());
+			res.setBrandName(registrationForm.getBrandName());
+			res.setHolderName(registrationForm.getHolderName());
+			res.setNumber(registrationForm.getNumber());
+			res.setExpirationMonth(registrationForm.getExpirationMonth());
+			res.setExpirationYear(registrationForm.getExpirationYear());
+			res.setCW(registrationForm.getCW());
+
+			this.validator.validate(res, binding);
+
+		} else {
+			Hacker hacker;
+			hacker = this.hackerService.findOne(registrationForm.getId());
+			res = hacker.getCreditCard();
 			final CreditCard p = new CreditCard();
 			p.setId(res.getId());
 			p.setVersion(res.getVersion());
