@@ -18,7 +18,9 @@ import org.springframework.validation.Validator;
 
 import repositories.CompanyRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Company;
 import domain.CreditCard;
 import forms.RegistrationFormCompanyAndCreditCard;
@@ -73,6 +75,11 @@ public class CompanyService {
 	}
 
 	public Company findOne(final int companyId) {
+		final Company company = this.companyRepository.findOne(companyId);
+		final UserAccount userLoged = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(userLoged.getId());
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("COMPANY"));
+		Assert.isTrue(company.equals(a));
 		return this.companyRepository.findOne(companyId);
 	}
 
@@ -99,10 +106,10 @@ public class CompanyService {
 
 		if (r.getId() == 0)
 			Assert.isTrue(!emails.contains(r.getEmail()), "Company.Email -> The email you entered is already being used");
-		else {
-			final Company a = this.companyRepository.findOne(r.getId());
-			Assert.isTrue(a.getEmail().equals(r.getEmail()));
-		}
+		//		else {
+		//			final Company a = this.companyRepository.findOne(r.getId());
+		//			Assert.isTrue(a.getEmail().equals(r.getEmail()));
+		//		}
 
 		//NUEVO
 		Assert.isTrue(r.getUserAccount().getUsername() != null && r.getUserAccount().getUsername() != "");

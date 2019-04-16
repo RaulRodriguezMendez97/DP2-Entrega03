@@ -127,7 +127,7 @@ public class AdministratorServiceTest extends AbstractTest {
 				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876785, 8, 2020, 876, super.getEntityId("administrator1"), null
 			},
 			{
-				//Negative test: email vacio
+				//Negative test: UN administrador intenta modificar los datos de otro
 				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876784, 8, 2020, 876, super.getEntityId("administrator2"),
 				IllegalArgumentException.class
 
@@ -165,7 +165,7 @@ public class AdministratorServiceTest extends AbstractTest {
 			registrationForm.setSurnames(surnames);
 			registrationForm.setVatNumber(vatNumber);
 			registrationForm.setEmail(email);
-			registrationForm.getUserAccount().setUsername(username);
+			registrationForm.getUserAccount().setUsername(admin.getUserAccount().getUsername());
 			registrationForm.getUserAccount().setPassword(password);
 			registrationForm.setPassword(confirmPassword);
 			registrationForm.setPhone("");
