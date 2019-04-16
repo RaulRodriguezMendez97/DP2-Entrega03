@@ -130,8 +130,20 @@
 		<property name="email" value="cristian@hotmail.com"/>
 		<property name="phone" value="654654654"/>
 		<property name="address" value="Sevilla"/>
-		<property name="userAccount" ref="userAccount1"/>
+		<property name="userAccount" ref="userAccount2"/>
 		<property name="creditCard" ref="creditCard1"/>
+	
+	</bean>
+	<bean id="administrator2" class="domain.Administrator">
+		<property name="name" value="Jesus"/>
+		<property name="surnames" value="Elias"/>
+		<property name="vatNumber" value="ES87654321C"/>
+		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="email" value="jesus@gmail.com"/>
+		<property name="phone" value="635208248"/>
+		<property name="address" value="Sevilla"/>
+		<property name="userAccount" ref="userAccount1"/>
+		<property name="creditCard" ref="creditCard6"/>
 	
 	</bean>
 	
@@ -602,6 +614,16 @@
 		<property name="expirationMonth" value="4"></property>
 		<property name="expirationYear" value="2030"></property>
 		<property name="CW" value="205"></property>
+	
+	</bean>
+	
+		<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="nombre6"></property>
+		<property name="brandName" value="VISA"></property>
+		<property name="number" value="987678"></property>
+		<property name="expirationMonth" value="9"></property>
+		<property name="expirationYear" value="2030"></property>
+		<property name="CW" value="302"></property>
 	
 	</bean>
 	

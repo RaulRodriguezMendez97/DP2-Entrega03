@@ -20,6 +20,7 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Administrator;
 import forms.RegistrationForm;
 
@@ -68,6 +69,11 @@ public class AdministratorService {
 		return this.adminRepo.findAll();
 	}
 	public Administrator findOne(final int adminId) {
+		final Administrator admin = this.adminRepo.findOne(adminId);
+		final UserAccount userLoged = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(userLoged.getId());
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("ADMIN"));
+		Assert.isTrue(admin.equals(a));
 		return this.adminRepo.findOne(adminId);
 	}
 
@@ -101,10 +107,10 @@ public class AdministratorService {
 
 		if (admin.getId() == 0)
 			Assert.isTrue(!emails.contains(admin.getEmail()));
-		else {
-			final Administrator a = this.adminRepo.findOne(admin.getId());
-			Assert.isTrue(a.getEmail().equals(admin.getEmail()));
-		}
+		//		else {
+		//			final Administrator a = this.adminRepo.findOne(admin.getId());
+		//			Assert.isTrue(a.getEmail().equals(admin.getEmail()));
+		//		}
 
 		//NUEVO
 		Assert.isTrue(admin.getUserAccount().getUsername() != null && admin.getUserAccount().getUsername() != "", "Cuenta");
