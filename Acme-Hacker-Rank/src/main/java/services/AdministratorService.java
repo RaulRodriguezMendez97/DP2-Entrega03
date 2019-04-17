@@ -171,9 +171,35 @@ public class AdministratorService {
 			this.validator.validate(res, binding);
 
 		} else {
-			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
+
 			res = this.adminRepo.findOne(registrationForm.getId());
 			final Administrator a = new Administrator();
+
+			if (registrationForm.getUserAccount().getPassword().equals("") && registrationForm.getPassword().equals(""))
+				a.setUserAccount(res.getUserAccount());
+			else {
+				final UserAccount user = registrationForm.getUserAccount();
+				final Md5PasswordEncoder encoder;
+				encoder = new Md5PasswordEncoder();
+				final String hash = encoder.encodePassword(registrationForm.getUserAccount().getPassword(), null);
+				user.setPassword(hash);
+				registrationForm.setUserAccount(user);
+
+				if (!registrationForm.getUserAccount().getPassword().equals(res.getUserAccount().getPassword())) {
+					final Md5PasswordEncoder encoder2;
+					encoder2 = new Md5PasswordEncoder();
+					final String hash2 = encoder2.encodePassword(registrationForm.getPassword(), null);
+					registrationForm.setPassword(hash2);
+
+					Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
+
+				}
+
+				a.setUserAccount(res.getUserAccount());
+				a.getUserAccount().setPassword(registrationForm.getUserAccount().getPassword());
+
+			}
+
 			a.setId(res.getId());
 			a.setVersion(res.getVersion());
 			a.setAddress(registrationForm.getAddress());
@@ -195,19 +221,9 @@ public class AdministratorService {
 				Assert.isTrue(matcherTelefono.find() == true, "BrotherhoodService.save -> Telefono no valido");
 			}
 
-			if (registrationForm.getPassword().equals("") || registrationForm.getPassword() == null)
-				a.setUserAccount(res.getUserAccount());
-			else {
-				final UserAccount user = res.getUserAccount();
-				final Md5PasswordEncoder encoder;
-				encoder = new Md5PasswordEncoder();
-				final String hash = encoder.encodePassword(registrationForm.getPassword(), null);
-				user.setPassword(hash);
-				a.setUserAccount(user);
-			}
 			a.getUserAccount().setUsername(registrationForm.getUserAccount().getUsername());
 
-			this.validator.validate(res, binding);
+			this.validator.validate(a, binding);
 			res = a;
 		}
 		return res;

@@ -173,9 +173,33 @@ public class CompanyService {
 			Assert.isTrue(registrationForm.getCheck() == true);
 
 		} else {
-			Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
 			res = this.companyRepository.findOne(registrationForm.getId());
 			final Company p = new Company();
+
+			if (registrationForm.getUserAccount().getPassword().equals("") && registrationForm.getPassword().equals(""))
+				p.setUserAccount(res.getUserAccount());
+			else {
+				final UserAccount user = registrationForm.getUserAccount();
+				final Md5PasswordEncoder encoder;
+				encoder = new Md5PasswordEncoder();
+				final String hash = encoder.encodePassword(registrationForm.getUserAccount().getPassword(), null);
+				user.setPassword(hash);
+				registrationForm.setUserAccount(user);
+
+				if (!registrationForm.getUserAccount().getPassword().equals(res.getUserAccount().getPassword())) {
+					final Md5PasswordEncoder encoder2;
+					encoder2 = new Md5PasswordEncoder();
+					final String hash2 = encoder2.encodePassword(registrationForm.getPassword(), null);
+					registrationForm.setPassword(hash2);
+					Assert.isTrue(registrationForm.getPassword().equals(registrationForm.getUserAccount().getPassword()));
+
+				}
+
+				p.setUserAccount(res.getUserAccount());
+				p.getUserAccount().setPassword(registrationForm.getUserAccount().getPassword());
+
+			}
+
 			p.setId(res.getId());
 			p.setVersion(res.getVersion());
 			p.setAddress(registrationForm.getAddress());
@@ -196,17 +220,6 @@ public class CompanyService {
 				final Pattern patternTelefono = Pattern.compile(regexTelefono);
 				final Matcher matcherTelefono = patternTelefono.matcher(p.getPhone());
 				Assert.isTrue(matcherTelefono.find() == true, "CompanyService.save -> Telefono no valido");
-			}
-
-			if (registrationForm.getPassword().equals("") || registrationForm.getPassword() == null)
-				p.setUserAccount(res.getUserAccount());
-			else {
-				final UserAccount user = res.getUserAccount();
-				final Md5PasswordEncoder encoder;
-				encoder = new Md5PasswordEncoder();
-				final String hash = encoder.encodePassword(registrationForm.getPassword(), null);
-				user.setPassword(hash);
-				p.setUserAccount(user);
 			}
 
 			p.getUserAccount().setUsername(registrationForm.getUserAccount().getUsername());

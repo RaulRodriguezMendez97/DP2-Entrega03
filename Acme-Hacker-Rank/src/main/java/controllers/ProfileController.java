@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -95,13 +96,13 @@ public class ProfileController extends AbstractController {
 			registrationForm.setPhone(company.getPhone());
 			registrationForm.setCreditCard(company.getCreditCard());
 			registrationForm.setAddress(company.getAddress());
-			registrationForm.setPassword(company.getUserAccount().getPassword());
+			registrationForm.setPassword("");
 			registrationForm.setCheck(true);
 			registrationForm.setPatternPhone(false);
 			registrationForm.setNameCompany(company.getNameCompany());
 			final UserAccount userAccount = new UserAccount();
 			userAccount.setUsername(company.getUserAccount().getUsername());
-			userAccount.setPassword(company.getUserAccount().getPassword());
+			userAccount.setPassword("");
 			registrationForm.setUserAccount(userAccount);
 			registrationForm.setBrandName(creditCard.getBrandName());
 			registrationForm.setHolderName(creditCard.getHolderName());
@@ -123,7 +124,7 @@ public class ProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit-company", method = RequestMethod.POST, params = "save")
-	public ModelAndView editCompany(final RegistrationFormCompanyAndCreditCard registrationForm, final BindingResult binding) {
+	public ModelAndView editCompany(@ModelAttribute("actor") final RegistrationFormCompanyAndCreditCard registrationForm, final BindingResult binding) {
 		ModelAndView result;
 
 		try {
@@ -199,7 +200,7 @@ public class ProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit-administrator", method = RequestMethod.POST, params = "save")
-	public ModelAndView editAdmin(final RegistrationForm registrationForm, final BindingResult binding) {
+	public ModelAndView editAdmin(@ModelAttribute("actor") final RegistrationForm registrationForm, final BindingResult binding) {
 		ModelAndView result;
 
 		try {
@@ -276,7 +277,7 @@ public class ProfileController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit-hacker", method = RequestMethod.POST, params = "save")
-	public ModelAndView editHacker(final RegistrationFormHacker registrationForm, final BindingResult binding) {
+	public ModelAndView editHacker(@ModelAttribute("actor") final RegistrationFormHacker registrationForm, final BindingResult binding) {
 		ModelAndView result;
 
 		try {
