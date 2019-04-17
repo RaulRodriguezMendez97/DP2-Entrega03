@@ -53,8 +53,6 @@ No
 <b><spring:message code="position.salary" /> : </b> <jstl:out value="${position.salary}"></jstl:out>
 
 <br/>
-<br/>
-<input type="button" name="cancel" value="<spring:message code="position.cancel" />"
-			onclick="javascript: relativeRedir('position/list.do?companyId=${position.company.id}');" />
+
 
 </security:authorize>
