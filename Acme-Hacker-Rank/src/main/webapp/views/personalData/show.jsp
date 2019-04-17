@@ -28,6 +28,8 @@
 <strong><spring:message code="personalData.linkedlnProfile"/></strong>: <jstl:out value=" ${personalData.linkedlnProfile}"></jstl:out><br>
 
 <a href="personalData/hacker/delete.do?personalDataId=${personalData.id}"><spring:message code="delete" /></a>
+<input type="button" name="create" value="<spring:message code="edit" />"
+			onclick="javascript: relativeRedir('personalData/hacker/edit.do?personalDataId=${personalData.id}');" />
 <acme:cancel url="curricula/hacker/list.do" code="cancel"/>
 
 </security:authorize>

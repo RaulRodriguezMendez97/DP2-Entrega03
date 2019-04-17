@@ -24,6 +24,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="patternPhone" />
 
  
  	<acme:textbox code="personalData.fullName" path="fullName"/>
@@ -37,10 +38,35 @@
 	<acme:textbox code="personalData.linkedlnProfile" path="linkedlnProfile"/>
 	<br />
 	
-	<acme:submit name="save" code="save"/>	
+	<input type="submit" name="save" onclick=" return validar(); "
+	value="<spring:message code="save" />" />
 	<acme:cancel url="curricula/hacker/list.do" code="cancel"/>
 	<br />
 </form:form>
 </security:authorize>
 </body>
+<script>
+function validar(){
+	return validar_phone();
+}
+
+ function validar_phone(){
+  var numeroTelefono=document.getElementById('phoneNumber');
+   var expresionRegular1=/^\+[0-9]{0,3}\ \([0-9]{0,3}\)\ [0-9]{4,}$|^\+[1-9][0-9]{0,2}\ [0-9]{4,}$|^[0-9]{4,}|^\+[0-9]\ $|^$|^\+$/gm;//<-- hay que cambiar el pattern
+ 
+
+	 if(!expresionRegular1.test(numeroTelefono.value)){
+	 var confirmarTelefono= confirm('Are you sure you want to register that phone number?');
+	 
+	 
+	 if(confirmarTelefono==true){
+	 
+		 document.getElementById('patternPhone').value=true;
+		 
+	 }
+ }
+	 return confirmarTelefono ;
+
+	}
+</script>
 </html>

@@ -92,8 +92,6 @@ public class PersonalDataHackerController extends AbstractController {
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../curricula/hacker/list.do");
 			result.addObject("exception", e);
-			//			final Collection<InceptionRecord> allMyInceptionRecord = this.inceptionRecordService.getAllMyInceptionRecords();
-			//			result.addObject("inceptionRecords", allMyInceptionRecord);
 		}
 		return result;
 	}
