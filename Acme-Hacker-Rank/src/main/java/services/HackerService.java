@@ -18,7 +18,9 @@ import org.springframework.validation.Validator;
 
 import repositories.HackerRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.CreditCard;
 import domain.Finder;
 import domain.Hacker;
@@ -76,6 +78,11 @@ public class HackerService {
 	}
 
 	public Hacker findOne(final int hackerId) {
+		final Hacker hacker = this.hackerRepository.findOne(hackerId);
+		final UserAccount userLoged = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(userLoged.getId());
+		Assert.isTrue(userLoged.getAuthorities().iterator().next().getAuthority().equals("HACKER"));
+		Assert.isTrue(hacker.equals(a));
 		return this.hackerRepository.findOne(hackerId);
 	}
 
@@ -102,10 +109,10 @@ public class HackerService {
 
 		if (r.getId() == 0)
 			Assert.isTrue(!emails.contains(r.getEmail()), "Company.Email -> The email you entered is already being used");
-		else {
-			final Hacker a = this.hackerRepository.findOne(r.getId());
-			Assert.isTrue(a.getEmail().equals(r.getEmail()));
-		}
+		//		else {
+		//			final Hacker a = this.hackerRepository.findOne(r.getId());
+		//			Assert.isTrue(a.getEmail().equals(r.getEmail()));
+		//		}
 
 		//NUEVO
 		Assert.isTrue(r.getUserAccount().getUsername() != null && r.getUserAccount().getUsername() != "");

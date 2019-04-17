@@ -32,8 +32,8 @@ public class CompanyServiceTest extends AbstractTest {
 
 
 	/*
-	 * a) Requeriment: An actor who is authenticated as an administrator
-	 * must be able to create user acconunts for new administrators.
+	 * a) Requeriment: An actor who is not authenticated must be able to
+	 * register to the system as company.
 	 * 
 	 * b) Broken bussines rule:
 	 * Se intenta registratar un usuario como company con el nameCompany vacio
@@ -113,7 +113,7 @@ public class CompanyServiceTest extends AbstractTest {
 	 * must be able to edit his or her personal data.
 	 * 
 	 * b) Broken bussines rule:
-	 * Un administrador intenta editar la informacion de otro.
+	 * Una company intenta editar la informacion de otro.
 	 * 
 	 * c) Sentence coverage:Este caso de uso engloba el recontructor y el save tando del CompanyService como del CreditCardService, y al findOne de CompanyService,
 	 * el total de lineas sumando estos metodos es de 134, de las cuales este test recorrer 81 , es decir un 60'45%.
