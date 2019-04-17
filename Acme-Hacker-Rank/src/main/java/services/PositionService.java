@@ -141,7 +141,11 @@ public class PositionService {
 			position.setDraftMode(1);
 			position.setIsCancelled(0);
 			position.setProblems(new HashSet<Problem>());
+			if (!(new Date().before(position.getDeadLine())))
+				binding.rejectValue("deadLine", "FutureBinding");
 			this.validator.validate(res, binding);
+			if (binding.hasErrors())
+				throw new ValidationException();
 
 			return res;
 		} else {

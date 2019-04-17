@@ -196,6 +196,8 @@ public class PositionServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{//Positive test
 				"company", super.getEntityId("position1"), null
+			}, {//Positive test
+				"company", super.getEntityId("position2"), null
 			}, {//Negative test: Case 2
 				"company1", super.getEntityId("position2"), IllegalArgumentException.class
 			}

@@ -161,7 +161,7 @@ public class PositionCompanyController extends AbstractController {
 				result = new ModelAndView("redirect:list.do");
 			} else {
 				result = new ModelAndView("position/edit");
-				result.addObject("position", position);
+				result.addObject("position", p);
 			}
 		} catch (final Exception e) {
 
@@ -172,7 +172,7 @@ public class PositionCompanyController extends AbstractController {
 				if (position.getDraftMode() == 1) {
 
 					result = new ModelAndView("position/edit");
-					result.addObject("position", position);
+					result.addObject("position", p);
 					result.addObject("exception", e);
 				} else
 					result = new ModelAndView("redirect:list.do");

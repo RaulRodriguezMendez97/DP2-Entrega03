@@ -26,7 +26,7 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 	@Query(value = "select date_add(CURRENT_DATE, interval 1 day)", nativeQuery = true)
 	public Date getTomorrow();
 
-	@Query("select p from Position p where (locate(?1, p.title)=1 or locate(?1,p.description)=1 or locate(?1,p.requiredProfile)=1 or locate(?1, p.skillsRequired)= 1 or locate(?1, p.technologiesRequired)=1 or locate(?1,p.company.nameCompany)=1) and p.draftMode=0 and p.isCancelled=0")
+	@Query("select p from Position p where (p.title like %?1% or p.description like %?1% or p.requiredProfile like %?1% or p.skillsRequired like %?1% or p.technologiesRequired like %?1% or p.company.nameCompany like %?1%) and p.draftMode=0 and p.isCancelled=0")
 	public Collection<Position> getPositionByFinder(String word);
 
 	@Query("select p from Position p where ?1 member of p.problems")

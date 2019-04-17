@@ -66,6 +66,18 @@ public class ProblemService {
 		return this.problemRepository.findOne(id);
 	}
 
+	public Problem findOneWithCredentials(final Integer id) {
+		Problem res;
+		res = this.problemRepository.findOne(id);
+		final UserAccount user = LoginService.getPrincipal();
+		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+		final Position p = this.positionRepository.getPositionByProblem(res.getId());
+		Assert.isTrue(p.getCompany().equals(a));
+		Assert.isTrue(p.getProblems().contains(res));
+
+		return res;
+	}
+
 	public Problem save(final Problem problem) {
 
 		if (problem.getId() != 0) {
