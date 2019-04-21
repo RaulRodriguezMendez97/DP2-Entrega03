@@ -33,52 +33,28 @@
 	<!-- ADMIN -->
 	
 	<bean id="administrator1" class="domain.Administrator">
-		<property name="name" value="Cristian" />
-		<property name="middleName" value="Lorca" />
-		<property name="surname" value="BRENES" />
-		<property name="photo" value="https://i.blogs.es/dcc721/url1/450_1000.jpg" />
-		<property name="email" value="cristian@hotmail.com" />
-		<property name="phone" value="+34 620510520" />
-		<property name="address" value="SEVILLA" />
-		<property name="userAccount" ref="userAccount1" />
+		<property name="name" value="Cristian"/>
+		<property name="surnames" value="Lorca"/>
+		<property name="vatNumber" value="ES12345678S"/>
+		<property name="photo" value="https://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="email" value="cristian@hotmail.com"/>
+		<property name="phone" value="654654654"/>
+		<property name="address" value="Sevilla"/>
+		<property name="userAccount" ref="userAccount1"/>
+		<property name="creditCard" ref="creditCard1"/>
+	
 	</bean>
 	
-	<!-- POSITION -->
-
-	<bean id="position1" class="domain.Posicion">
-		<property name="name" value="President" />
-		<property name="spanishName" value="Presidente" />
-	</bean>	
-
-	<bean id="position2" class="domain.Posicion">
-		<property name="name" value="Vice-President" />
-		<property name="spanishName" value="Vicepresidente" />
-	</bean>	
-
-	<bean id="position3" class="domain.Posicion">
-		<property name="name" value="Secretary" />
-		<property name="spanishName" value="Secretario" />
-	</bean>	
-
-	<bean id="position4" class="domain.Posicion">
-		<property name="name" value="Treasurer" />
-		<property name="spanishName" value="Tesorero" />
-	</bean>	
-
-	<bean id="position5" class="domain.Posicion">
-		<property name="name" value="Historian" />
-		<property name="spanishName" value="Historiador" />
-	</bean>	
-
-	<bean id="position6" class="domain.Posicion">
-		<property name="name" value="Fundraiser" />
-		<property name="spanishName" value="Promotor" />
-	</bean>	
-
-	<bean id="position7" class="domain.Posicion">
-		<property name="name" value="Officer" />
-		<property name="spanishName" value="Vocal" />
-	</bean>	
+	<!-- CreditCard -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="nombre1"></property>
+		<property name="brandName" value="VISA"></property>
+		<property name="number" value="123321"></property>
+		<property name="expirationMonth" value="3"></property>
+		<property name="expirationYear" value="2019"></property>
+		<property name="CW" value="101"></property>
+		
+	</bean>
 	
 	<!-- CUSTOMIZABLE SYSTEM -->
 
@@ -86,13 +62,12 @@
 
 		<property name="nameSystem" value="Acme Hacker Rank" />
 		<property name="banner" value="https://i.imgur.com/7b8lu4b.png" />
-		<property name="messageWelcomePage" value="“Welcome to Acme hacker Rank! We’re IT hacker’s favourite job marketplace!" />
+		<property name="messageWelcomePage" value="Welcome to Acme hacker Rank! We're IT hacker's favourite job marketplace!" />
 		<property name="spanishMessageWelcomePage" value="¡Bienvenidos a Acme Hacker Rank!  ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
 		<property name="telephoneCode" value="+34" />
 		<property name="timeCache" value="1" />
 		<property name="maxResults" value="10" />
-
-
+		
 	</bean>
 	
 </beans>
