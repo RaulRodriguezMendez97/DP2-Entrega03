@@ -138,6 +138,12 @@ public class FinderService {
 			fecha = "";
 		else
 			fecha = this.getStringToDate(new Date(a.getYear(), a.getMonth(), a.getDate()));
+
+		if (finder.getMinSalary() == null)
+			finder.setMinSalary(0.);
+		if (finder.getMaxSalary() == null)
+			finder.setMaxSalary(Double.MAX_VALUE);
+
 		final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
 		finder.setPositions(c);
 		this.save(finder);
