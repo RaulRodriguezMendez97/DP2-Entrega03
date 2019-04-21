@@ -57,10 +57,15 @@ public class CreditCardService {
 		return cc;
 	}
 	public CreditCard save(final CreditCard cc) {
-		if (cc.getId() == 0) {
-			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
-			Assert.isTrue(!creditCardsNumbers.contains(cc.getNumber()));
+		final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+
+		if (cc.getId() != 0) {
+
+			final CreditCard creditCard = this.findOne(cc.getId());
+			final Integer number = creditCard.getNumber();
+			creditCardsNumbers.remove(number);
 		}
+		Assert.isTrue(!creditCardsNumbers.contains(cc.getNumber()));
 
 		Assert.isTrue(cc != null && cc.getBrandName() != null && cc.getHolderName() != null && cc.getBrandName() != "" && cc.getHolderName() != "");
 		return this.creditCardRepository.save(cc);
@@ -92,6 +97,10 @@ public class CreditCardService {
 			res.setExpirationYear(registrationForm.getExpirationYear());
 			res.setCW(registrationForm.getCW());
 
+			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			if (creditCardsNumbers.contains(res.getNumber()))
+				binding.rejectValue("number", "NumeroRepetido");
+
 			this.validator.validate(res, binding);
 
 		} else {
@@ -107,6 +116,13 @@ public class CreditCardService {
 			p.setExpirationMonth(registrationForm.getExpirationMonth());
 			p.setExpirationYear(registrationForm.getExpirationYear());
 			p.setCW(registrationForm.getCW());
+
+			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final CreditCard creditCard = this.findOne(res.getId());
+			final Integer number = creditCard.getNumber();
+			creditCardsNumbers.remove(number);
+			if (creditCardsNumbers.contains(p.getNumber()))
+				binding.rejectValue("number", "NumeroRepetido");
 
 			this.validator.validate(p, binding);
 			res = p;
@@ -128,6 +144,10 @@ public class CreditCardService {
 			res.setExpirationYear(registrationForm.getExpirationYear());
 			res.setCW(registrationForm.getCW());
 
+			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			if (creditCardsNumbers.contains(res.getNumber()))
+				binding.rejectValue("number", "NumeroRepetido");
+
 			this.validator.validate(res, binding);
 
 		} else {
@@ -143,6 +163,13 @@ public class CreditCardService {
 			p.setExpirationMonth(registrationForm.getExpirationMonth());
 			p.setExpirationYear(registrationForm.getExpirationYear());
 			p.setCW(registrationForm.getCW());
+
+			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final CreditCard creditCard = this.findOne(res.getId());
+			final Integer number = creditCard.getNumber();
+			creditCardsNumbers.remove(number);
+			if (creditCardsNumbers.contains(p.getNumber()))
+				binding.rejectValue("number", "NumeroRepetido");
 
 			this.validator.validate(p, binding);
 			res = p;
@@ -164,6 +191,10 @@ public class CreditCardService {
 			res.setExpirationYear(registrationForm.getExpirationYear());
 			res.setCW(registrationForm.getCW());
 
+			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			if (creditCardsNumbers.contains(res.getNumber()))
+				binding.rejectValue("number", "NumeroRepetido");
+
 			this.validator.validate(res, binding);
 
 		} else {
@@ -179,6 +210,13 @@ public class CreditCardService {
 			p.setExpirationMonth(registrationForm.getExpirationMonth());
 			p.setExpirationYear(registrationForm.getExpirationYear());
 			p.setCW(registrationForm.getCW());
+
+			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final CreditCard creditCard = this.findOne(res.getId());
+			final Integer number = creditCard.getNumber();
+			creditCardsNumbers.remove(number);
+			if (creditCardsNumbers.contains(p.getNumber()))
+				binding.rejectValue("number", "NumeroRepetido");
 
 			this.validator.validate(p, binding);
 			res = p;
