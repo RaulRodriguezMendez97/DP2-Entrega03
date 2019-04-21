@@ -65,6 +65,7 @@ public class FinderService {
 			savedFinder.setMinSalary(f.getMinSalary());
 			savedFinder.setPositions(f.getPositions());
 			savedFinder.setMoment(f.getMoment());
+			Assert.isTrue(f.getMoment() != null);
 			saved = this.finderRepository.save(savedFinder);
 		}
 		return saved;
