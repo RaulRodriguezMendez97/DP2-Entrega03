@@ -25,7 +25,7 @@
 <form:hidden path="version"/>
 <jstl:if test="${not empty exception}">
 		<p style="color:red"> <spring:message code="application.hacker.create.error" /> </p>
-</jstl:if><acme:selectWithoutNullOption items="${curriculas}" itemLabel="id" code="application.curricula" path="curricula"/>
+</jstl:if><acme:selectWithoutNullOption items="${curriculas}" itemLabel="personalData.fullName" code="application.curricula" path="curricula"/>
 
 <input type="submit" name="save" 
 	value="<spring:message code="application.create" />" />
