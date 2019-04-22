@@ -567,6 +567,27 @@
 		</property>
 		<property name="isCopy" value="0"/>
 	</bean>
+	
+	<bean id="curricula2" class="domain.Curricula">
+		<property name="hacker" ref="hacker2"/>
+		<property name="personalData" ref="personalData2"/>
+		<property name="positionData">
+			<list>
+				<ref bean="positionData2" />
+			</list>
+		</property>
+		<property name="educationData">
+			<list>
+				<ref bean="educationData2" />
+			</list>
+		</property>
+		<property name="miscellaneousData" >
+			<list>
+				<ref bean="miscellaneousData2" />
+			</list>
+		</property>
+		<property name="isCopy" value="0"/>
+	</bean>
 		
 	<!-- CreditCard -->
 	<bean id="creditCard1" class="domain.CreditCard">
