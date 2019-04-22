@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import repositories.PersonalDataRepository;
 import services.PersonalDataService;
@@ -40,18 +41,22 @@ public class PersonalDataServiceTest extends AbstractTest {
 		 * original curricu-lum are not propagated to the applications to which
 		 * he or she’s attached a previous version.
 		 * 
-		 * b) Broken bussines rule:
-		 * Case 2 and 3: Un hacker intenta modificar un personalData que no le pertenece.
+		 * b) Broken bussines rule: Un hacker intenta modificar un personalData que no le pertenece.
 		 * 
-		 * c) Sentence coverage: 80%
+		 * c) Sentence coverage:
+		 * Sentencias metodo findOne-> 7
+		 * Sentencias metodo save-> 16
+		 * Sentencias totales-> 23
+		 * Sentence covegare positive test -> 17 (73,91%)
+		 * Sentence covegare negative test -> 6 (26,08%)
 		 * 
-		 * d) Data coverage: 50%
+		 * d) Data coverage: 1 atributo incorrecto de 7 atributos-> 14,28%
 		 */
 		final Object testingData[][] = {
 			{//Positive test
-				"hacker", super.getEntityId("personalData1"), "full name", "statement", "phoneNumber", "http://githubProfile", "http://linkedlnProfile", null
+				"hacker", super.getEntityId("personalData1"), "full name", "statement", "+34 123456789", "http://githubProfile", "http://linkedlnProfile", null
 			}, {//Negative test
-				"hacker1", super.getEntityId("personalData1"), "full name", "statement", "phoneNumber", "http://githubProfile", "http://linkedlnProfile", IllegalArgumentException.class
+				"hacker1", super.getEntityId("personalData1"), "full name", "statement", "+34 123456789", "http://githubProfile", "http://linkedlnProfile", IllegalArgumentException.class
 			}
 		};
 
@@ -68,18 +73,22 @@ public class PersonalDataServiceTest extends AbstractTest {
 		 * original curricu-lum are not propagated to the applications to which
 		 * he or she’s attached a previous version.
 		 * 
-		 * b) Broken bussines rule:
-		 * Case 2 and 3: Un hacker intenta crear un personalData con el fullName vacio
+		 * b) Broken bussines rule: Un hacker intenta crear un personalData con el fullName vacio
 		 * 
-		 * c) Sentence coverage: 80%
+		 * c) Sentence coverage:
+		 * Sentencias metodo create-> 8
+		 * Sentencias metodo save-> 16
+		 * Sentencias totales-> 24
+		 * Sentence covegare positive test -> 24 (100%)
+		 * Sentence covegare negative test -> 17 (70,83%)
 		 * 
-		 * d) Data coverage: 20%
+		 * d) Data coverage: 1 atributo incorrecto de 5 atributos-> 20%
 		 */
 		final Object testingData2[][] = {
 			{//Positive test
-				"full name", "statement", "phoneNumber", "http://githubProfile", "http://linkedlnProfile", null
+				"full name", "statement", "+34 123456789", "http://githubProfile", "http://linkedlnProfile", null
 			}, {//Negative test
-				"", "statement", "phoneNumber", "http://githubProfile", "http://linkedlnProfile", ConstraintViolationException.class
+				"", "statement", "+34 123456789", "http://githubProfile", "http://linkedlnProfile", ConstraintViolationException.class
 			}
 		};
 
@@ -95,18 +104,24 @@ public class PersonalDataServiceTest extends AbstractTest {
 		 * original curricu-lum are not propagated to the applications to which
 		 * he or she’s attached a previous version.
 		 * 
-		 * b) Broken bussines rule:
-		 * Case 2 and 3: Un hacker intenta eliminar un personalData que no le pertenece.
+		 * b) Broken bussines rule: Un hacker intenta eliminar un personalData que no le pertenece.
 		 * 
-		 * c) Sentence coverage: 90%
+		 * c) Sentence coverage:
+		 * Sentencias metodo findOne-> 7
+		 * Sentencias metodo delete-> 6
+		 * Sentencias totales-> 13
+		 * Sentence covegare positive test -> 13 (100%)
+		 * Sentence covegare negative test -> 6 (46,15%)
 		 * 
-		 * d) Data coverage: 100%
+		 * 
+		 * d) Data coverage: 1 atributo incorrecto de 2 atributos-> 50%
 		 */
+
 		final Object testingData3[][] = {
 			{//Positive test
-				"hacker1", super.getEntityId("personalData1"), null
+				"hacker", super.getEntityId("personalData1"), null
 			}, {//Negative test
-				"hacker1", super.getEntityId("personalData2"), IllegalArgumentException.class
+				"hacker1", super.getEntityId("personalData1"), IllegalArgumentException.class
 			}
 		};
 
@@ -172,6 +187,24 @@ public class PersonalDataServiceTest extends AbstractTest {
 			final PersonalData p = this.personalDataService.findOne(id);
 			this.personalDataService.delete(p);
 
+			super.authenticate(null);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+	}
+
+	protected void personalDataServiceTemplateShow(final String authority, final int id, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate(authority);
+
+			final PersonalData p = this.personalDataService.findOne(id);
+			Assert.notNull(p);
+			this.personalDataRepository.flush();
 			super.authenticate(null);
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
