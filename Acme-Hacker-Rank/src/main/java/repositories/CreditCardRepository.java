@@ -13,9 +13,9 @@ import domain.CreditCard;
 public interface CreditCardRepository extends JpaRepository<CreditCard, Integer> {
 
 	@Query("select c.number from CreditCard c")
-	public Collection<Integer> getAllNumbercreditCards();
+	public Collection<String> getAllNumbercreditCards();
 
 	@Query("select c from CreditCard c where c.number=?1 ")
-	public CreditCard CreditCardByNumber(Integer number);
+	public CreditCard CreditCardByNumber(String number);
 
 }

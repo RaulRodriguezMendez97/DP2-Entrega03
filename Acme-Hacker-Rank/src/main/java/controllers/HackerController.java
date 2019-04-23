@@ -51,13 +51,14 @@ public class HackerController extends AbstractController {
 		ModelAndView result;
 		Hacker hacker = null;
 		CreditCard creditcard = null;
+		CreditCard creditCardSave = null;
 
 		try {
 			creditcard = this.creditCardService.reconstruct(registrationForm, binding);
 			registrationForm.setCreditCard(creditcard);
 			hacker = this.hackerService.reconstruct(registrationForm, binding);
 			if (!binding.hasErrors() && registrationForm.getUserAccount().getPassword().equals(registrationForm.getPassword())) {
-				final CreditCard creditCardSave = this.creditCardService.save(creditcard);
+				creditCardSave = this.creditCardService.save(creditcard);
 				hacker.setCreditCard(creditCardSave);
 				this.hackerService.save(hacker);
 				result = new ModelAndView("redirect:/");
@@ -67,9 +68,10 @@ public class HackerController extends AbstractController {
 				result.addObject("registrationForm", registrationForm);
 			}
 		} catch (final Exception e) {
-			final Collection<Integer> creditCardsNumbers = this.creditCardService.getAllNumbers();
-			if (creditCardsNumbers.contains(creditcard.getNumber()) && creditcard.equals(this.creditCardService.getCreditCardByNumber(creditcard.getNumber())))
-				this.creditCardService.delete(creditcard);
+			final Collection<String> creditCardsNumbers = this.creditCardService.getAllNumbers();
+			if (creditcard != null)
+				if (creditCardsNumbers.contains(creditcard.getNumber()) && creditCardSave.equals((this.creditCardService.getCreditCardByNumber(creditcard.getNumber()))))
+					this.creditCardService.delete(creditCardSave);
 			result = new ModelAndView("hacker/create");
 			result.addObject("exception", e);
 			result.addObject("registrationForm", registrationForm);

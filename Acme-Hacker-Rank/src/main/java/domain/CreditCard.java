@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
@@ -16,7 +17,7 @@ public class CreditCard extends DomainEntity {
 
 	private String	holderName;
 	private String	brandName;
-	private int		number;
+	private String	number;
 	private int		expirationMonth;
 	private int		expirationYear;
 	private int		CW;
@@ -39,11 +40,13 @@ public class CreditCard extends DomainEntity {
 	public void setBrandName(final String brandName) {
 		this.brandName = brandName;
 	}
-
-	public int getNumber() {
+	@CreditCardNumber
+	@NotNull
+	@NotBlank
+	public String getNumber() {
 		return this.number;
 	}
-	public void setNumber(final int number) {
+	public void setNumber(final String number) {
 		this.number = number;
 	}
 	@Max(12)
