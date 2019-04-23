@@ -67,7 +67,7 @@ public class HackerController extends AbstractController {
 				result.addObject("registrationForm", registrationForm);
 			}
 		} catch (final Exception e) {
-			final Collection<Integer> creditCardsNumbers = this.creditCardService.getAllNumbers();
+			final Collection<String> creditCardsNumbers = this.creditCardService.getAllNumbers();
 			if (creditCardsNumbers.contains(creditcard.getNumber()) && creditcard.equals(this.creditCardService.getCreditCardByNumber(creditcard.getNumber())))
 				this.creditCardService.delete(creditcard);
 			result = new ModelAndView("hacker/create");

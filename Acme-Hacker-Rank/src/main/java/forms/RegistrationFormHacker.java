@@ -39,7 +39,7 @@ public class RegistrationFormHacker extends Actor {
 
 	private String	holderName;
 	private String	brandName;
-	private int		number;
+	private String	number;
 	private int		expirationMonth;
 	private int		expirationYear;
 	private int		CW;
@@ -65,11 +65,11 @@ public class RegistrationFormHacker extends Actor {
 		this.brandName = brandName;
 	}
 
-	public int getNumber() {
+	public String getNumber() {
 		return this.number;
 	}
 
-	public void setNumber(final int number) {
+	public void setNumber(final String number) {
 		this.number = number;
 	}
 
@@ -153,7 +153,7 @@ public class RegistrationFormHacker extends Actor {
 		registrationForm.setPassword("");
 		registrationForm.setBrandName("");
 		registrationForm.setHolderName("");
-		registrationForm.setNumber(0);
+		registrationForm.setNumber("");
 		registrationForm.setExpirationMonth(0);
 		registrationForm.setExpirationYear(0);
 		registrationForm.setCW(0);

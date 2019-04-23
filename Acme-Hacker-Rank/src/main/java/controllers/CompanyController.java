@@ -82,9 +82,10 @@ public class CompanyController extends AbstractController {
 				result.addObject("registrationForm", registrationForm);
 			}
 		} catch (final Exception e) {
-			final Collection<Integer> creditCardsNumbers = this.creditCardService.getAllNumbers();
-			if (creditCardsNumbers.contains(creditcard.getNumber()) && creditcard.equals(this.creditCardService.getCreditCardByNumber(creditcard.getNumber())))
-				this.creditCardService.delete(creditcard);
+			final Collection<String> creditCardsNumbers = this.creditCardService.getAllNumbers();
+			if (creditcard != null)
+				if (creditCardsNumbers.contains(creditcard.getNumber()) && creditcard.equals(this.creditCardService.getCreditCardByNumber(creditcard.getNumber())))
+					this.creditCardService.delete(creditcard);
 			result = new ModelAndView("company/create");
 			result.addObject("exception", e);
 			result.addObject("registrationForm", registrationForm);

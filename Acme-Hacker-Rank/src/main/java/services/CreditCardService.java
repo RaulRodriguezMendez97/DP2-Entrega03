@@ -50,19 +50,19 @@ public class CreditCardService {
 		final CreditCard cc = new CreditCard();
 		cc.setBrandName("");
 		cc.setHolderName("");
-		cc.setNumber(0);
+		cc.setNumber("");
 		cc.setExpirationMonth(0);
 		cc.setExpirationYear(0);
 		cc.setCW(0);
 		return cc;
 	}
 	public CreditCard save(final CreditCard cc) {
-		final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+		final Collection<String> creditCardsNumbers = this.getAllNumbers();
 
 		if (cc.getId() != 0) {
 
 			final CreditCard creditCard = this.findOne(cc.getId());
-			final Integer number = creditCard.getNumber();
+			final String number = creditCard.getNumber();
 			creditCardsNumbers.remove(number);
 		}
 		Assert.isTrue(!creditCardsNumbers.contains(cc.getNumber()));
@@ -76,11 +76,11 @@ public class CreditCardService {
 		this.creditCardRepository.delete(creditCard);
 	}
 
-	public Collection<Integer> getAllNumbers() {
+	public Collection<String> getAllNumbers() {
 		return this.creditCardRepository.getAllNumbercreditCards();
 	}
 
-	public CreditCard getCreditCardByNumber(final Integer number) {
+	public CreditCard getCreditCardByNumber(final String number) {
 		return this.creditCardRepository.CreditCardByNumber(number);
 	}
 
@@ -97,7 +97,7 @@ public class CreditCardService {
 			res.setExpirationYear(registrationForm.getExpirationYear());
 			res.setCW(registrationForm.getCW());
 
-			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final Collection<String> creditCardsNumbers = this.getAllNumbers();
 			if (creditCardsNumbers.contains(res.getNumber()))
 				binding.rejectValue("number", "NumeroRepetido");
 
@@ -117,9 +117,9 @@ public class CreditCardService {
 			p.setExpirationYear(registrationForm.getExpirationYear());
 			p.setCW(registrationForm.getCW());
 
-			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final Collection<String> creditCardsNumbers = this.getAllNumbers();
 			final CreditCard creditCard = this.findOne(res.getId());
-			final Integer number = creditCard.getNumber();
+			final String number = creditCard.getNumber();
 			creditCardsNumbers.remove(number);
 			if (creditCardsNumbers.contains(p.getNumber()))
 				binding.rejectValue("number", "NumeroRepetido");
@@ -144,7 +144,7 @@ public class CreditCardService {
 			res.setExpirationYear(registrationForm.getExpirationYear());
 			res.setCW(registrationForm.getCW());
 
-			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final Collection<String> creditCardsNumbers = this.getAllNumbers();
 			if (creditCardsNumbers.contains(res.getNumber()))
 				binding.rejectValue("number", "NumeroRepetido");
 
@@ -164,9 +164,9 @@ public class CreditCardService {
 			p.setExpirationYear(registrationForm.getExpirationYear());
 			p.setCW(registrationForm.getCW());
 
-			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final Collection<String> creditCardsNumbers = this.getAllNumbers();
 			final CreditCard creditCard = this.findOne(res.getId());
-			final Integer number = creditCard.getNumber();
+			final String number = creditCard.getNumber();
 			creditCardsNumbers.remove(number);
 			if (creditCardsNumbers.contains(p.getNumber()))
 				binding.rejectValue("number", "NumeroRepetido");
@@ -191,7 +191,7 @@ public class CreditCardService {
 			res.setExpirationYear(registrationForm.getExpirationYear());
 			res.setCW(registrationForm.getCW());
 
-			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final Collection<String> creditCardsNumbers = this.getAllNumbers();
 			if (creditCardsNumbers.contains(res.getNumber()))
 				binding.rejectValue("number", "NumeroRepetido");
 
@@ -211,9 +211,9 @@ public class CreditCardService {
 			p.setExpirationYear(registrationForm.getExpirationYear());
 			p.setCW(registrationForm.getCW());
 
-			final Collection<Integer> creditCardsNumbers = this.getAllNumbers();
+			final Collection<String> creditCardsNumbers = this.getAllNumbers();
 			final CreditCard creditCard = this.findOne(res.getId());
-			final Integer number = creditCard.getNumber();
+			final String number = creditCard.getNumber();
 			creditCardsNumbers.remove(number);
 			if (creditCardsNumbers.contains(p.getNumber()))
 				binding.rejectValue("number", "NumeroRepetido");
