@@ -159,13 +159,14 @@ public class AdministratorController extends AbstractController {
 		ModelAndView result;
 		Administrator admin = null;
 		CreditCard creditcard = null;
+		CreditCard creditCardSave = null;
 
 		try {
 			creditcard = this.creditCardService.reconstruct(registrationForm, binding);
 			registrationForm.setCreditCard(creditcard);
 			admin = this.administratorService.reconstruct(registrationForm, binding);
 			if (!binding.hasErrors() && registrationForm.getUserAccount().getPassword().equals(registrationForm.getPassword())) {
-				final CreditCard creditCardSave = this.creditCardService.save(creditcard);
+				creditCardSave = this.creditCardService.save(creditcard);
 				admin.setCreditCard(creditCardSave);
 				this.administratorService.save(admin);
 				result = new ModelAndView("redirect:/");
@@ -176,8 +177,9 @@ public class AdministratorController extends AbstractController {
 			}
 		} catch (final Exception e) {
 			final Collection<String> creditCardsNumbers = this.creditCardService.getAllNumbers();
-			if (creditCardsNumbers.contains(creditcard.getNumber()) && creditcard.equals(this.creditCardService.getCreditCardByNumber(creditcard.getNumber())))
-				this.creditCardService.delete(creditcard);
+			if (creditcard != null)
+				if (creditCardsNumbers.contains(creditcard.getNumber()) && creditCardSave.equals((this.creditCardService.getCreditCardByNumber(creditcard.getNumber()))))
+					this.creditCardService.delete(creditCardSave);
 			result = new ModelAndView("administrator/create");
 			result.addObject("exception", e);
 			result.addObject("registrationForm", registrationForm);
