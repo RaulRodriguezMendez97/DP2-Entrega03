@@ -189,6 +189,7 @@ public class ProblemCompanyController extends AbstractController {
 		try {
 
 			final Position position = this.positionService.findOne(positionId);
+			Assert.isTrue(position.getIsCancelled() == 0);
 
 			if (!binding.hasErrors()) {
 				this.problemService.delete(p, positionId);

@@ -112,7 +112,8 @@ public class PositionService {
 		Assert.isTrue(p.getCompany().equals(a));
 		Assert.isTrue(p.getTitle() != null && p.getTitle() != "");
 		Assert.isTrue(p.getDescription() != null && p.getDescription() != "");
-		Assert.isTrue(new Date().before(p.getDeadLine()));
+		if (!((p.getDeadLine().getYear() == new Date().getYear()) && (p.getDeadLine().getMonth() == new Date().getMonth()) && p.getDeadLine().getDate() == new Date().getDate()))
+			Assert.isTrue(new Date().before(p.getDeadLine()));
 		Assert.isTrue(p.getRequiredProfile() != null && p.getRequiredProfile() != "");
 		Assert.isTrue(p.getSkillsRequired() != null && p.getSkillsRequired() != "");
 		Assert.isTrue(p.getTechnologiesRequired() != null && p.getTechnologiesRequired() != "");
@@ -166,8 +167,9 @@ public class PositionService {
 			copy.setProblems(res.getProblems());
 			copy.setIsCancelled(res.getIsCancelled());
 
-			if (!(new Date().before(copy.getDeadLine())))
-				binding.rejectValue("deadLine", "FutureBinding");
+			if (!((copy.getDeadLine().getYear() == new Date().getYear()) && (copy.getDeadLine().getMonth() == new Date().getMonth()) && copy.getDeadLine().getDate() == new Date().getDate()))
+				if (!(new Date().before(copy.getDeadLine())))
+					binding.rejectValue("deadLine", "FutureBinding");
 
 			if (copy.getId() != 0 && copy.getDraftMode() == 0)
 				if (!(this.getProblemsWithoutDraftMode(copy.getId()) >= 2))
