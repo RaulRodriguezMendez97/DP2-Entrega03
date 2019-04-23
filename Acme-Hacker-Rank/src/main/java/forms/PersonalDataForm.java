@@ -1,34 +1,27 @@
 
-package domain;
+package forms;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
-@Entity
-@Access(AccessType.PROPERTY)
-public class PersonalData extends DomainEntity {
+import domain.DomainEntity;
+
+public class PersonalDataForm extends DomainEntity {
+
+	public PersonalDataForm() {
+		super();
+	}
+
 
 	private String	fullName;
 	private String	statement;
 	private String	phoneNumber;
 	private String	githubProfile;
 	private String	linkedlnProfile;
+	private Boolean	patternPhone;
 
-
-	//	private Boolean	patternPhone;
-
-	//	public Boolean getPatternPhone() {
-	//		return this.patternPhone;
-	//	}
-	//
-	//	public void setPatternPhone(final Boolean patternPhone) {
-	//		this.patternPhone = patternPhone;
-	//	}
 
 	@NotNull
 	@NotBlank
@@ -81,4 +74,26 @@ public class PersonalData extends DomainEntity {
 	public void setLinkedlnProfile(final String linkedlnProfile) {
 		this.linkedlnProfile = linkedlnProfile;
 	}
+
+	public Boolean getPatternPhone() {
+		return this.patternPhone;
+	}
+
+	public void setPatternPhone(final Boolean patternPhone) {
+		this.patternPhone = patternPhone;
+	}
+
+	public PersonalDataForm createPersonalData() {
+
+		final PersonalDataForm registrationForm = new PersonalDataForm();
+		registrationForm.setFullName("");
+		registrationForm.setPatternPhone(false);
+		registrationForm.setGithubProfile("");
+		registrationForm.setLinkedlnProfile("");
+		//registrationForm.setPhoneNumber("");
+		registrationForm.setStatement("");
+
+		return registrationForm;
+	}
+
 }

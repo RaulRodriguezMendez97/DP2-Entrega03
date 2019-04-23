@@ -167,7 +167,6 @@ public class CompanyService {
 				final Matcher matcherTelefono = patternTelefono.matcher(res.getPhone());
 				Assert.isTrue(matcherTelefono.find() == true, "CompanyService.save -> Telefono no valido");
 			}
-
 			this.validator.validate(res, binding);
 
 			Assert.isTrue(registrationForm.getCheck() == true);

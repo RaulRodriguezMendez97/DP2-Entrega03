@@ -20,11 +20,12 @@
 <body>
 
 <security:authorize access="hasRole('HACKER')">
-<form:form action=" personalData/hacker/edit.do" modelAttribute="personalData">
+<form:form action=" personalData/hacker/edit.do" modelAttribute="registrationForm">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="patternPhone" />
+	<form:hidden path="patternPhone"/>
+	
 
  
  	<acme:textbox code="personalData.fullName" path="fullName"/>
