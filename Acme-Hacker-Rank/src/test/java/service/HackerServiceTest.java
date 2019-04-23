@@ -48,9 +48,9 @@ public class HackerServiceTest extends AbstractTest {
 	public void CreateHackerService() {
 		final Object testingData[][] = {
 			{//Positive test
-				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876785, 8, 2020, 876, null
+				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, null
 			}, {//Negative test: VatNumber con patrón incorrecto
-				"Nuevo Nombre", "Apellido", "ES123456789X", "prueba2@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876785, 8, 2020, 876, NullPointerException.class
+				"Nuevo Nombre", "Apellido", "ES123456789X", "prueba2@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, NullPointerException.class
 
 			},
 
@@ -58,10 +58,10 @@ public class HackerServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++)
 			this.CreateHackerTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-				(String) testingData[i][7], (String) testingData[i][8], (int) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (Class<?>) testingData[i][13]);
+				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (Class<?>) testingData[i][13]);
 	}
 	protected void CreateHackerTemplate(final String name, final String surnames, final String vatNumber, final String email, final String username, final String password, final String confirmPassword, final String brandName, final String holderName,
-		final int number, final int expirationMonth, final int expirationYear, final int cW, final Class<?> expected) {
+		final String number, final int expirationMonth, final int expirationYear, final int cW, final Class<?> expected) {
 		Class<?> caught;
 		Hacker hacker = null;
 		CreditCard creditcard = null;
@@ -126,10 +126,10 @@ public class HackerServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				//Positive test
-				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876785, 8, 2020, 876, super.getEntityId("hacker1"), null
+				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, super.getEntityId("hacker1"), null
 			}, {
 				//Negative test: Un hacker intenta modificar los datos de otra
-				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876784, 8, 2020, 876, super.getEntityId("hacker2"), IllegalArgumentException.class
+				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, super.getEntityId("hacker2"), IllegalArgumentException.class
 
 			},
 
@@ -137,9 +137,9 @@ public class HackerServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++)
 			this.EditHackerTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-				(String) testingData[i][7], (int) testingData[i][8], (int) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (Class<?>) testingData[i][13]);
+				(String) testingData[i][7], (String) testingData[i][8], (int) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (Class<?>) testingData[i][13]);
 	}
-	protected void EditHackerTemplate(final String name, final String surnames, final String vatNumber, final String email, final String password, final String confirmPassword, final String brandName, final String holderName, final int number,
+	protected void EditHackerTemplate(final String name, final String surnames, final String vatNumber, final String email, final String password, final String confirmPassword, final String brandName, final String holderName, final String number,
 		final int expirationMonth, final int expirationYear, final int cW, final int hackerId, final Class<?> expected) {
 		Class<?> caught;
 		Hacker hacker = null;

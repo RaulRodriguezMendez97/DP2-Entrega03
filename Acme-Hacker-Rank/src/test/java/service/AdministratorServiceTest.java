@@ -48,9 +48,9 @@ public class AdministratorServiceTest extends AbstractTest {
 	public void CreateAdmnistratorService() {
 		final Object testingData[][] = {
 			{//Positive test
-				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876785, 8, 2020, 876, null
+				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, null
 			}, {//Negative test: email vacio
-				"Nuevo Nombre", "Apellido", "ES12345678X", "", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876785, 8, 2020, 876, NullPointerException.class
+				"Nuevo Nombre", "Apellido", "ES12345678X", "", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, NullPointerException.class
 
 			},
 
@@ -58,10 +58,10 @@ public class AdministratorServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++)
 			this.CreateAdministradorTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-				(String) testingData[i][7], (String) testingData[i][8], (int) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (Class<?>) testingData[i][13]);
+				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (Class<?>) testingData[i][13]);
 	}
 	protected void CreateAdministradorTemplate(final String name, final String surnames, final String vatNumber, final String email, final String username, final String password, final String confirmPassword, final String brandName,
-		final String holderName, final int number, final int expirationMonth, final int expirationYear, final int cW, final Class<?> expected) {
+		final String holderName, final String number, final int expirationMonth, final int expirationYear, final int cW, final Class<?> expected) {
 		Class<?> caught;
 		Administrator admin = null;
 		CreditCard creditcard = null;
@@ -124,11 +124,11 @@ public class AdministratorServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				//Positive test
-				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876785, 8, 2020, 876, super.getEntityId("administrator1"), null
+				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, super.getEntityId("administrator1"), null
 			},
 			{
 				//Negative test: UN administrador intenta modificar los datos de otro
-				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", 9876784, 8, 2020, 876, super.getEntityId("administrator2"),
+				"Nuevo Nombre", "Apellido", "ES12345678X", "prueba@email.com", "NuevoUsername", "NuevaPassWord", "NuevaPassWord", "NuevoBrandName", "NuevoholderName", "5182901911816096", 8, 2020, 876, super.getEntityId("administrator2"),
 				IllegalArgumentException.class
 
 			},
@@ -137,10 +137,10 @@ public class AdministratorServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++)
 			this.EditAdministradorTemplate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (String) testingData[i][6],
-				(String) testingData[i][7], (String) testingData[i][8], (int) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (int) testingData[i][13], (Class<?>) testingData[i][14]);
+				(String) testingData[i][7], (String) testingData[i][8], (String) testingData[i][9], (int) testingData[i][10], (int) testingData[i][11], (int) testingData[i][12], (int) testingData[i][13], (Class<?>) testingData[i][14]);
 	}
 	protected void EditAdministradorTemplate(final String name, final String surnames, final String vatNumber, final String email, final String username, final String password, final String confirmPassword, final String brandName, final String holderName,
-		final int number, final int expirationMonth, final int expirationYear, final int cW, final int administratoriId, final Class<?> expected) {
+		final String number, final int expirationMonth, final int expirationYear, final int cW, final int administratoriId, final Class<?> expected) {
 		Class<?> caught;
 		Administrator admin = null;
 		CreditCard creditcard = null;
