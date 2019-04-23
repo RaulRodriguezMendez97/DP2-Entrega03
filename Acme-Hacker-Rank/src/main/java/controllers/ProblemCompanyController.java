@@ -98,6 +98,7 @@ public class ProblemCompanyController extends AbstractController {
 			final Problem problem;
 			final Position position;
 			position = this.positionService.findOne(positionId);
+			Assert.isTrue(position.getIsCancelled() == 0);
 
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
@@ -124,6 +125,7 @@ public class ProblemCompanyController extends AbstractController {
 			final Problem problem;
 			final Position position;
 			position = this.positionService.findOne(positionId);
+			Assert.isTrue(position.getIsCancelled() == 0);
 
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
@@ -152,6 +154,7 @@ public class ProblemCompanyController extends AbstractController {
 		final Position position = this.positionService.findOne(positionId);
 
 		try {
+			Assert.isTrue(position.getIsCancelled() == 0);
 			p = this.problemService.reconstruct(problem, binding);
 
 			if (!binding.hasErrors()) {

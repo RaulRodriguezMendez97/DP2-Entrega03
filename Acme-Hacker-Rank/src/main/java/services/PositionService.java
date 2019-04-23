@@ -170,7 +170,7 @@ public class PositionService {
 				binding.rejectValue("deadLine", "FutureBinding");
 
 			if (copy.getId() != 0 && copy.getDraftMode() == 0)
-				if (!(copy.getProblems().size() >= 2))
+				if (!(this.getProblemsWithoutDraftMode(copy.getId()) >= 2))
 					binding.rejectValue("title", "ProblemSize");
 
 			this.validator.validate(copy, binding);
@@ -220,6 +220,10 @@ public class PositionService {
 
 		return d + ticker;
 
+	}
+
+	public Integer getProblemsWithoutDraftMode(final Integer id) {
+		return this.positionRepository.getProblemsWithoutDraftMode(id);
 	}
 
 	public List<Object[]> getAvgMinMaxDesvPositionByCompany() {

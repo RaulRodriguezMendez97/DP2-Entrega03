@@ -32,6 +32,9 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 	@Query("select p from Position p where ?1 member of p.problems")
 	public Position getPositionByProblem(Integer id);
 
+	@Query("select count(x) from Position p join p.problems x where x.draftMode = 0 and p.id=?1")
+	public Integer getProblemsWithoutDraftMode(Integer id);
+
 	//DASHBOARD
 	@Query("select avg(1.0*(select count(p.company) from Position p where p.company.id = b.id)), min(1.0*(select count(p.company) from Position p where p.company.id = b.id)), max(1.0*(select count(p.company) from Position p where p.company.id = b.id)), sqrt(1.0*sum(1.0*(select count (p.company) from Position p where p.company.id = b.id) * (select count(p.company) from Position p where p.company.id = b.id)) / count(b) - avg(1.0*(select count(p.company) from Position p where p.company.id = b.id)) * avg(1.0*(select count(p.company) from Position p where p.company.id = b.id))) from Company b")
 	public List<Object[]> getAvgMinMaxDesvPositionByCompany();

@@ -246,7 +246,7 @@
 	<bean id="position1" class="domain.Position">
 		<property name="title" value="Position1"/>
 		<property name="description" value="Description of position1"/>
-		<property name="deadLine" value="01/01/2020"/>
+		<property name="deadLine" value="04/23/2019"/>
 		<property name="requiredProfile" value="Happy"/>
 		<property name="skillsRequired" value="MySQL"/>
 		<property name="technologiesRequired" value="i7"/>
