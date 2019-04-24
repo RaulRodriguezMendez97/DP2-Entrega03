@@ -35,6 +35,8 @@ requestURI="finder/hacker/show.do" >
         <th><spring:message code="position.title" /></th>
         <th><spring:message code="position.deadline" /></th>
         <th><spring:message code="position.salary" /></th>
+        <th><spring:message code="position.skillsRequired"/></th>
+        <th><spring:message code="position.description"/></th>
       </tr>
     </thead>
     <tbody>
@@ -48,10 +50,16 @@ requestURI="finder/hacker/show.do" >
 		            <jstl:out value="${p.title}" />
 		        </td>
 		        <td>
+		            <jstl:out value="${p.description}" />
+		        </td>
+		        <td>
 		            <jstl:out value="${p.deadLine}" />
 		        </td>
 		        <td>
 		            <jstl:out value="${p.salary}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.skillsRequired}" />
 		        </td>
 		    </tr>
 		  </jstl:if>
@@ -64,10 +72,16 @@ requestURI="finder/hacker/show.do" >
 		            <jstl:out value="${p.title}" />
 		        </td>
 		        <td>
+		            <jstl:out value="${p.description}" />
+		        </td>
+		        <td>
 		            <jstl:out value="${p.deadLine}" />
 		        </td>
 		        <td>
 		            <jstl:out value="${p.salary}" />
+		        </td>
+		        <td>
+		            <jstl:out value="${p.skillsRequired}" />
 		        </td>
 		    </tr>
 		  </jstl:if>

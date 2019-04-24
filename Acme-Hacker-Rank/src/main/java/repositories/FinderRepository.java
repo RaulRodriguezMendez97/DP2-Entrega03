@@ -2,7 +2,6 @@
 package repositories;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,10 +17,10 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 	@Query("select h.finder from Hacker h where h.userAccount.id = ?1")
 	public Finder getMyFinder(int id);
 
-	@Query("select p from Position p where (locate(?1,p.title) != 0 or locate(?1,p.ticker) != 0 or locate(?1,p.description) != 0 or locate(?1,p.skillsRequired) != 0 or locate(?1,p.technologiesRequired) != 0 or locate(?1,p.requiredProfile) != 0) and p.salary between ?2 and ?3 or locate(?4,p.deadLine) != 0 and p.draftMode = 1")
-	public Collection<Position> filterPositions(String keyWord, Double minSalary, Double maxSalary, Date deadline);
+	//	@Query("select p from Position p where (locate(?1,p.title) != 0 or locate(?1,p.ticker) != 0 or locate(?1,p.description) != 0 or locate(?1,p.skillsRequired) != 0 or locate(?1,p.technologiesRequired) != 0 or locate(?1,p.requiredProfile) != 0) and p.salary between ?2 and ?3 or locate(?4,p.deadLine) != 0 and p.draftMode = 1")
+	//	public Collection<Position> filterPositions(String keyWord, Double minSalary, Double maxSalary, Date deadline);
 
-	@Query("select p from Position p where (locate(?1,p.title) != 0 or locate(?1,p.ticker) != 0 or locate(?1,p.description) != 0 or locate(?1,p.skillsRequired) != 0 or locate(?1,p.technologiesRequired) != 0 or locate(?1,p.requiredProfile) != 0) and p.salary between ?2 and ?3 and locate(?4,p.deadLine) != 0 and p.draftMode = 1")
+	@Query("select p from Position p where ((locate(?1,p.title) != 0 or locate(?1,p.ticker) != 0 or locate(?1,p.description) != 0 or locate(?1,p.skillsRequired) != 0 or locate(?1,p.technologiesRequired) != 0 or locate(?1,p.requiredProfile) != 0) and p.salary between ?2 and ?3 and locate(?4,p.deadLine) != 0) and p.draftMode = 0 and p.isCancelled = 0")
 	public Collection<Position> filterPositions2(String keyWord, Double minSalary, Double maxSalary, String fecha);
 
 	@Query("select f from Finder f where ?1 member of f.positions")
