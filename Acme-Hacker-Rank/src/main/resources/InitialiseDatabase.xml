@@ -49,7 +49,7 @@
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holderName" value="nombre1"></property>
 		<property name="brandName" value="VISA"></property>
-		<property name="number" value="123321"></property>
+		<property name="number" value="5325065299416578"></property>
 		<property name="expirationMonth" value="3"></property>
 		<property name="expirationYear" value="2019"></property>
 		<property name="CW" value="101"></property>
