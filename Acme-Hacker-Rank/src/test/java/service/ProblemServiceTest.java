@@ -102,7 +102,7 @@ public class ProblemServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage: 100%
 	 * 
-	 * d) Data coverage:
+	 * d) Data coverage: 20%
 	 */
 
 	@Test
@@ -149,7 +149,7 @@ public class ProblemServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage: 100%
 	 * 
-	 * d) Data coverage:
+	 * d) Data coverage: --
 	 */
 
 	@Test
@@ -195,7 +195,7 @@ public class ProblemServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage: 100%
 	 * 
-	 * d) Data coverage:
+	 * d) Data coverage: --
 	 */
 
 	@Test

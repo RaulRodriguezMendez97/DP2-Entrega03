@@ -109,7 +109,7 @@ public class PositionServiceTest extends AbstractTest {
 	 * Case 3: se intenta modificar una compañia que ya esta en save mode
 	 * c) Sentence coverage: 100%
 	 * 
-	 * d) Data coverage:
+	 * d) Data coverage: 9%
 	 */
 
 	@Test
@@ -156,7 +156,7 @@ public class PositionServiceTest extends AbstractTest {
 	 * 
 	 * c) Sentence coverage: 100%
 	 * 
-	 * d) Data coverage:
+	 * d) Data coverage:--
 	 */
 
 	@Test
@@ -190,6 +190,18 @@ public class PositionServiceTest extends AbstractTest {
 
 		this.checkExceptions(expected, caught);
 	}
+
+	/*
+	 * a) Requeriment: An actor who is authenticated as a company must be able to:
+	 * Manage their positions, which includes delete them.
+	 * 
+	 * b) Broken bussines rule:
+	 * una compañía que no es propietaria de la position, intenta acceder a ella
+	 * 
+	 * c) Sentence coverage: 100%
+	 * 
+	 * d) Data coverage:--
+	 */
 
 	@Test
 	public void FindOnePositionService() {
