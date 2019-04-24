@@ -41,6 +41,36 @@ public class PersonalDataServiceTest extends AbstractTest {
 		 * original curricu-lum are not propagated to the applications to which
 		 * he or she’s attached a previous version.
 		 * 
+		 * b) Broken bussines rule: Un hacker intenta mostrar un personalData que no le pertenece.
+		 * 
+		 * c) Sentence coverage:
+		 * Sentencias metodo findOne-> 7
+		 * Sentencias totales-> 7
+		 * Sentence covegare positive test -> 7 (100%)
+		 * Sentence covegare negative test -> 6 (85,71%)
+		 * 
+		 * d) Data coverage: 1 atributo incorrecto de 2 atributos-> 50%
+		 */
+		final Object testingData4[][] = {
+			{//Positive test
+				"hacker", super.getEntityId("personalData1"), null
+			}, {//Negative test
+				"hacker1", super.getEntityId("personalData1"), IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData4.length; i++)
+			this.personalDataServiceTemplateShow((String) testingData4[i][0], (int) testingData4[i][1], (Class<?>) testingData4[i][2]);
+
+		/*
+		 * a) Requeriment: Manage his or her curricula, which includes listing,
+		 * showing, creating, updating, and deleting them. When a hacker makes
+		 * an application, he or she must select one of his or her curricula so
+		 * that it’s attached to the application. Note that attaching a
+		 * curriculum makes a copy; the updates that a hacker performs on the
+		 * original curricu-lum are not propagated to the applications to which
+		 * he or she’s attached a previous version.
+		 * 
 		 * b) Broken bussines rule: Un hacker intenta modificar un personalData que no le pertenece.
 		 * 
 		 * c) Sentence coverage:
@@ -116,7 +146,6 @@ public class PersonalDataServiceTest extends AbstractTest {
 		 * 
 		 * d) Data coverage: 1 atributo incorrecto de 2 atributos-> 50%
 		 */
-
 		final Object testingData3[][] = {
 			{//Positive test
 				"hacker", super.getEntityId("personalData1"), null
@@ -125,7 +154,7 @@ public class PersonalDataServiceTest extends AbstractTest {
 			}
 		};
 
-		for (int i = 0; i < testingData.length; i++)
+		for (int i = 0; i < testingData3.length; i++)
 			this.PersonalDataServiceTemplateDelete((String) testingData3[i][0], (int) testingData3[i][1], (Class<?>) testingData3[i][2]);
 
 	}
@@ -204,7 +233,6 @@ public class PersonalDataServiceTest extends AbstractTest {
 
 			final PersonalData p = this.personalDataService.findOne(id);
 			Assert.notNull(p);
-			this.personalDataRepository.flush();
 			super.authenticate(null);
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
