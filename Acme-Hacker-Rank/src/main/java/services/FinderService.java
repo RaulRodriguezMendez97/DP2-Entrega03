@@ -73,28 +73,48 @@ public class FinderService {
 
 	//RECONSTRUCT
 	public Finder reconstruct(final Finder finder, final BindingResult binding) {
-		final Finder res;
+		final Finder res = this.findOne();
 
-		res = this.findOne();
-		final Finder copy = res;
-		copy.setKeyWord(finder.getKeyWord());
+		final Finder copy = new Finder();
+		copy.setId(res.getId());
+		copy.setVersion(res.getVersion());
+		copy.setMoment(res.getMoment());
 		copy.setDeadLine(finder.getDeadLine());
 		copy.setMaxSalary(finder.getMaxSalary());
+		copy.setKeyWord(finder.getKeyWord());
 		copy.setMinSalary(finder.getMinSalary());
+
 		if (finder.getMinSalary() == null)
-			finder.setMinSalary(0.);
+			copy.setMinSalary(0.);
 		if (finder.getMaxSalary() == null)
-			finder.setMaxSalary(Double.MAX_VALUE);
+			copy.setMaxSalary(Double.MAX_VALUE);
+		if (finder.getKeyWord() == null)
+			copy.setKeyWord("");
+		if (res.getKeyWord() == null)
+			res.setKeyWord("");
+
+		Boolean noHaCambiadoFecha;
+		if (res.getDeadLine() == null && finder.getDeadLine() == null)
+			noHaCambiadoFecha = true;
+		else if ((res.getDeadLine() == null && finder.getDeadLine() != null) || (res.getDeadLine() != null && finder.getDeadLine() == null))
+			noHaCambiadoFecha = false;
+		else if (res.getDeadLine().getDate() == finder.getDeadLine().getDate() && res.getDeadLine().getMonth() == finder.getDeadLine().getMonth() && res.getDeadLine().getYear() == finder.getDeadLine().getYear())
+			noHaCambiadoFecha = true;
+		else
+			noHaCambiadoFecha = false;
+
+		final Boolean noHaCambiadoFinder = res.getMinSalary().equals(copy.getMinSalary()) && res.getMaxSalary().equals(copy.getMaxSalary()) && res.getKeyWord().equals(copy.getKeyWord()) && noHaCambiadoFecha;
 
 		final long a = (new Date().getTime() - res.getMoment().getTime()) / 3600000;
 		final long b = this.customizableSystemService.getTimeCache();
-		if (a > b) {
+
+		if (a > b || !noHaCambiadoFinder) {
 			String fecha;
 			if (finder.getDeadLine() == null)
 				fecha = "";
 			else
 				fecha = this.getStringToDate(finder.getDeadLine());
-			final Collection<Position> c = this.finderRepository.filterPositions2(finder.getKeyWord(), finder.getMinSalary(), finder.getMaxSalary(), fecha);
+			final Collection<Position> c = this.finderRepository.filterPositions2(copy.getKeyWord(), copy.getMinSalary(), copy.getMaxSalary(), fecha);
 			copy.setPositions(c);
 			copy.setMoment(new Date());
 		} else
@@ -104,7 +124,6 @@ public class FinderService {
 		return copy;
 
 	}
-
 	private int hackerUserAccountId() {
 		return LoginService.getPrincipal().getId();
 	}
@@ -157,4 +176,5 @@ public class FinderService {
 	public Double ratioEmptyNotEmtpyFinder() {
 		return this.finderRepository.ratioEmptyNotEmtpyFinder();
 	}
+
 }

@@ -1,6 +1,4 @@
 ﻿
-
-
 start transaction;
 
 
@@ -202,7 +200,7 @@ CREATE TABLE `credit_card` (
   `expiration_month` int(11) NOT NULL,
   `expiration_year` int(11) NOT NULL,
   `holder_name` varchar(255) DEFAULT NULL,
-  `number` int(11) NOT NULL,
+  `number` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -213,7 +211,7 @@ CREATE TABLE `credit_card` (
 
 LOCK TABLES `credit_card` WRITE;
 /*!40000 ALTER TABLE `credit_card` DISABLE KEYS */;
-INSERT INTO `credit_card` VALUES (8,0,101,'VISA',3,2019,'nombre1',123321);
+INSERT INTO `credit_card` VALUES (8,0,101,'VISA',3,2019,'nombre1','5325065299416578');
 /*!40000 ALTER TABLE `credit_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -807,4 +805,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-21 17:50:15
+-- Dump completed on 2019-04-24 18:09:04

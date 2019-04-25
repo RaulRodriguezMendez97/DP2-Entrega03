@@ -44,9 +44,12 @@
 <input type="button" name="cancel" value="<spring:message code="finder.show" />"
 			onclick="javascript: relativeRedir('finder/hacker/show.do');" />
 
-<button type="button" onclick="exportFunction()"><spring:message code="finder.clear.results" /></button>
+<input type="button" name="clear" value="<spring:message code="finder.clear.results" />"
+			onclick="javascript: relativeRedir('finder/hacker/clear.do');" />
+
+<!-- <button type="button" onclick="exportFunction()"><spring:message code="finder.clear.results" /></button>
 <p id="message"></p>
-<script type="text/javascript">
+ <script type="text/javascript">
 	function exportFunction() {
 		$.ajax({
 			type:'GET',
@@ -56,5 +59,5 @@
 		    }
 		});
 	}
-</script>
+</script> -->
 </security:authorize>

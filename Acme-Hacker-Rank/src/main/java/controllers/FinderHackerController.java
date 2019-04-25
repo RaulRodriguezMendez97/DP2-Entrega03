@@ -2,8 +2,6 @@
 package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,15 +65,28 @@ public class FinderHackerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/clear", method = RequestMethod.GET)
-	public ResponseEntity<String> clearResults() {
-		ResponseEntity<String> res;
+	public ModelAndView clearResults() {
+		ModelAndView result;
 		try {
 			this.finderService.clearResults();
-			res = new ResponseEntity<String>("Ok", HttpStatus.OK);
+			result = new ModelAndView("redirect:show.do");
 		} catch (final Exception e) {
-			res = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			result = new ModelAndView("finder/edit");
+			result.addObject("finder", this.finderService.findOne());
 		}
-		return res;
+		return result;
 	}
+
+	//	@RequestMapping(value = "/clear", method = RequestMethod.GET)
+	//	public ResponseEntity<String> clearResults2() {
+	//		ResponseEntity<String> res;
+	//		try {
+	//			this.finderService.clearResults();
+	//			res = new ResponseEntity<String>("Ok", HttpStatus.OK);
+	//		} catch (final Exception e) {
+	//			res = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	//		}
+	//		return res;
+	//	}
 
 }
