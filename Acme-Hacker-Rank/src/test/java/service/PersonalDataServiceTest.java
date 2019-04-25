@@ -125,38 +125,6 @@ public class PersonalDataServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.personalDataServiceTemplateCreate((String) testingData2[i][0], (String) testingData2[i][1], (String) testingData2[i][2], (String) testingData2[i][3], (String) testingData2[i][4], (Class<?>) testingData2[i][5]);
 
-		/*
-		 * a) Requeriment: Manage his or her curricula, which includes listing,
-		 * showing, creating, updating, and deleting them. When a hacker makes
-		 * an application, he or she must select one of his or her curricula so
-		 * that it’s attached to the application. Note that attaching a
-		 * curriculum makes a copy; the updates that a hacker performs on the
-		 * original curricu-lum are not propagated to the applications to which
-		 * he or she’s attached a previous version.
-		 * 
-		 * b) Broken bussines rule: Un hacker intenta eliminar un personalData que no le pertenece.
-		 * 
-		 * c) Sentence coverage:
-		 * Sentencias metodo findOne-> 7
-		 * Sentencias metodo delete-> 6
-		 * Sentencias totales-> 13
-		 * Sentence covegare positive test -> 13 (100%)
-		 * Sentence covegare negative test -> 6 (46,15%)
-		 * 
-		 * 
-		 * d) Data coverage: 1 atributo incorrecto de 2 atributos-> 50%
-		 */
-		final Object testingData3[][] = {
-			{//Positive test
-				"hacker", super.getEntityId("personalData1"), null
-			}, {//Negative test
-				"hacker1", super.getEntityId("personalData1"), IllegalArgumentException.class
-			}
-		};
-
-		for (int i = 0; i < testingData3.length; i++)
-			this.PersonalDataServiceTemplateDelete((String) testingData3[i][0], (int) testingData3[i][1], (Class<?>) testingData3[i][2]);
-
 	}
 
 	protected void personalDataServiceTemplateSave(final String authority, final int id, final String fullName, final String statement, final String phoneNumber, final String githubProfile, final String linkedlnProfile, final Class<?> expected) {
