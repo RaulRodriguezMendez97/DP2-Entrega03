@@ -3,6 +3,8 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.PositionService;
 import services.ProblemService;
 import domain.Application;
+import domain.Position;
 import domain.Problem;
 
 @Controller
@@ -25,6 +29,8 @@ public class ApplicationHackerController extends AbstractController {
 	private ApplicationService	applicationService;
 	@Autowired
 	private ProblemService		problemService;
+	@Autowired
+	private PositionService		positionService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -48,6 +54,7 @@ public class ApplicationHackerController extends AbstractController {
 		result = new ModelAndView("application/create");
 		result.addObject("application", application);
 		result.addObject("curriculas", this.applicationService.getCurriculaHacker());
+		result.addObject("positions", this.positionService.getAllPositionToCreateApplication());
 		return result;
 	}
 
@@ -71,23 +78,36 @@ public class ApplicationHackerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(Application newApplication, final BindingResult binding, @RequestParam(value = "status", defaultValue = "0") final int status) {
+	public ModelAndView edit(Application newApplication, final BindingResult binding, @RequestParam(value = "status", defaultValue = "0") final int status, @RequestParam(value = "positionId", defaultValue = "-1") final int positionId) {
 		ModelAndView result;
 		if (status == 1)
 			newApplication.setStatus(1);
 		try {
+			Position position = null;
+			if (positionId != -1) {
+				position = this.positionService.findOne(positionId);
+				Assert.notNull(position);
+			}
 			newApplication = this.applicationService.reconstruct(newApplication, binding);
 			if (!binding.hasErrors()) {
-				this.applicationService.save(newApplication);
+				this.applicationService.save(newApplication, position);
 				result = new ModelAndView("redirect:list.do");
-			} else {
+			} else if (newApplication.getId() != 0) {
 				result = new ModelAndView("application/edit");
 				result.addObject("application", newApplication);
 				result.addObject("curriculas", this.applicationService.getCurriculaHacker());
+			} else {
+				result = new ModelAndView("application/create");
+				result.addObject("positions", this.positionService.getAllPositionToCreateApplication());
+				result.addObject("curriculas", this.applicationService.getCurriculaHacker());
 			}
+		} catch (final ValidationException v) {
+			result = new ModelAndView("application/edit");
+			result.addObject("application", newApplication);
 		} catch (final Exception e) {
 			if (newApplication.getId() == 0) {
 				result = new ModelAndView("application/create");
+				result.addObject("positions", this.positionService.getAllPositionToCreateApplication());
 				result.addObject("curriculas", this.applicationService.getCurriculaHacker());
 			} else
 				result = new ModelAndView("application/edit");

@@ -397,7 +397,7 @@
 		<property name="explication" value="explication1"/>
 		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
 		<property name="submitMoment" value="01/03/2019 23:59"/>
-		<property name="status" value="0"/>
+		<property name="status" value="1"/>
 		<property name="hacker" ref="hacker1"/>
 		<property name="curricula" ref="curricula1"/>
 	</bean>
@@ -424,9 +424,9 @@
 	
 	<bean id="application4" class="domain.Application">
 		<property name="moment" value="01/03/2019 23:59"/>
-		<property name="explication" value="explication2"/>
-		<property name="urlCode" value="https://www.google.es/?gws_rd=ssl"/>
-		<property name="submitMoment" value="01/03/2019 23:59"/>
+		<property name="explication" value=""/>
+		<property name="urlCode" value=""/>
+		<property name="submitMoment" value=""/>
 		<property name="status" value="0"/>
 		<property name="hacker" ref="hacker2"/>
 		<property name="curricula" ref="curricula1"/>

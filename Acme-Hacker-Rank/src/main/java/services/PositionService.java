@@ -251,4 +251,8 @@ public class PositionService {
 	public Position getPositionByProblem(final Integer id) {
 		return this.positionRepository.getPositionByProblem(id);
 	}
+
+	public Collection<Position> getAllPositionToCreateApplication() {
+		return this.positionRepository.getAllPositionToCreateApplication();
+	}
 }

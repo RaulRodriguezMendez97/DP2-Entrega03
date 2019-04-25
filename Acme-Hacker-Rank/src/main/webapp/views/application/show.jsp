@@ -36,7 +36,6 @@
 <spring:message code="application.status.cancel"/>
 </jstl:if>
 <br>
-
 <display:table pagesize="1" name="problem" id="row" >
 
 	<display:column property="title" titleKey="application.problem.title" />

@@ -45,7 +45,7 @@ requestURI="application/hacker/list.do" >
 	<spring:message code="application.status.cancel" />
 </jstl:if>
 </display:column>
-<display:column property="curricula.id" titleKey="application.curricula" />
+<display:column property="curricula.personalData.fullName" titleKey="application.curricula" />
 <display:column property="moment" titleKey="application.moment" />
 <display:column property="explication" titleKey="application.explication" />
 <display:column property="urlCode" titleKey="application.urlCode" />
@@ -91,7 +91,7 @@ requestURI="application/company/list.do" >
 	<spring:message code="application.status.cancel" />
 </jstl:if>
 </display:column>
-<display:column property="curricula.id" titleKey="application.curricula" />
+<display:column property="curricula.personalData.fullName" titleKey="application.curricula" />
 <display:column property="moment" titleKey="application.moment" />
 <display:column property="explication" titleKey="application.explication" />
 <display:column property="urlCode" titleKey="application.urlCode" />

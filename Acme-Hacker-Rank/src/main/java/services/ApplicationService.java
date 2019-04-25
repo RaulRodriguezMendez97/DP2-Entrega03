@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import security.UserAccount;
 import domain.Application;
 import domain.Curricula;
 import domain.Hacker;
+import domain.Position;
 import domain.Problem;
 
 @Service
@@ -56,7 +59,7 @@ public class ApplicationService {
 		return this.applicationRepository.findAll();
 	}
 
-	public Application save(final Application application) {
+	public Application save(final Application application, final Position position) {
 		Application savedApplication;
 
 		if (application.getId() != 0) {
@@ -68,7 +71,7 @@ public class ApplicationService {
 		}
 		savedApplication = this.applicationRepository.save(application);
 		if (application.getId() == 0 && this.problemService.getProblemDraftModeOut().size() > 0) {
-			final Problem p = this.problemService.getAleatoryProblem();
+			final Problem p = this.problemService.getAleatoryProblem(position);
 			p.getApplications().add(savedApplication);
 			this.problemService.saveApplication(p);
 		} else if (application.getId() != 0)
@@ -107,9 +110,13 @@ public class ApplicationService {
 			a.setMoment(res.getMoment());
 			a.setHacker(res.getHacker());
 			a.setSubmitMoment(new Date());
-
+			if (application.getExplication() == null || application.getExplication() == "")
+				binding.rejectValue("explication", "notBlank");
+			if (application.getUrlCode() == null || application.getUrlCode() == "")
+				binding.rejectValue("urlCode", "notBlank");
 			this.validator.validate(a, binding);
-
+			if (binding.hasErrors())
+				throw new ValidationException();
 			res = a;
 
 		}

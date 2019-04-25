@@ -33,7 +33,7 @@ public class ApplicationCompanyController extends AbstractController {
 		final Collection<Application> applications = new HashSet<Application>();
 		final Collection<Problem> problems = this.problemService.getProblemsByCompany();
 		for (final Problem p : problems)
-			if (p.getDraftMode() == 1)
+			if (p.getDraftMode() == 0)
 				applications.addAll(p.getApplications());
 		result = new ModelAndView("application/list");
 		result.addObject("applications", applications);

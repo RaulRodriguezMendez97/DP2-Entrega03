@@ -14,8 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import services.ApplicationService;
 import services.CurriculaService;
 import services.HackerService;
+import services.PositionService;
 import utilities.AbstractTest;
 import domain.Application;
+import domain.Position;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -30,6 +32,8 @@ public class ApplicationServiceTest extends AbstractTest {
 	private CurriculaService	curriculaService;
 	@Autowired
 	private HackerService		hackerService;
+	@Autowired
+	private PositionService		positionService;
 
 
 	/*
@@ -68,7 +72,9 @@ public class ApplicationServiceTest extends AbstractTest {
 			a.setMoment(new Date());
 			a.setHacker(this.hackerService.findOne(hackerId));
 			a.setCurricula(this.curriculaService.findOne(curriculaId));
-			this.applicationService.save(a);
+			final int idPosition = super.getEntityId("position1");
+			final Position position = this.positionService.findOne(idPosition);
+			this.applicationService.save(a, position);
 
 			super.authenticate(null);
 		} catch (final Throwable oops) {
@@ -111,7 +117,9 @@ public class ApplicationServiceTest extends AbstractTest {
 
 			final Application a = this.applicationService.findOne(applicationId);
 			a.setExplication("hola");
-			this.applicationService.save(a);
+			final int idPosition = super.getEntityId("position1");
+			final Position position = this.positionService.findOne(idPosition);
+			this.applicationService.save(a, position);
 
 			super.authenticate(null);
 		} catch (final Throwable oops) {

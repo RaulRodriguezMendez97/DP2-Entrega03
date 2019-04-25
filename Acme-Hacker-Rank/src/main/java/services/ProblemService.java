@@ -141,8 +141,8 @@ public class ProblemService {
 		return this.problemRepository.getProblemByApplication(a);
 	}
 
-	public Problem getAleatoryProblem() {
-		final Collection<Problem> ps = this.problemRepository.getProblemDraftModeOut();
+	public Problem getAleatoryProblem(final Position position) {
+		final Collection<Problem> ps = this.problemRepository.getProblemsWithoutDraftModeByPosition(position.getId());
 		final List<Problem> list = new ArrayList<Problem>(ps);
 		final int number = (int) Math.floor(Math.random() * ((list.size() - 1) - 0 + 1) + (0));
 		final Problem aleatory = list.get(number);

@@ -47,4 +47,7 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 
 	@Query("select p.title from Position p where p.salary=(select min(p.salary) from Position p)")
 	public String getPositionWithWorstSalary();
+
+	@Query("select p from Position p where p.draftMode=0 and p.isCancelled=0")
+	public Collection<Position> getAllPositionToCreateApplication();
 }
